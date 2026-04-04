@@ -1,1 +1,73 @@
 @import 'tailwindcss';
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundL.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundR.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundB.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundEB.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Regular.woff') format(truetype);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Medium.woff') format(truetype);
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Bold.woff') format(truetype);
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-nanum: 'NanumSquare', sans-serif;
+  --font-pretendard: 'Pretendard', 'NanumSquare', sans-serif;
+
+  --color-primary: #485422;
+  --color-primary2: #46483c;
+  --color-accent: #fdbd77;
+  --color-background: #fafaf1;
+}
+
+@layer base {
+  body {
+    font-family: 'NanumSquare', sans-serif;
+    width: 100%;
+    height: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+}
