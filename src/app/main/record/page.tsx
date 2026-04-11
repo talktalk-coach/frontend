@@ -13,6 +13,15 @@ export default function RecordPage() {
    * true: 녹음 재개, false: 일시정지
    */
   const [status, setStatus] = useState<'idle' | 'recording' | 'paused'>('idle');
+
+  const handleMicClick = () => {
+    if (status === 'idle') setStatus('recording');
+  };
+
+  const handlePauseClick = () => setStatus('paused');
+
+  const handleResumeClick = () => setStatus('recording');
+
   return (
     <main className='bg-background flex h-screen flex-col items-center px-6 py-4'>
       <figure className='bg-primary/20 mt-6 flex items-center gap-2 rounded-full px-4 py-1.5'>
@@ -27,7 +36,7 @@ export default function RecordPage() {
         <i className='border-primary/20 absolute h-48 w-48 rounded-full border' />
         <button
           className='from-primary to-primary-gradient relative flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br shadow-2xl'
-          onClick={() => status === 'idle' && setStatus('recording')}>
+          onClick={handleMicClick}>
           <MicIcon className='text-white' />
         </button>
       </section>
@@ -85,13 +94,13 @@ export default function RecordPage() {
         ) : status === 'recording' ? (
           <button
             className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
-            onClick={() => setStatus('paused')}>
+            onClick={handlePauseClick}>
             <PauseIcon />
           </button>
         ) : (
           <button
             className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
-            onClick={() => setStatus('recording')}>
+            onClick={handleResumeClick}>
             <PlayIcon />
           </button>
         )}
