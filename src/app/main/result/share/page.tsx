@@ -1,6 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
+import ParrotIcon from '@/assets/icons/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
@@ -21,31 +22,10 @@ export default function ResultSharePage() {
 
   return (
     <main className='bg-background flex min-h-screen flex-col items-center px-4 py-5'>
-      <header className='flex w-full max-w-[448px] items-center justify-between px-6 pt-5 pb-4'>
-        <h1 className='font-pretendard text-primary text-3xl font-normal tracking-[-0.9px]'>
-          TALKTALK COACH
-        </h1>
-        <button aria-label='닫기' onClick={handleClose}>
-          <svg
-            width='14'
-            height='14'
-            viewBox='0 0 14 14'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'>
-            <path
-              d='M1 1L13 13M13 1L1 13'
-              stroke='#485422'
-              strokeWidth='2'
-              strokeLinecap='round'
-            />
-          </svg>
-        </button>
-      </header>
-
       <article
         aria-label='분석 결과 공유 카드'
         className='w-full max-w-[448px] overflow-hidden rounded-[48px] bg-white shadow-[0px_48px_48px_-12px_rgba(26,28,23,0.04)]'>
-        <div className='bg-surface relative h-[88px] w-full overflow-hidden'>
+        <div className='bg-surface relative h-[88px] w-full'>
           <div
             className='from-primary to-primary-gradient absolute inset-0 bg-gradient-to-br opacity-10'
             aria-hidden='true'
@@ -55,12 +35,11 @@ export default function ResultSharePage() {
               Daily Report
             </span>
           </span>
-          <img
-            src='/icons/parrot.svg'
-            alt='TalkTalk Coach 마스코트'
+          <ParrotIcon
+            className='absolute right-6 bottom-0 object-contain opacity-70'
             width={92}
             height={83}
-            className='absolute top-1.5 right-6 object-contain opacity-70'
+            aria-hidden='true'
           />
         </div>
 
@@ -139,7 +118,7 @@ export default function ResultSharePage() {
       </article>
 
       <button
-        className='bg-primary mt-6 flex w-full max-w-[448px] items-center justify-center gap-2 rounded-[48px] py-[14px] text-white shadow-xl'
+        className='bg-primary mt-8 flex w-full max-w-[448px] items-center justify-center gap-2 rounded-[48px] py-[14px] text-white shadow-xl'
         onClick={handleSaveImage}>
         <svg
           width='16'
@@ -159,7 +138,7 @@ export default function ResultSharePage() {
         <span className='font-pretendard text-sm font-bold'>Save Image</span>
       </button>
 
-      <footer className='mt-12 pb-8'>
+      <footer className='mt-8 pb-24'>
         <p className='font-pretendard text-primary2 text-center text-xs font-medium opacity-60'>
           Improve your communication daily with TalkTalk Coach
         </p>
