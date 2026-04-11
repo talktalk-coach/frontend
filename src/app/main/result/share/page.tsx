@@ -36,7 +36,7 @@ export default function ResultSharePage() {
             </span>
           </span>
           <ParrotIcon
-            className='absolute right-6 bottom-0 object-contain opacity-70'
+            className='absolute right-6 bottom-0 object-contain opacity-85'
             width={92}
             height={83}
             aria-hidden='true'
