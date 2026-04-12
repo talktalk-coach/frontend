@@ -1,13 +1,18 @@
 'use client';
 
 import {useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {ROUTES} from '@/constants/routes';
 import {WaveForm} from '@/components/record/WaveForm';
+import {StatusMessage} from '@/components/record/StatusMessage';
 import MicIcon from '@/assets/icons/mic.svg';
 import PauseIcon from '@/assets/icons/pause.svg';
 import PlayIcon from '@/assets/icons/play.svg';
 import {mockSessionTime} from '@/mocks/record';
 
 export default function RecordPage() {
+  const router = useRouter();
+
   /*
    * 녹음 일시정지/재개 상태.
    * true: 녹음 재개, false: 일시정지
@@ -21,6 +26,8 @@ export default function RecordPage() {
   const handlePauseClick = () => setStatus('paused');
 
   const handleResumeClick = () => setStatus('recording');
+
+  const handleSubmitClick = () => router.push(ROUTES.RESULT_LOADING);
 
   return (
     <main className='bg-background flex h-screen flex-col items-center px-6 py-4'>
@@ -41,69 +48,51 @@ export default function RecordPage() {
         </button>
       </section>
 
-      <section className='mt-25 flex flex-col items-center gap-2'>
-        <h2 className='text-text text-center text-2xl font-bold tracking-tight'>
-          {status === 'idle' ? (
-            <>
-              마이크를 눌러
-              <br />
-              시작하세요
-            </>
-          ) : status === 'recording' ? (
-            <>
-              당신의 이야기를
-              <br />
-              듣고 있습니다...
-            </>
-          ) : (
-            '일시정지 중...'
-          )}
-        </h2>
-        <p className='font-pretendard text-primary2 text-base font-semibold opacity-70'>
-          {status === 'idle'
-            ? '(Press the mic to start...)'
-            : status === 'recording'
-              ? '(Listening to your path...)'
-              : '(Recording paused...)'}
-        </p>
-      </section>
+      <StatusMessage status={status} />
 
-      <figure className='mt-8'>
+      <figure className='mt-10'>
         <WaveForm isPlaying={status === 'recording'} />
       </figure>
 
-      <footer className='mt-10 flex w-full gap-4 pb-24'>
-        <section className='bg-surface flex flex-1 flex-col items-center justify-center gap-1 rounded-3xl py-5'>
-          <h3 className='font-pretendard text-primary text-xs font-semibold tracking-widest'>
-            SESSION TIME
-          </h3>
-          <time className='text-text text-2xl font-bold'>
-            {status === 'idle' ? '00:00' : mockSessionTime}
-          </time>
-        </section>
+      <footer className='mt-10 flex w-full flex-col gap-10 px-5 pb-[115px]'>
+        <div className='flex w-full gap-4'>
+          <section className='bg-surface flex flex-1 flex-col items-center justify-center gap-1 rounded-3xl py-5'>
+            <h3 className='font-pretendard text-primary text-xs font-semibold tracking-widest'>
+              SESSION TIME
+            </h3>
+            <time className='text-text text-2xl font-bold'>
+              {status === 'idle' ? '00:00' : mockSessionTime}
+            </time>
+          </section>
 
-        {status === 'idle' ? (
-          <div className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'>
-            <img
-              src='/icons/Speech-off.svg'
-              alt='speech'
-              width={45}
-              height={45}
-            />
-          </div>
-        ) : status === 'recording' ? (
-          <button
-            className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
-            onClick={handlePauseClick}>
-            <PauseIcon />
-          </button>
-        ) : (
-          <button
-            className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
-            onClick={handleResumeClick}>
-            <PlayIcon />
-          </button>
-        )}
+          {status === 'idle' ? (
+            <div className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'>
+              <img
+                src='/icons/Speech-off.svg'
+                alt='speech'
+                width={45}
+                height={45}
+              />
+            </div>
+          ) : status === 'recording' ? (
+            <button
+              className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
+              onClick={handlePauseClick}>
+              <PauseIcon />
+            </button>
+          ) : (
+            <button
+              className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'
+              onClick={handleResumeClick}>
+              <PlayIcon />
+            </button>
+          )}
+        </div>
+        <button
+          className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white'
+          onClick={handleSubmitClick}>
+          제출하기
+        </button>
       </footer>
     </main>
   );
