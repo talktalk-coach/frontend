@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {WaveForm} from '@/components/record/WaveForm';
 import {StatusMessage} from '@/components/record/StatusMessage';
-import MicIcon from '@/assets/icons/mic.svg';
+import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
 
 export default function RecordPage() {

@@ -1,6 +1,6 @@
 import {mockSessionTime} from '@/mocks/record';
-import PauseIcon from '@/assets/icons/pause.svg';
-import PlayIcon from '@/assets/icons/play.svg';
+import PauseIcon from '@/assets/record/pause.svg';
+import PlayIcon from '@/assets/record/play.svg';
 
 interface RecordFooterProps {
   status: 'idle' | 'recording' | 'paused';

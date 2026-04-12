@@ -1,7 +1,7 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import ParrotIcon from '@/assets/icons/Parrot.svg';
+import ParrotIcon from '@/assets/share/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
