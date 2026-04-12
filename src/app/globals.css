@@ -57,10 +57,13 @@
 
   --color-primary: #485422;
   --color-primary2: #46483c;
+  --color-primary-gradient: #606c38;
   --color-accent: #fdbd77;
   --color-brown: #835418;
   --color-gray: #f4f4eb;
   --color-background: #fafaf1;
+  --color-surface: #f4f4eb;
+  --color-text: #1a1c17;
 }
 
 @layer base {
@@ -71,5 +74,15 @@
   }
   button {
     cursor: pointer;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.5);
   }
 }
