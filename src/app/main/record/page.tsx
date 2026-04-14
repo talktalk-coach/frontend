@@ -28,7 +28,7 @@ export default function RecordPage() {
   const handleSubmitClick = () => router.push(ROUTES.RESULT_LOADING);
 
   return (
-    <main className='bg-background flex h-screen flex-col items-center px-6 py-4'>
+    <main className='flex h-screen flex-col items-center px-6 py-4'>
       <figure className='bg-primary/20 mt-6 flex items-center gap-2 rounded-full px-4 py-1.5'>
         <i className='h-2 w-2 rounded-full bg-red-600' />
         <figcaption className='font-pretendard text-primary text-xs font-bold tracking-widest'>
