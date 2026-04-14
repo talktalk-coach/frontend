@@ -1,15 +1,11 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import ParrotIcon from '@/assets/icons/Parrot.svg';
+import ParrotIcon from '@/assets/share/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
-const TOP_METRIC_COUNT = 5;
-
-const topMetrics = [...mockPerformanceMetrics]
-  .sort((a, b) => b.value - a.value)
-  .slice(0, TOP_METRIC_COUNT);
+const topMetrics = mockPerformanceMetrics;
 
 export default function ResultSharePage() {
   const router = useRouter();
@@ -57,14 +53,14 @@ export default function ResultSharePage() {
                 fill='#BFCD8F'
               />
             </svg>
-            <blockquote className='text-text mt-2 text-2xl leading-[1.25] font-semibold tracking-[-0.6px]'>
+            <blockquote className='text-text mt-2 text-xl leading-[1.25] font-semibold tracking-[-0.6px]'>
               &ldquo;{SHARE_QUOTE}&rdquo;
             </blockquote>
           </figure>
 
           <section aria-label='총점'>
-            <div className='relative h-24'>
-              <strong className='font-pretendard text-primary absolute top-0 left-0 text-[96px] leading-none font-extrabold tracking-[-4.8px]'>
+            <div className='relative h-18'>
+              <strong className='font-pretendard text-primary absolute top-0 left-0 text-[75px] leading-none font-extrabold tracking-[-4.8px]'>
                 {mockScore}
               </strong>
               <span
@@ -75,7 +71,7 @@ export default function ResultSharePage() {
           </section>
 
           <section aria-label='세부 지표'>
-            <ul className='flex flex-col gap-8 pt-4'>
+            <ul className='flex flex-col gap-7 pt-4'>
               {topMetrics.map((metric) => (
                 <li key={metric.label}>
                   <div className='flex items-end justify-between'>
