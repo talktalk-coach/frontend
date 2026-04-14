@@ -2,17 +2,26 @@
 
 import {useState} from 'react';
 import CopyTextButton from '@/assets/result/copytextbutton.svg';
-import {mockScript} from '@/mocks/result';
 
-export const Script = () => {
+type ScriptProps = {
+  text: string;
+};
+
+export const Script = ({text}: ScriptProps) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
-  const handleCopyButtonClick = () => {
-    setIsCopied(true);
+  const handleCopyButtonClick = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
 
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
+      setIsCopied(true);
+
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+    } catch (e) {
+      console.error('복사 실패', e);
+    }
   };
 
   return (
@@ -25,12 +34,15 @@ export const Script = () => {
       </div>
 
       <p className='bg-gray font-pretendard flex rounded-4xl p-6 whitespace-pre-line'>
-        {mockScript}
+        {text}
       </p>
 
       {isCopied && (
-        <div className='bg-accent/90 fixed bottom-10 left-1/2 -translate-x-1/2 rounded-4xl px-3 py-1.5 text-xs text-black shadow'>
-          복사되었습니다!
+        <div className='animate-fade-in-up fixed bottom-10 left-1/2 z-50 -translate-x-1/2'>
+          <div className='flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-md'>
+            <span className='text-sm'>✓</span>
+            <span>복사되었습니다!</span>
+          </div>
         </div>
       )}
     </section>

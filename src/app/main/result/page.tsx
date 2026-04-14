@@ -2,6 +2,7 @@ import {
   mockScore,
   mockPerformanceMetrics,
   mockImprovementPlans,
+  mockScript,
 } from '@/mocks/result';
 import {MetricBarList} from '@/components/result/MetricBarList';
 import {Score} from '@/components/result/Score';
@@ -12,7 +13,7 @@ import {ROUTES} from '@/constants/routes';
 
 export default function Resultpage() {
   return (
-    <div className='flex flex-col gap-10 px-6 py-4'>
+    <div className='flex flex-col gap-10 p-6'>
       <section className='gap-10 rounded-[40px] bg-[#606C38] p-6'>
         <h2 className='font-pretendard text-3xl font-bold text-[#DFEDAC]'>
           Excellent Progress!
@@ -36,10 +37,10 @@ export default function Resultpage() {
       </section>
 
       <section>
-        <Script />
+        <Script text={mockScript} />
       </section>
 
-      <section className='flex flex-col gap-4 text-center font-semibold'>
+      <section className='flex flex-col gap-6 text-center font-semibold'>
         <Link href={ROUTES.RESULT_SHARE}>
           <button className='text-brown w-full rounded-4xl bg-[#EAEAD1] p-3 shadow-xl'>
             공유하기
