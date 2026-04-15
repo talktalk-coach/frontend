@@ -17,7 +17,7 @@ export default function ResultSharePage() {
   };
 
   return (
-    <main className='bg-background flex min-h-screen flex-col items-center px-4 py-5'>
+    <main className='bg-background flex min-h-screen flex-col items-center px-4 py-6'>
       <article
         aria-label='분석 결과 공유 카드'
         className='w-full max-w-[448px] overflow-hidden rounded-[48px] bg-white shadow-[0px_48px_48px_-12px_rgba(26,28,23,0.04)]'>
