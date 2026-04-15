@@ -7,9 +7,13 @@ import {WaveForm} from '@/components/record/WaveForm';
 import {StatusMessage} from '@/components/record/StatusMessage';
 import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
+import {useRecord} from '@/hooks/useRecord';
 
 export default function RecordPage() {
   const router = useRouter();
+
+  const {startRecording, pauseRecording, resumeRecording, stopRecording} =
+    useRecord();
 
   /*
    * 녹음 일시정지/재개 상태.
@@ -17,15 +21,27 @@ export default function RecordPage() {
    */
   const [status, setStatus] = useState<'idle' | 'recording' | 'paused'>('idle');
 
-  const handleMicClick = () => {
-    if (status === 'idle') setStatus('recording');
+  const handleMicClick = async () => {
+    if (status === 'idle') {
+      await startRecording();
+      setStatus('recording');
+    }
   };
 
-  const handlePauseClick = () => setStatus('paused');
+  const handlePauseClick = () => {
+    pauseRecording();
+    setStatus('paused');
+  };
 
-  const handleResumeClick = () => setStatus('recording');
+  const handleResumeClick = () => {
+    resumeRecording();
+    setStatus('recording');
+  };
 
-  const handleSubmitClick = () => router.push(ROUTES.RESULT_LOADING);
+  const handleSubmitClick = async () => {
+    await stopRecording();
+    router.push(ROUTES.RESULT_LOADING);
+  };
 
   return (
     <main className='flex h-screen flex-col items-center px-6 py-4'>
