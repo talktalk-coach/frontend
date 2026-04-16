@@ -1,7 +1,6 @@
 'use client';
 
 import {useRef} from 'react';
-import {useRouter} from 'next/navigation';
 import {toPng} from 'html-to-image';
 import ParrotIcon from '@/assets/share/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
@@ -10,11 +9,7 @@ const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력
 const topMetrics = mockPerformanceMetrics;
 
 export default function ResultSharePage() {
-  const router = useRouter();
-
   const cardRef = useRef<HTMLElement>(null);
-
-  const handleClose = () => router.back();
 
   const handleSaveImage = async (): Promise<void> => {
     const targetElement = cardRef.current;

@@ -16,7 +16,7 @@ export default function Loadingpage() {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [router]);
 
   return (
     <div className='to-background flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-[#F7F8E9] p-8'>
