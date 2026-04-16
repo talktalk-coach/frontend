@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useState, ReactElement} from 'react';
 import {useRouter} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {WaveForm} from '@/components/record/WaveForm';
@@ -9,36 +9,35 @@ import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
 import {useRecord} from '@/hooks/useRecord';
 
-export default function RecordPage() {
+export default function RecordPage(): ReactElement {
   const router = useRouter();
 
   const {startRecording, pauseRecording, resumeRecording, stopRecording} =
     useRecord();
 
-  /*
-   * 녹음 일시정지/재개 상태.
-   * true: 녹음 재개, false: 일시정지
+  /**
+   * idle: 대기 중, recording: 녹음 진행 중, paused: 일시정지됨
    */
   const [status, setStatus] = useState<'idle' | 'recording' | 'paused'>('idle');
 
-  const handleMicClick = async () => {
+  const handleMicClick = async (): Promise<void> => {
     if (status === 'idle') {
       await startRecording();
       setStatus('recording');
     }
   };
 
-  const handlePauseClick = () => {
+  const handlePauseClick = (): void => {
     pauseRecording();
     setStatus('paused');
   };
 
-  const handleResumeClick = () => {
+  const handleResumeClick = (): void => {
     resumeRecording();
     setStatus('recording');
   };
 
-  const handleSubmitClick = async () => {
+  const handleSubmitClick = async (): Promise<void> => {
     await stopRecording();
     router.push(ROUTES.RESULT_LOADING);
   };
