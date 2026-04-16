@@ -1,6 +1,8 @@
 'use client';
 
+import {useRef} from 'react';
 import {useRouter} from 'next/navigation';
+import {toPng} from 'html-to-image';
 import ParrotIcon from '@/assets/share/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
 
@@ -10,15 +12,43 @@ const topMetrics = mockPerformanceMetrics;
 export default function ResultSharePage() {
   const router = useRouter();
 
+  const cardRef = useRef<HTMLElement>(null);
+
   const handleClose = () => router.back();
 
-  const handleSaveImage = () => {
-    // html2canvas 등 활용한 이미지 저장 로직 연동
+  const handleSaveImage = async (): Promise<void> => {
+    const targetElement = cardRef.current;
+    if (!targetElement) return;
+
+    const {offsetWidth, offsetHeight} = targetElement;
+    const IMAGE_PADDING = 32;
+
+    try {
+      const dataUrl = await toPng(targetElement, {
+        cacheBust: true,
+        backgroundColor: '#fafaf1',
+        width: offsetWidth + IMAGE_PADDING * 2,
+        height: offsetHeight + IMAGE_PADDING * 2,
+        style: {
+          margin: `${IMAGE_PADDING}px`,
+          width: `${offsetWidth}px`,
+          height: `${offsetHeight}px`,
+        },
+      });
+
+      const downloadLink = document.createElement('a');
+      downloadLink.download = 'talktalk-coach-daily-report.png';
+      downloadLink.href = dataUrl;
+      downloadLink.click();
+    } catch (error) {
+      console.error('이미지 저장에 실패했습니다:', error);
+    }
   };
 
   return (
-    <main className='bg-background flex min-h-screen flex-col items-center px-4 py-6'>
+    <main className='bg-background flex min-h-screen flex-col items-center px-4 py-10'>
       <article
+        ref={cardRef}
         aria-label='분석 결과 공유 카드'
         className='w-full max-w-[448px] overflow-hidden rounded-[48px] bg-white shadow-[0px_48px_48px_-12px_rgba(26,28,23,0.04)]'>
         <div className='bg-surface relative h-[88px] w-full'>
@@ -114,7 +144,7 @@ export default function ResultSharePage() {
       </article>
 
       <button
-        className='bg-primary mt-8 flex w-full max-w-[448px] items-center justify-center gap-2 rounded-[48px] py-[14px] text-white shadow-xl'
+        className='bg-primary mt-10 flex w-full max-w-[448px] items-center justify-center gap-2 rounded-[48px] py-[14px] text-white shadow-xl'
         onClick={handleSaveImage}>
         <svg
           width='16'
@@ -134,7 +164,7 @@ export default function ResultSharePage() {
         <span className='font-pretendard text-sm font-bold'>Save Image</span>
       </button>
 
-      <footer className='mt-8 pb-24'>
+      <footer className='mt-8'>
         <p className='font-pretendard text-primary2 text-center text-xs font-medium opacity-60'>
           Improve your communication daily with TalkTalk Coach
         </p>
