@@ -1,6 +1,7 @@
 import {mockSessionTime} from '@/mocks/record';
 import PauseIcon from '@/assets/record/pause.svg';
 import PlayIcon from '@/assets/record/play.svg';
+import Image from 'next/image';
 
 interface RecordFooterProps {
   status: 'idle' | 'recording' | 'paused';
@@ -29,7 +30,7 @@ export const RecordFooter = ({
 
         {status === 'idle' ? (
           <div className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'>
-            <img
+            <Image
               src='/icons/Speech-off.svg'
               alt='speech'
               width={45}
