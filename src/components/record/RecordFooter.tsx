@@ -1,10 +1,12 @@
-import {mockSessionTime} from '@/mocks/record';
+import {formatSessionTime} from '@/utils/formatSessionTime';
 import PauseIcon from '@/assets/record/pause.svg';
 import PlayIcon from '@/assets/record/play.svg';
 import Image from 'next/image';
 
 interface RecordFooterProps {
   status: 'idle' | 'recording' | 'paused';
+  elapsedSeconds: number;
+  isDanger: boolean;
   onPause: () => void;
   onResume: () => void;
   onSubmit: () => void;
@@ -12,6 +14,8 @@ interface RecordFooterProps {
 
 export const RecordFooter = ({
   status,
+  elapsedSeconds,
+  isDanger,
   onPause,
   onResume,
   onSubmit,
@@ -23,8 +27,13 @@ export const RecordFooter = ({
           <h3 className='font-pretendard text-primary text-xs font-semibold tracking-widest'>
             SESSION TIME
           </h3>
-          <time className='text-text text-2xl font-bold'>
-            {status === 'idle' ? '00:00' : mockSessionTime}
+          <time
+            className={
+              isDanger
+                ? 'animate-pulse text-2xl font-bold text-red-600 transition-colors'
+                : 'text-text text-2xl font-bold transition-colors'
+            }>
+            {status === 'idle' ? '00:00' : formatSessionTime(elapsedSeconds)}
           </time>
         </section>
 
