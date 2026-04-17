@@ -41,7 +41,7 @@ export default function ResultSharePage() {
   };
 
   return (
-    <main className='bg-background flex min-h-screen flex-col items-center px-4 py-10'>
+    <main className='flex min-h-screen flex-col items-center px-4 py-10'>
       <article
         ref={cardRef}
         aria-label='분석 결과 공유 카드'

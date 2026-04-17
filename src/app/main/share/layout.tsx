@@ -5,7 +5,7 @@ import {CloseButton} from '@/components/layout/CloseButton';
 
 export default function ShareLayout({children}: {children: React.ReactNode}) {
   return (
-    <div className='bg-background min-h-screen'>
+    <div className='min-h-screen'>
       <header className='bg-background sticky top-0 z-50 flex items-center justify-between px-6 py-6 shadow-sm'>
         <Link href={ROUTES.HOMEPAGE}>
           <Logo />
