@@ -1,9 +1,12 @@
-import {mockSessionTime} from '@/mocks/record';
+import {formatSessionTime} from '@/utils/formatSessionTime';
 import PauseIcon from '@/assets/record/pause.svg';
 import PlayIcon from '@/assets/record/play.svg';
+import Image from 'next/image';
 
 interface RecordFooterProps {
   status: 'idle' | 'recording' | 'paused';
+  elapsedSeconds: number;
+  isDanger: boolean;
   onPause: () => void;
   onResume: () => void;
   onSubmit: () => void;
@@ -11,6 +14,8 @@ interface RecordFooterProps {
 
 export const RecordFooter = ({
   status,
+  elapsedSeconds,
+  isDanger,
   onPause,
   onResume,
   onSubmit,
@@ -22,14 +27,19 @@ export const RecordFooter = ({
           <h3 className='font-pretendard text-primary text-xs font-semibold tracking-widest'>
             SESSION TIME
           </h3>
-          <time className='text-text text-2xl font-bold'>
-            {status === 'idle' ? '00:00' : mockSessionTime}
+          <time
+            className={
+              isDanger
+                ? 'animate-pulse text-2xl font-bold text-red-600 transition-colors'
+                : 'text-text text-2xl font-bold transition-colors'
+            }>
+            {status === 'idle' ? '00:00' : formatSessionTime(elapsedSeconds)}
           </time>
         </section>
 
         {status === 'idle' ? (
           <div className='bg-surface flex flex-1 items-center justify-center rounded-3xl py-5'>
-            <img
+            <Image
               src='/icons/Speech-off.svg'
               alt='speech'
               width={45}
@@ -52,8 +62,9 @@ export const RecordFooter = ({
       </div>
 
       <button
-        className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white'
-        onClick={onSubmit}>
+        className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50'
+        onClick={onSubmit}
+        disabled={status === 'idle'}>
         제출하기
       </button>
     </footer>
