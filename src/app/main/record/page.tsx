@@ -13,10 +13,10 @@ import {useRecord} from '@/hooks/useRecord';
 
 type RecordStatus = 'idle' | 'recording' | 'paused';
 
-interface ToastState {
+type ToastState = {
   isVisible: boolean;
   message: string;
-}
+};
 
 const INITIAL_TOAST_STATE: ToastState = {isVisible: false, message: ''};
 
