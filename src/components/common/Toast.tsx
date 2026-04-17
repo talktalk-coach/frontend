@@ -14,12 +14,12 @@ interface ToastProps {
  */
 const DEFAULT_DURATION_MS = 3000;
 
-const Toast = ({
+export default function Toast({
   message,
   isVisible,
   onClose,
   duration = DEFAULT_DURATION_MS,
-}: ToastProps) => {
+}: ToastProps) {
   /* isVisible이 true가 되면 duration 후 onClose를 호출한다 */
   useEffect(() => {
     if (!isVisible) return;
@@ -45,6 +45,4 @@ const Toast = ({
       {message}
     </div>
   );
-};
-
-export default Toast;
+}
