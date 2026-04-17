@@ -53,8 +53,9 @@ export const RecordFooter = ({
       </div>
 
       <button
-        className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white'
-        onClick={onSubmit}>
+        className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50'
+        onClick={onSubmit}
+        disabled={status === 'idle'}>
         제출하기
       </button>
     </footer>
