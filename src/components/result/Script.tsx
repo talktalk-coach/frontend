@@ -33,7 +33,7 @@ export const Script = ({text}: ScriptProps) => {
         </button>
       </div>
 
-      <p className='bg-gray font-pretendard flex rounded-4xl p-6 whitespace-pre-line'>
+      <p className='bg-surface font-pretendard flex rounded-4xl p-6 whitespace-pre-line'>
         {text}
       </p>
 
