@@ -4,7 +4,7 @@ type ScoreProps = {
 
 export const Score = ({score}: ScoreProps) => {
   return (
-    <section className='bg-gray flex flex-col items-center gap-6 rounded-4xl p-6'>
+    <section className='bg-surface flex flex-col items-center gap-6 rounded-4xl p-6'>
       <h2 className='text-primary text-sm font-extrabold tracking-wider'>
         TOTAL SCORE
       </h2>
