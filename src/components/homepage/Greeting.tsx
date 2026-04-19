@@ -1,6 +1,6 @@
 export const Greeting = ({userName}: {userName: string}) => {
   return (
-    <section className='flex flex-col gap-2'>
+    <section className='flex flex-col gap-2 text-center'>
       <h2 className='text-primary text-3xl font-extrabold'>
         Hello, {userName}.
       </h2>
