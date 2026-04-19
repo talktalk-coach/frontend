@@ -114,7 +114,7 @@ export default function ResultSharePage() {
                     aria-valuenow={metric.value}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    className='bg-gray relative mt-3 h-1.5 w-full overflow-hidden rounded-full'>
+                    className='bg-surface relative mt-3 h-1.5 w-full overflow-hidden rounded-full'>
                     <div
                       className='bg-primary absolute inset-y-0 left-0 rounded-full'
                       style={{width: `${metric.value}%`}}

@@ -1,9 +1,13 @@
 import {Header} from '@/components/layout/Header';
 import {NavBar} from '@/components/layout/NavBar';
 
-export default function RecordLayout({children}: {children: React.ReactNode}) {
+export default function HomepageLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div>
+    <div className='bg-background min-h-screen'>
       <Header />
       {children}
       <NavBar />

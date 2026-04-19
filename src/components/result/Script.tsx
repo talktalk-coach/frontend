@@ -33,12 +33,12 @@ export const Script = ({text}: ScriptProps) => {
         </button>
       </div>
 
-      <p className='bg-gray font-pretendard flex rounded-4xl p-6 whitespace-pre-line'>
+      <p className='bg-surface font-pretendard flex rounded-4xl p-6 whitespace-pre-line'>
         {text}
       </p>
 
       {isCopied && (
-        <div className='animate-fade-in-up fixed bottom-10 left-1/2 z-50 -translate-x-1/2'>
+        <div className='fixed bottom-10 left-1/2 z-50 -translate-x-1/2'>
           <div className='flex items-center gap-2 rounded-full bg-black/80 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-md'>
             <span className='text-sm'>✓</span>
             <span>복사되었습니다!</span>
