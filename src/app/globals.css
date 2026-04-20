@@ -60,7 +60,6 @@
   --color-primary-gradient: #606c38;
   --color-accent: #fdbd77;
   --color-brown: #835418;
-  --color-gray: #f4f4eb;
   --color-background: #fafaf1;
   --color-surface: #f4f4eb;
   --color-text: #1a1c17;
@@ -84,5 +83,11 @@
   }
   50% {
     transform: scaleY(1.5);
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
 }
