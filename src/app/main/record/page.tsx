@@ -95,6 +95,8 @@ export default function RecordPage(): ReactElement {
   return (
     <main className='flex h-screen flex-col items-center px-6 py-4'>
       <Toast
+        variant='info'
+        position='viewport-top'
         message={toast.message}
         isVisible={toast.isVisible}
         onClose={hideToast}
