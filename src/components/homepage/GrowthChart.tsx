@@ -20,9 +20,9 @@ type GrowthChartProps = {
 export const GrowthChart = ({data}: GrowthChartProps) => {
   return (
     <section className='shadow-soft flex flex-col gap-6 rounded-4xl bg-white px-6 pt-6'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-0.5'>
         <div className='flex justify-between'>
-          <h2 className='text-primary font-extrabold'>성장치 그래프</h2>
+          <h2 className='text-primary text-lg font-extrabold'>성장치 그래프</h2>
           <Growthchart />
         </div>
         <span className='text-primary2 text-[12px] font-semibold'>
