@@ -22,7 +22,7 @@ export interface SpeechHistoryItem {
 
 export const mockUserProfile: UserProfile = {
   name: 'Julian Brooks',
-  imageUrl: '/assets/mypage/profile-default.svg',
+  imageUrl: '/icons/profile-default.svg',
 };
 
 export const mockTotalSpeechCount = 128;
