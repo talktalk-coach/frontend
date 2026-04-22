@@ -63,6 +63,18 @@
   --color-background: #fafaf1;
   --color-surface: #f4f4eb;
   --color-text: #1a1c17;
+
+  /* 스피치 등급 뱃지 색상 */
+  --color-bad-bg: #ffdad6;
+  --color-bad-text: #93000a;
+  --color-normal-bg: #e8e8da;
+  --color-normal-text: #5c5f50;
+  --color-good-bg: #fdbd77;
+  --color-good-text: #784a0d;
+  --color-excellent-bg: #dbe9a9;
+  --color-excellent-text: #404b1b;
+  --color-mastery-bg: #ffd6fd;
+  --color-mastery-text: #5c3b5e;
 }
 
 @layer base {
