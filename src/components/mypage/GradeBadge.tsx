@@ -20,7 +20,7 @@ const GRADE_STYLES: Record<SpeechGrade, string> = {
 export const GradeBadge = ({grade}: GradeBadgeProps) => {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-[10px] font-bold ${GRADE_STYLES[grade]}`}>
+      className={`inline-flex items-center rounded-full px-3 py-1 text-[10px] font-extrabold ${GRADE_STYLES[grade]}`}>
       {grade}
     </span>
   );
