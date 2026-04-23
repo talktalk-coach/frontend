@@ -17,7 +17,7 @@ import {MonthlyScore} from '@/components/homepage/MonthlyScore';
 import {TodayPractice} from '@/components/homepage/TodayPractice';
 import {FeedbackList} from '@/components/homepage/FeedbackSection/FeedbackList';
 import {DailyQuiz} from '@/components/homepage/DailyQuiz';
-import {Button} from '@/components/homepage/Button';
+import {HomePageButton} from '@/components/common/buttons/HomePageButton';
 
 export default function Homepage() {
   const router = useRouter();
@@ -66,7 +66,7 @@ export default function Homepage() {
         />
       </section>
 
-      <Button onClick={handleButtonClick} />
+      <HomePageButton onClick={handleButtonClick} />
     </div>
   );
 }

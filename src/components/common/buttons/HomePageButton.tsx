@@ -1,6 +1,6 @@
 import ChevronIcon from '@/assets/homepage/chevron.svg';
 
-export const Button = ({onClick}: {onClick: () => void}) => {
+export const HomePageButton = ({onClick}: {onClick: () => void}) => {
   return (
     <section>
       <button
