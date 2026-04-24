@@ -55,13 +55,13 @@ export const DailyQuiz = ({
         {"TODAY'S CHALLENGE"}
       </h3>
       <div className='mt-1 flex justify-between'>
-        <h2 className='text-2xl font-extrabold text-black'>오늘의 어휘 퀴즈</h2>
+        <h2 className='text-xl font-extrabold text-black'>오늘의 어휘 퀴즈</h2>
         <div className='bg-primary/20 text-primary flex items-center rounded-4xl px-3 py-1 text-center text-sm font-extrabold'>
           {currentIndex + 1} / {totalIndex}
         </div>
       </div>
 
-      <div className='relative mt-6 flex flex-col gap-4 rounded-4xl bg-[#EEEEE5] p-6'>
+      <div className='relative mt-4 flex flex-col gap-4 rounded-4xl bg-[#EEEEE5] p-6'>
         {isFinished && (
           <div className='bg-surface absolute inset-0 flex items-center justify-center rounded-4xl shadow-md'>
             <div className='flex items-center justify-center gap-1.5 text-lg font-bold text-black'>
@@ -102,7 +102,7 @@ export const DailyQuiz = ({
 
       {showToast && (
         <div className='fixed bottom-26 left-1/2 z-50 -translate-x-1/2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-bold text-red-700 shadow-lg backdrop-blur-md transition-all duration-300'>
-          <div className=''>틀렸습니다. 다시 시도해보세요</div>
+          <div className=''>오답입니다 다시 시도해보세요</div>
         </div>
       )}
     </div>
