@@ -3,6 +3,7 @@ import {StatsButton} from '@/components/mypage/StatsButton';
 import {SpeechCountCard} from '@/components/mypage/SpeechCountCard';
 import {SpeechHistorySection} from '@/components/mypage/SpeechHistorySection';
 import {DifficultySection} from '@/components/mypage/DifficultySection';
+import {AccountSection} from '@/components/mypage/AccountSection';
 import {
   mockUserProfile,
   mockTotalSpeechCount,
@@ -29,6 +30,10 @@ export default function MyPage() {
 
       <div className='mt-9 w-full max-w-[342px]'>
         <DifficultySection currentLevel={mockDifficultyLevel} />
+      </div>
+
+      <div className='mt-9 w-full max-w-[342px]'>
+        <AccountSection />
       </div>
     </main>
   );
