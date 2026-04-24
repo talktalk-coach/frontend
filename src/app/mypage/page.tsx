@@ -2,10 +2,12 @@ import {ProfileSection} from '@/components/mypage/ProfileSection';
 import {StatsButton} from '@/components/mypage/StatsButton';
 import {SpeechCountCard} from '@/components/mypage/SpeechCountCard';
 import {SpeechHistorySection} from '@/components/mypage/SpeechHistorySection';
+import {DifficultySection} from '@/components/mypage/DifficultySection';
 import {
   mockUserProfile,
   mockTotalSpeechCount,
   mockSpeechHistory,
+  mockDifficultyLevel,
 } from '@/mocks/mypage';
 
 export default function MyPage() {
@@ -23,6 +25,10 @@ export default function MyPage() {
 
       <div className='mt-9 w-full max-w-[342px]'>
         <SpeechHistorySection speeches={mockSpeechHistory} />
+      </div>
+
+      <div className='mt-9 w-full max-w-[342px]'>
+        <DifficultySection currentLevel={mockDifficultyLevel} />
       </div>
     </main>
   );
