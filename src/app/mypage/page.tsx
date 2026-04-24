@@ -13,7 +13,7 @@ import {
 
 export default function MyPage() {
   return (
-    <main className='bg-background flex min-h-screen flex-col items-center px-6 pt-10 pb-32'>
+    <main className='bg-background flex min-h-screen flex-col items-center px-6 pt-10 pb-30'>
       <ProfileSection profile={mockUserProfile} />
 
       <div className='mt-9 w-full max-w-[342px]'>
