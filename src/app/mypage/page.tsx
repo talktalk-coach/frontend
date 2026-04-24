@@ -1,8 +1,7 @@
-import {GradeBadge} from '@/components/mypage/GradeBadge';
-import {SpeechHistoryCard} from '@/components/mypage/SpeechHistoryCard';
 import {ProfileSection} from '@/components/mypage/ProfileSection';
 import {StatsButton} from '@/components/mypage/StatsButton';
 import {SpeechCountCard} from '@/components/mypage/SpeechCountCard';
+import {SpeechHistorySection} from '@/components/mypage/SpeechHistorySection';
 import {
   mockUserProfile,
   mockTotalSpeechCount,
@@ -22,11 +21,8 @@ export default function MyPage() {
         <SpeechCountCard count={mockTotalSpeechCount} />
       </div>
 
-      {/* 임시 테스트용 - 스피치 카드 3개 */}
-      <div className='mt-6 flex w-full max-w-[342px] flex-col gap-3'>
-        {mockSpeechHistory.map((speech) => (
-          <SpeechHistoryCard key={speech.id} speech={speech} />
-        ))}
+      <div className='mt-9 w-full max-w-[342px]'>
+        <SpeechHistorySection speeches={mockSpeechHistory} />
       </div>
     </main>
   );
