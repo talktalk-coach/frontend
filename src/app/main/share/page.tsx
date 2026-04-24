@@ -4,6 +4,7 @@ import {useRef} from 'react';
 import {toPng} from 'html-to-image';
 import ParrotIcon from '@/assets/share/Parrot.svg';
 import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
+import {SaveImageButton} from '@/components/common/buttons/SaveImageButton';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
 const topMetrics = mockPerformanceMetrics;
@@ -138,26 +139,7 @@ export default function ResultSharePage() {
         </footer>
       </article>
 
-      <button
-        className='bg-primary mt-10 flex w-full max-w-[448px] items-center justify-center gap-2 rounded-[48px] py-[14px] text-white shadow-xl'
-        onClick={handleSaveImage}>
-        <svg
-          width='16'
-          height='16'
-          viewBox='0 0 16 16'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-          aria-hidden='true'>
-          <path
-            d='M8 1V11M8 11L4 7M8 11L12 7M2 13H14'
-            stroke='white'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
-        <span className='font-pretendard text-sm font-bold'>Save Image</span>
-      </button>
+      <SaveImageButton onClick={handleSaveImage} />
 
       <footer className='mt-8'>
         <p className='font-pretendard text-primary2 text-center text-xs font-medium opacity-60'>

@@ -60,6 +60,7 @@
   --color-primary-gradient: #606c38;
   --color-accent: #fdbd77;
   --color-brown: #835418;
+  --color-oatmeal: #eaead1;
   --color-background: #fafaf1;
   --color-surface: #f4f4eb;
   --color-text: #1a1c17;
@@ -90,4 +91,11 @@
   .shadow-soft {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
+  .text-shadow {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.hide-placeholder-on-focus:focus::placeholder {
+  color: transparent;
 }
