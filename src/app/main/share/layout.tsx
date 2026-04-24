@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {ROUTES} from '@/constants/routes';
-import Logo from '@/assets/logo/headerlogo.svg';
+import Logo from '@/assets/icons/logo.svg';
 import {CloseButton} from '@/components/layout/CloseButton';
 
 export default function ShareLayout({children}: {children: React.ReactNode}) {
@@ -8,7 +8,7 @@ export default function ShareLayout({children}: {children: React.ReactNode}) {
     <div className='min-h-screen'>
       <header className='bg-background sticky top-0 z-50 flex items-center justify-between px-6 py-6 shadow-sm'>
         <Link href={ROUTES.HOMEPAGE}>
-          <Logo />
+          <Logo className='h-5 w-55' />
         </Link>
         <CloseButton />
       </header>

@@ -1,5 +1,8 @@
 export const ROUTES = {
   ROOT: '/',
+  LANDING: '/auth/landing',
+  LOGIN: '/auth/login',
+  SIGNUP: '/auth/signup',
   MAIN: '/main',
   HOMEPAGE: '/homepage',
   RECORD: '/main/record',

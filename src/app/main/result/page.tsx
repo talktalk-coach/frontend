@@ -8,8 +8,8 @@ import {MetricBarList} from '@/components/result/MetricBarList';
 import {Score} from '@/components/result/Score';
 import {ImprovementPlanList} from '@/components/result/ImprovementPlanList';
 import {Script} from '@/components/result/Script';
-import Link from 'next/link';
 import {ROUTES} from '@/constants/routes';
+import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 
 export default function Resultpage() {
   return (
@@ -41,16 +41,12 @@ export default function Resultpage() {
       </section>
 
       <section className='flex flex-col gap-6 text-center font-semibold'>
-        <Link href={ROUTES.RESULT_SHARE}>
-          <button className='text-brown w-full rounded-4xl bg-[#EAEAD1] p-3 shadow-xl'>
-            공유하기
-          </button>
-        </Link>
-        <Link href={ROUTES.RECORD}>
-          <button className='bg-primary w-full rounded-4xl p-3 text-white shadow-xl'>
-            다시 연습하기
-          </button>
-        </Link>
+        <NavigationButton
+          href={ROUTES.RESULT_SHARE}
+          variant='oatmeal'
+          label='공유하기'
+        />
+        <NavigationButton href={ROUTES.RECORD} label='다시 연습하기' />
       </section>
     </div>
   );
