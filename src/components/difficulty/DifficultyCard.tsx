@@ -1,6 +1,5 @@
 'use client';
 
-import CheckIcon from '@/assets/difficulty/check.svg';
 import type {DifficultyOption} from '@/constants/difficulty';
 
 interface DifficultyCardProps {
@@ -22,8 +21,10 @@ export const DifficultyCard = ({
       type='button'
       onClick={onSelect}
       aria-pressed={isSelected}
-      className={`flex w-full items-center gap-6 rounded-[32px] p-6 shadow-[0px_10px_40px_-10px_rgba(72,84,34,0.08)] transition ${
-        isSelected ? 'bg-primary-gradient ring-4 ring-[#BFCD8F]/30' : 'bg-white'
+      className={`relative flex w-full items-center gap-4 rounded-[32px] p-6 transition-all duration-300 ${
+        isSelected
+          ? 'bg-primary-gradient scale-[1.02] shadow-[0px_15px_30px_-10px_rgba(72,84,34,0.3)] ring-4 ring-[#BFCD8F]/30'
+          : 'bg-white shadow-[0px_10px_40px_-10px_rgba(72,84,34,0.08)]'
       }`}>
       <div
         className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${
@@ -48,9 +49,6 @@ export const DifficultyCard = ({
           {option.description}
         </p>
       </div>
-
-      {/* 우측 체크 아이콘 (선택 시) */}
-      {isSelected && <CheckIcon className='h-5 w-5 shrink-0 text-white' />}
     </button>
   );
 };
