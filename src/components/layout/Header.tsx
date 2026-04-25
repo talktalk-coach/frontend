@@ -1,5 +1,5 @@
 import Logo from '@/assets/icons/logo.svg';
-import ProfileImage from '@/assets/user/userprofile.svg';
+import ProfileImage from '@/assets/user/user.svg';
 import Link from 'next/link';
 import {ROUTES} from '@/constants/routes';
 
