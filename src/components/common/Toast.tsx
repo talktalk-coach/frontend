@@ -106,7 +106,7 @@ export default function Toast({
       } ${VARIANT_STYLES[variant]} ${
         isVisible
           ? 'translate-y-0 opacity-100'
-          : '${HIDDEN_TRANSFORMS[position]} pointer-events-none opacity-0'
+          : `${HIDDEN_TRANSFORMS[position]} pointer-events-none opacity-0`
       }`}>
       {variant === 'success' && <span className='mr-2'>✓</span>}
       {message}
