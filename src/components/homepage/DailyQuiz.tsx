@@ -2,6 +2,7 @@ import {useState} from 'react';
 import CheckedIcon from '@/assets/homepage/checkedicon.svg';
 import UnCheckedIcon from '@/assets/homepage/uncheckedicon.svg';
 import SuccessIcon from '@/assets/homepage/partypopper.svg';
+import Toast from '@/components/common/Toast';
 
 export type DailyQuizProps = {
   question: string;
@@ -42,10 +43,6 @@ export const DailyQuiz = ({
       }, 1000);
     } else {
       setShowToast(true);
-
-      setTimeout(() => {
-        setShowToast(false);
-      }, 1200);
     }
   };
 
@@ -98,13 +95,14 @@ export const DailyQuiz = ({
             );
           })}
         </div>
+        <Toast
+          message='오답입니다 다시 시도해보세요'
+          isVisible={showToast}
+          variant='error'
+          position='container-bottom'
+          onClose={() => setShowToast(false)}
+        />
       </div>
-
-      {showToast && (
-        <div className='fixed bottom-26 left-1/2 z-50 -translate-x-1/2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-bold text-red-700 shadow-lg backdrop-blur-md transition-all duration-300'>
-          <div className=''>오답입니다 다시 시도해보세요</div>
-        </div>
-      )}
     </div>
   );
 };

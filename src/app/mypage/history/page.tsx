@@ -1,7 +1,7 @@
-export default function Signuppage() {
+export default function Historypage() {
   return (
     <div className='flex min-h-screen items-center justify-center'>
-      회원가입 페이지
+      과거 스피치 결과
     </div>
   );
 }
