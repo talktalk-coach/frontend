@@ -1,12 +1,9 @@
-import {CircleIcon} from '@/components/common/display/CircleIcon';
+import Logo from '@/assets/icons/logo.svg';
 
 export const TopSection = () => {
   return (
-    <div className='flex w-full flex-col items-center gap-4'>
-      <CircleIcon />
-      <div className='text-primary text-lg font-bold'>
-        AI 스피치 교정 서비스
-      </div>
+    <div className='flex w-full justify-center'>
+      <Logo className='h-10 w-[342px]' />
     </div>
   );
 };
