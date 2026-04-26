@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import WarningIcon from '@/assets/mypage/warning.svg';
 import {ROUTES} from '@/constants/routes';
-import type {DifficultyLevel} from '@/mocks/mypage';
+import type {DifficultyLevel} from '@/constants/difficulty';
 
 interface DifficultySectionProps {
   currentLevel: DifficultyLevel;
