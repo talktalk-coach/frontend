@@ -13,10 +13,10 @@ export const InputField = ({label, value, onChange}: InputFieldProps) => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <label className='text-primary text-shadow ml-4 text-[10px] font-extrabold tracking-wider'>
+      <label className='text-primary ml-4 text-[10px] font-bold tracking-wider'>
         {label}
       </label>
-      <div className='flex items-center rounded-full bg-[#E9E9E0] px-5 py-3.5 shadow-xl'>
+      <div className='bg-input flex items-center rounded-full px-5 py-4'>
         <Icon className='mr-3' />
         <input
           type={type}

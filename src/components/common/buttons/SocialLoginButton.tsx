@@ -10,7 +10,7 @@ export const SocialLoginButton = ({label}: SocialLoginButtonProps) => {
 
   return (
     <button
-      className={`relative flex items-center rounded-full px-5 py-4 text-center text-sm font-bold shadow-lg ${style}`}>
+      className={`relative flex items-center rounded-full p-4 px-5 text-center text-sm font-bold shadow-lg ${style}`}>
       <span className='absolute left-7'>
         <Icon />
       </span>
