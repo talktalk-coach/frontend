@@ -20,7 +20,7 @@ export default function MypageDifficultyPage() {
   };
 
   return (
-    <main className='bg-background flex min-h-screen flex-col items-center px-6 pt-8 pb-30'>
+    <main className='bg-background flex min-h-screen flex-col items-center px-6 pt-8 pb-12'>
       <div className='flex w-full max-w-[342px] flex-col gap-8'>
         <header className='flex flex-col items-center gap-3 text-center'>
           <span className='text-primary text-sm font-bold tracking-[1.4px] uppercase opacity-70'>
