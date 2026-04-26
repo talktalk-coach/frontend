@@ -26,10 +26,10 @@ export default function Loginpage() {
   };
 
   return (
-    <div className='flex min-h-screen flex-col items-center px-6 py-8'>
+    <div className='flex min-h-screen flex-col items-center px-6 pt-9 pb-10'>
       <LoginHeader />
 
-      <main className='flex w-full flex-1 flex-col justify-center gap-10'>
+      <main className='flex w-full flex-1 flex-col justify-center gap-8'>
         <form
           className='flex w-full flex-col gap-4'
           onSubmit={handleLoginSubmit}>
@@ -43,7 +43,9 @@ export default function Loginpage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <AuthButton label='LOGIN' />
+          <div className='mt-4'>
+            <AuthButton label='LOGIN' />
+          </div>
         </form>
         <Divider />
         <div className='flex w-full flex-col gap-4'>

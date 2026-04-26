@@ -1,16 +1,11 @@
+import type {DifficultyLevel} from '@/constants/difficulty';
+
 export interface UserProfile {
   name: string;
   imageUrl: string;
 }
 
 export type SpeechGrade = 'Bad' | 'Normal' | 'Good' | 'Excellent' | 'Mastery';
-
-export type DifficultyLevel =
-  | '초급(외국인)'
-  | '초등 저학년'
-  | '초등 고학년'
-  | '중학생'
-  | '고등학생';
 
 export interface SpeechHistoryItem {
   id: number;
@@ -51,4 +46,4 @@ export const mockSpeechHistory: SpeechHistoryItem[] = [
   },
 ];
 
-export const mockDifficultyLevel: DifficultyLevel = '고등학생';
+export const mockDifficultyLevel: DifficultyLevel = '중학교 3학년';
