@@ -1,1 +1,130 @@
 @import 'tailwindcss';
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundL.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundR.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundB.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('../fonts/NanumSquare/NanumSquareRoundEB.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../fonts/Pretendard/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-nanum: 'NanumSquare', sans-serif;
+  --font-pretendard: 'Pretendard', 'NanumSquare', sans-serif;
+
+  --color-primary: #485422;
+  --color-primary2: #46483c;
+  --color-primary-gradient: #606c38;
+  --color-accent: #fdbd77;
+  --color-brown: #835418;
+  --color-oatmeal: #eaead1;
+  --color-background: #fafaf1;
+  --color-surface: #f4f4eb;
+  --color-text: #1a1c17;
+
+  /* 스피치 등급 뱃지 색상 */
+  --color-bad-bg: #ffdad6;
+  --color-bad-text: #93000a;
+  --color-normal-bg: #e8e8da;
+  --color-normal-text: #5c5f50;
+  --color-good-bg: #fdbd77;
+  --color-good-text: #784a0d;
+  --color-excellent-bg: #dbe9a9;
+  --color-excellent-text: #404b1b;
+  --color-mastery-bg: #ffd6fd;
+  --color-mastery-text: #5c3b5e;
+
+  /* 인풋/버튼 등 비활성/보조 영역 배경 */
+  --color-input: #e9e9e0;
+
+  /* 구분선, 얇은 라인 */
+  --color-divider: #c7c8b9;
+
+  /* 보조 텍스트 */
+  --color-muted: #77786b;
+}
+
+@layer base {
+  body {
+    font-family: 'NanumSquare', sans-serif;
+    width: 100%;
+    height: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  .text-shadow {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.hide-placeholder-on-focus:focus::placeholder {
+  color: transparent;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
