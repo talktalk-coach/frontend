@@ -4,6 +4,7 @@ import {useState, useRef, ChangeEvent} from 'react';
 import Image from 'next/image';
 import EditIcon from '@/assets/mypage/edit-profile.svg';
 import type {UserProfile} from '@/mocks/mypage';
+import {useUserStore} from '@/stores/userStore';
 
 interface ProfileSectionProps {
   profile: UserProfile;
@@ -24,6 +25,7 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   const [name, setName] = useState<string>(profile.name);
   const [imageUrl, setImageUrl] = useState<string>(profile.imageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const setUser = useUserStore((state) => state.setUser);
 
   const handleEditMenuOpenClick = (): void => {
     setIsMenuOpen(true);
@@ -47,6 +49,7 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
 
     const previewUrl = URL.createObjectURL(file);
     setImageUrl(previewUrl);
+    setUser({profileImage: previewUrl});
   };
 
   const handleNameMenuClick = (): void => {
@@ -62,6 +65,7 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   const handleNameEditSaveClick = (): void => {
     /* TODO: 닉네임 수정 API 연동 필요 (PATCH /api/users/me/nickname) */
     console.log('닉네임 저장:', {name});
+    setUser({nickname: name});
     setIsEditingName(false);
   };
 
