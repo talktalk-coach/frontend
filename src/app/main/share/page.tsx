@@ -23,7 +23,11 @@ export default function ResultSharePage() {
         type: 'image/png',
       });
 
-      if (navigator.canShare && navigator.canShare({files: [file]})) {
+      const isMobile =
+        /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+        (navigator.maxTouchPoints > 0 && window.innerWidth < 768);
+
+      if (isMobile && navigator.canShare?.({files: [file]})) {
         await navigator.share({
           files: [file],
           title: 'TalkTalk Coach Daily Report',
@@ -42,7 +46,7 @@ export default function ResultSharePage() {
   };
 
   return (
-    <main className='flex min-h-screen flex-col items-center px-4 py-10'>
+    <main className='flex min-h-screen flex-col items-center px-6 py-10'>
       <div className='w-full max-w-[448px]'>
         <ShareCard />
       </div>
