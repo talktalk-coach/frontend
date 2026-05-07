@@ -3,7 +3,7 @@
 import {useRef} from 'react';
 import {toPng} from 'html-to-image';
 import {SaveImageButton} from '@/components/common/buttons/SaveImageButton';
-import {ShareCard} from '@/components/shared/ShareCard';
+import {ShareCard} from '@/components/share/ShareCard';
 
 export default function ResultSharePage() {
   const captureRef = useRef<HTMLDivElement>(null);
