@@ -86,6 +86,11 @@ export const BUTTON_TYPE = {
 
 export type ButtonType = (typeof BUTTON_TYPE)[keyof typeof BUTTON_TYPE];
 
+export const SOCIAL_TYPE = {
+  KAKAO: 'KAKAO',
+  GOOGLE: 'GOOGLE',
+} as const;
+
 export const SOCIAL_MAP = {
   KAKAO: {
     text: '카카오로 시작하기',
@@ -98,6 +103,8 @@ export const SOCIAL_MAP = {
     style: 'border border-gray-300 bg-white',
   },
 } as const;
+
+export type SocialType = (typeof SOCIAL_TYPE)[keyof typeof SOCIAL_TYPE];
 
 export const LANDING_MAP = {
   primary: {
