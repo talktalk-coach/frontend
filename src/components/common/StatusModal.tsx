@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect} from 'react';
+import {useRouter} from 'next/navigation';
 
 export type StatusModalVariant = 'info' | 'success' | 'error';
 
@@ -9,6 +10,7 @@ export interface StatusModalProps {
   variant: StatusModalVariant;
   message: string;
   onClose: () => void;
+  redirectPath?: string;
 }
 
 const VARIANT_STATUS_STYLES: Record<StatusModalVariant, string> = {
@@ -22,7 +24,9 @@ export const StatusModal = ({
   variant,
   message,
   onClose,
+  redirectPath,
 }: StatusModalProps) => {
+  const router = useRouter();
   const textColor = VARIANT_STATUS_STYLES[variant];
 
   useEffect(() => {
@@ -41,23 +45,16 @@ export const StatusModal = ({
     };
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleEscKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    document.addEventListener('keydown', handleEscKey);
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.removeEventListener('keydown', handleEscKey);
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, onClose]);
-
   if (!isOpen) return null;
+
+  const handleComfirm = () => {
+    onClose();
+
+    if (redirectPath) {
+      router.push(redirectPath);
+    }
+  };
+
   return (
     <div
       role='dialog'
@@ -79,7 +76,7 @@ export const StatusModal = ({
         <div className='mt-6 flex justify-center gap-3'>
           <button
             type='button'
-            onClick={onClose}
+            onClick={handleComfirm}
             className='bg-primary rounded-full px-8 py-3 text-sm font-semibold text-white'>
             확인
           </button>

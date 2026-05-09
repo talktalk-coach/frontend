@@ -1,7 +1,6 @@
 'use client';
 
 import {useMemo, useState} from 'react';
-import {useRouter} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {EMAIL_REGEX, PASSWORD_REGEX} from '@/constants/auth';
 import {StatusModalVariant} from '@/components/common/StatusModal';
@@ -10,10 +9,10 @@ interface ModalState {
   isOpen: boolean;
   variant: StatusModalVariant;
   message: string;
+  redirectPath?: string;
 }
 
 export const useSignupForm = () => {
-  const router = useRouter();
   //signup state
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
@@ -39,11 +38,16 @@ export const useSignupForm = () => {
     message: '',
   });
 
-  const openModal = (variant: StatusModalVariant, message: string) => {
+  const openModal = (
+    variant: StatusModalVariant,
+    message: string,
+    redirectPath?: string
+  ) => {
     setModal({
       isOpen: true,
       variant,
       message,
+      redirectPath,
     });
   };
 
@@ -157,7 +161,7 @@ export const useSignupForm = () => {
       }
     }
 
-    router.push(ROUTES.HOMEPAGE);
+    openModal('success', '회원가입이 완료되었습니다.', ROUTES.HOMEPAGE);
   };
 
   return {

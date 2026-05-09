@@ -127,6 +127,7 @@ export const SignupForm = () => {
         variant={modal.variant}
         message={modal.message}
         onClose={closeModal}
+        redirectPath={modal.redirectPath}
       />
     </>
   );
