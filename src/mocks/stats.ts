@@ -2,7 +2,12 @@ import {mockPerformanceMetrics} from '@/mocks/result';
 
 export {mockPerformanceMetrics};
 
-export const mockHighlight = {
+export interface Highlight {
+  title: string;
+  description: string;
+}
+
+export const mockHighlight: Highlight = {
   title: '유창성과 부음이\n눈에 띄게 성장했어요!',
   description: '지난주 대비 유창성 점수가 12% 향상되었습니다.',
 };
@@ -32,67 +37,80 @@ export const mockDailyScores: DailyScoreItem[] = [
 export const mockDailyAverage = 88.5;
 
 export interface HistoryGroup {
-  key: 'foreigner' | 'elementaryLow' | 'elementaryHigh' | 'middle';
+  key:
+    | 'elementaryLow'
+    | 'elementaryMid'
+    | 'elementaryHigh'
+    | 'middleLow'
+    | 'middleHigh';
   label: string;
   color: string;
 }
 
 export const HISTORY_GROUPS: HistoryGroup[] = [
-  {key: 'foreigner', label: '외국인', color: '#835418'},
-  {key: 'elementaryLow', label: '초등 저학년', color: '#BFCD8F'},
-  {key: 'elementaryHigh', label: '초등 고학년', color: '#606C38'},
-  {key: 'middle', label: '중학생', color: '#485422'},
+  {key: 'elementaryLow', label: '초등학교 1-2학년', color: '#D4C28A'},
+  {key: 'elementaryMid', label: '초등학교 3-4학년', color: '#BFCD8F'},
+  {key: 'elementaryHigh', label: '초등학교 5-6학년', color: '#8A9A5B'},
+  {key: 'middleLow', label: '중학교 1-2학년', color: '#606C38'},
+  {key: 'middleHigh', label: '중학교 3학년', color: '#485422'},
 ];
 
 export interface MonthlyScoreItem {
   month: string;
-  foreigner: number;
   elementaryLow: number;
+  elementaryMid: number;
   elementaryHigh: number;
-  middle: number;
+  middleLow: number;
+  middleHigh: number;
 }
 
 export const mockMonthlyScores: MonthlyScoreItem[] = [
   {
     month: '1월',
-    foreigner: 25,
-    elementaryLow: 30,
+    elementaryLow: 25,
+    elementaryMid: 30,
     elementaryHigh: 50,
-    middle: 65,
+    middleLow: 65,
+    middleHigh: 80,
   },
   {
     month: '2월',
-    foreigner: 28,
-    elementaryLow: 38,
+    elementaryLow: 28,
+    elementaryMid: 38,
     elementaryHigh: 60,
-    middle: 75,
+    middleLow: 75,
+    middleHigh: 85,
   },
   {
     month: '3월',
-    foreigner: 30,
-    elementaryLow: 50,
+    elementaryLow: 30,
+    elementaryMid: 50,
     elementaryHigh: 72,
-    middle: 82,
+    middleLow: 82,
+    middleHigh: 88,
   },
   {
     month: '4월',
-    foreigner: 32,
-    elementaryLow: 58,
+    elementaryLow: 32,
+    elementaryMid: 58,
     elementaryHigh: 80,
-    middle: 87,
+    middleLow: 87,
+    middleHigh: 90,
   },
   {
     month: '5월',
-    foreigner: 33,
-    elementaryLow: 62,
+    elementaryLow: 33,
+    elementaryMid: 62,
     elementaryHigh: 85,
-    middle: 90,
+    middleLow: 90,
+    middleHigh: 93,
   },
   {
     month: '6월',
-    foreigner: 33,
-    elementaryLow: 64,
+    elementaryLow: 33,
+    elementaryMid: 64,
     elementaryHigh: 87,
-    middle: 92,
+    middleLow: 92,
+    middleHigh: 95,
   },
 ];
