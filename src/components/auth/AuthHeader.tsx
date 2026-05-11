@@ -17,7 +17,7 @@ export const AuthHeader = ({mode}: AuthHeaderProps) => {
         />
         <CircleIcon variant='auth' />
       </div>
-      <div className='mt-6 flex flex-col items-center gap-1'>
+      <div className='mt-6 flex flex-col items-center gap-2'>
         {isSignup && <LogoIcon className='mb-3 w-56.25' />}
         <h1 className='text-primary text-2xl font-extrabold tracking-[-0.5px]'>
           {isSignup ? '처음 오셨군요?' : '다시 오셨군요?'}
