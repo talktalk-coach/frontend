@@ -6,7 +6,7 @@ import EmailIcon from '@/assets/auth/email.svg';
 import PassWordIcon from '@/assets/auth/password.svg';
 import SecurityIcon from '@/assets/auth/security.svg';
 import NicknameIcon from '@/assets/auth/nickname.svg';
-import ComfirmPasswordIcon from '@/assets/auth/confirmpassword.svg';
+import ConfirmPasswordIcon from '@/assets/auth/confirmpassword.svg';
 import {ROUTES} from '@/constants/routes';
 
 export type InputType =
@@ -57,7 +57,7 @@ export const INPUT_FIELD_MAP: Record<InputType, FieldConfig> = {
     displayLabel: 'CONFIRM PASSWORD',
     type: 'password',
     placeholder: '비밀번호를 한 번 더 입력해주세요',
-    icon: ComfirmPasswordIcon,
+    icon: ConfirmPasswordIcon,
   },
   PARENT_EMAIL: {
     displayLabel: 'EMAIL',
