@@ -14,7 +14,7 @@ export default function page() {
           <LandingButton variant='gray' />
         </div>
       </div>
-      <div className='mt-[20px] mb-[40px] w-full'>
+      <div className='mt-5 mb-10 w-full'>
         <FeatureItemList />
       </div>
     </div>
