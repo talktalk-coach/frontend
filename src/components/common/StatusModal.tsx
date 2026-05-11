@@ -14,8 +14,8 @@ export interface StatusModalProps {
 }
 
 const VARIANT_STATUS_STYLES: Record<StatusModalVariant, string> = {
-  info: 'text-[#46483C]',
-  success: 'text-[#46483C]',
+  info: 'text-primary2',
+  success: 'text-primary2',
   error: 'text-red-700',
 };
 
