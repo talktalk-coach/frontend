@@ -2,11 +2,14 @@ import {PageTitle} from '@/components/stats/PageTitle';
 import {HighlightMessage} from '@/components/stats/HighlightMessage';
 import {GrowthRateCard} from '@/components/stats/GrowthRateCard';
 import {MasteryCard} from '@/components/stats/MasteryCard';
+import {DailyScoreChart} from '@/components/stats/DailyScoreChart';
 import {
   mockHighlight,
   mockGrowthRate,
   mockPerformanceMetrics,
   mockOverallAverage,
+  mockDailyScores,
+  mockDailyAverage,
 } from '@/mocks/stats';
 
 export default function StatsPage() {
@@ -20,6 +23,7 @@ export default function StatsPage() {
           metrics={mockPerformanceMetrics}
           overallAverage={mockOverallAverage}
         />
+        <DailyScoreChart scores={mockDailyScores} average={mockDailyAverage} />
       </div>
     </main>
   );
