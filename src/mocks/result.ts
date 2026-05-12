@@ -4,9 +4,7 @@ export const mockPerformanceMetrics = [
   {label: '정확도', value: 92},
   {label: '유창성', value: 50},
   {label: '발음', value: 88},
-  {label: '완성도', value: 70},
   {label: '어휘력', value: 95},
-  {label: '문장력', value: 24},
   {label: '논리성', value: 85},
   {label: '표현력', value: 90},
 ];
