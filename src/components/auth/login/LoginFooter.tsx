@@ -1,4 +1,9 @@
+import {useRouter} from 'next/navigation';
+import {ROUTES} from '@/constants/routes';
+
 export const LoginFooter = () => {
+  const router = useRouter();
+
   return (
     <div className='mt-9 flex flex-col items-center gap-6'>
       <div className='text-primary2/60 flex gap-2 text-xs font-bold'>
@@ -8,7 +13,11 @@ export const LoginFooter = () => {
       </div>
       <div className='flex gap-4 text-xs font-bold'>
         <span className='text-primary2'>아직 회원이 아니신가요?</span>
-        <button className='text-primary'>회원가입</button>
+        <button
+          className='text-primary'
+          onClick={() => router.push(ROUTES.SIGNUP)}>
+          회원가입
+        </button>
       </div>
     </div>
   );

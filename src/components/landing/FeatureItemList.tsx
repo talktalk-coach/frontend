@@ -11,7 +11,7 @@ const FEATURES = [
 
 export const FeatureItemList = () => {
   return (
-    <div className='mt-7 flex justify-center gap-10 [@media(max-height:740px)]:mt-0'>
+    <div className='mt-7 flex justify-center gap-10'>
       {FEATURES.map(({icon, label}) => (
         <FeatureItem key={label} icon={icon} label={label} />
       ))}
