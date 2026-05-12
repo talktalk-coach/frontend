@@ -9,7 +9,7 @@ export const MasteryCard = ({metrics, overallAverage}: MasteryCardProps) => {
   return (
     <section className='bg-surface border-divider/30 flex w-full flex-col gap-6 rounded-3xl border p-6 shadow-sm'>
       <header className='flex items-start justify-between'>
-        <h3 className='font-pretendard text-text text-lg font-semibold'>
+        <h3 className='text-primary text-xl font-bold tracking-[-0.32px]'>
           핵심 역량 마스터리
         </h3>
         <div className='flex flex-col items-end gap-0.5'>

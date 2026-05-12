@@ -10,9 +10,11 @@ interface DailyScoreChartProps {
 
 export const DailyScoreChart = ({scores, average}: DailyScoreChartProps) => {
   return (
-    <section className='bg-surface border-divider/30 flex w-full flex-col gap-6 rounded-[32px] border px-4 py-6 shadow-sm'>
+    <section className='bg-surface border-divider/30 flex w-full flex-col gap-6 rounded-[32px] border p-6 shadow-sm'>
       <header className='flex items-center justify-between'>
-        <h3 className='text-primary text-xl font-bold'>일별 나의 성장치</h3>
+        <h3 className='text-primary text-xl font-bold tracking-[-0.32px]'>
+          일별 나의 성장치
+        </h3>
         <span className='font-pretendard text-primary2 rounded-2xl bg-[#EEEEE5] px-2 py-1 text-[10px] font-bold'>
           LATEST 7 DAYS
         </span>

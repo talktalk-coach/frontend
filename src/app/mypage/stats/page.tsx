@@ -3,6 +3,7 @@ import {HighlightMessage} from '@/components/stats/HighlightMessage';
 import {GrowthRateCard} from '@/components/stats/GrowthRateCard';
 import {MasteryCard} from '@/components/stats/MasteryCard';
 import {DailyScoreChart} from '@/components/stats/DailyScoreChart';
+import {HistoryChart} from '@/components/stats/HistoryChart';
 import {
   mockHighlight,
   mockGrowthRate,
@@ -10,11 +11,12 @@ import {
   mockOverallAverage,
   mockDailyScores,
   mockDailyAverage,
+  mockMonthlyScores,
 } from '@/mocks/stats';
 
 export default function StatsPage() {
   return (
-    <main className='flex flex-col items-center px-6 pt-6 pb-44'>
+    <main className='flex flex-col items-center px-6 pt-6 pb-10'>
       <div className='flex w-full max-w-[342px] flex-col gap-8'>
         <PageTitle />
         <HighlightMessage highlight={mockHighlight} />
@@ -24,6 +26,7 @@ export default function StatsPage() {
           overallAverage={mockOverallAverage}
         />
         <DailyScoreChart scores={mockDailyScores} average={mockDailyAverage} />
+        <HistoryChart scores={mockMonthlyScores} />
       </div>
     </main>
   );
