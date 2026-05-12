@@ -1,6 +1,7 @@
 import {mockPerformanceMetrics} from '@/mocks/result';
 
 export {mockPerformanceMetrics};
+export type {PerformanceMetric} from '@/mocks/result';
 
 export interface Highlight {
   title: string;

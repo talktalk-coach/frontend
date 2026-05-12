@@ -1,5 +1,10 @@
 export const mockScore = 84;
 
+export interface PerformanceMetric {
+  label: string;
+  value: number;
+}
+
 export const mockPerformanceMetrics = [
   {label: '정확도', value: 92},
   {label: '유창성', value: 50},
