@@ -12,7 +12,12 @@ export const mockHighlight: Highlight = {
   description: '지난주 대비 유창성 점수가 12% 향상되었습니다.',
 };
 
-export const mockGrowthRate = {
+export interface GrowthRate {
+  label: string;
+  value: number;
+}
+
+export const mockGrowthRate: GrowthRate = {
   label: '전체 성장률',
   value: 24.8,
 };

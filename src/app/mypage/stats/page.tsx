@@ -1,6 +1,7 @@
 import {PageTitle} from '@/components/stats/PageTitle';
 import {HighlightMessage} from '@/components/stats/HighlightMessage';
-import {mockHighlight} from '@/mocks/stats';
+import {GrowthRateCard} from '@/components/stats/GrowthRateCard';
+import {mockHighlight, mockGrowthRate} from '@/mocks/stats';
 
 export default function StatsPage() {
   return (
@@ -8,6 +9,7 @@ export default function StatsPage() {
       <div className='flex w-full max-w-[342px] flex-col gap-8'>
         <PageTitle />
         <HighlightMessage highlight={mockHighlight} />
+        <GrowthRateCard growthRate={mockGrowthRate} />
       </div>
     </main>
   );
