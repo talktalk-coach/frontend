@@ -1,7 +1,13 @@
 import {PageTitle} from '@/components/stats/PageTitle';
 import {HighlightMessage} from '@/components/stats/HighlightMessage';
 import {GrowthRateCard} from '@/components/stats/GrowthRateCard';
-import {mockHighlight, mockGrowthRate} from '@/mocks/stats';
+import {MasteryCard} from '@/components/stats/MasteryCard';
+import {
+  mockHighlight,
+  mockGrowthRate,
+  mockPerformanceMetrics,
+  mockOverallAverage,
+} from '@/mocks/stats';
 
 export default function StatsPage() {
   return (
@@ -10,6 +16,10 @@ export default function StatsPage() {
         <PageTitle />
         <HighlightMessage highlight={mockHighlight} />
         <GrowthRateCard growthRate={mockGrowthRate} />
+        <MasteryCard
+          metrics={mockPerformanceMetrics}
+          overallAverage={mockOverallAverage}
+        />
       </div>
     </main>
   );
