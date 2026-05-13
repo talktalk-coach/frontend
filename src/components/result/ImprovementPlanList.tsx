@@ -13,7 +13,7 @@ type ImprovementPlanListProps = {
 export const ImprovementPlanList = ({plans}: ImprovementPlanListProps) => {
   return (
     <section className='flex flex-col gap-6'>
-      <h2 className='text-primary text-lg font-extrabold'>개선 방향</h2>
+      <h2 className='text-primary text-lg font-extrabold'>세부 피드백</h2>
       <div className='flex flex-col gap-6'>
         {plans.map((plan) => (
           <ImprovementPlan
