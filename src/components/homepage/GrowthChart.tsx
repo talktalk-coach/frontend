@@ -31,12 +31,21 @@ export const GrowthChart = ({data}: GrowthChartProps) => {
         <div className='h-70 w-full'>
           <ResponsiveContainer>
             <RadarChart data={data}>
-              <PolarGrid radialLines={false} stroke='#77786B' />
+              <PolarGrid
+                gridType='polygon'
+                radialLines={false}
+                stroke='#77786B'
+              />
               <PolarAngleAxis
                 dataKey='label'
                 tick={{fontSize: 10, fill: '#46483C', fontWeight: 600}}
               />
-              <PolarRadiusAxis tickCount={4} tick={false} axisLine={false} />
+              <PolarRadiusAxis
+                tickCount={4}
+                tick={false}
+                axisLine={false}
+                domain={[0, 100]}
+              />
               <Radar
                 name='score'
                 dataKey='score'
