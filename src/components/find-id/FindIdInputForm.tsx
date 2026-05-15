@@ -31,7 +31,7 @@ export const FindIdInputForm = ({
   return (
     <section className='flex w-full flex-col gap-8'>
       <header className='flex flex-col gap-3'>
-        <h1 className='text-text text-4xl font-extrabold tracking-[-0.9px]'>
+        <h1 className='text-primary text-4xl font-extrabold tracking-[-0.9px]'>
           아이디 찾기
         </h1>
         <p className='text-primary2 text-base font-medium'>

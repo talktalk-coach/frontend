@@ -2,13 +2,15 @@
 
 import {useFindIdForm} from '@/hooks/useFindIdForm';
 import {FindIdInputForm} from '@/components/find-id/FindIdInputForm';
+import {FindIdSuccessCard} from '@/components/find-id/FindIdSuccessCard';
 import {FindAccountFooter} from '@/components/layout/FindAccountFooter';
 
 export default function FindIdPage() {
-  const {email, setEmail, emailError, step, handleSubmit} = useFindIdForm();
+  const {email, setEmail, emailError, step, result, handleSubmit} =
+    useFindIdForm();
 
   return (
-    <main className='flex min-h-[calc(100vh-64px)] flex-col items-center px-6 pt-12 pb-10'>
+    <main className='flex min-h-[calc(100vh-64px)] flex-col items-center px-6 pt-5 pb-10'>
       <div className='flex w-full max-w-[342px] flex-col'>
         {step === 'input' && (
           <FindIdInputForm
@@ -18,6 +20,7 @@ export default function FindIdPage() {
             onSubmit={handleSubmit}
           />
         )}
+        {step === 'success' && result && <FindIdSuccessCard result={result} />}
         {/* TODO: success, failure 화면은 다음 단계에서 추가 */}
       </div>
 
