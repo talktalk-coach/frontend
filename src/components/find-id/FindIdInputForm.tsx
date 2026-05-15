@@ -2,6 +2,7 @@
 
 import {ChangeEvent, FormEvent} from 'react';
 import Link from 'next/link';
+import Typewriter from '@/assets/find-id/typewriter.svg';
 import {ROUTES} from '@/constants/routes';
 
 interface FindIdInputFormProps {
@@ -38,7 +39,7 @@ export const FindIdInputForm = ({
         </p>
       </header>
 
-      <form onSubmit={onSubmit} className='flex flex-col gap-6'>
+      <form onSubmit={onSubmit} className='flex flex-col gap-8'>
         <div className='bg-surface flex flex-col gap-4 rounded-[32px] p-8 shadow-sm'>
           <div className='flex flex-col gap-2'>
             <label
@@ -80,6 +81,12 @@ export const FindIdInputForm = ({
             비밀번호 찾기
           </Link>
         </div>
+
+        <Typewriter
+          className='h-auto w-full'
+          preserveAspectRatio='xMidYMid meet'
+          aria-hidden='true'
+        />
       </form>
     </section>
   );
