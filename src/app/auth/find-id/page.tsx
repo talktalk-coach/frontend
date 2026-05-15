@@ -3,10 +3,11 @@
 import {useFindIdForm} from '@/hooks/useFindIdForm';
 import {FindIdInputForm} from '@/components/find-id/FindIdInputForm';
 import {FindIdSuccessCard} from '@/components/find-id/FindIdSuccessCard';
+import {FindIdFailureCard} from '@/components/find-id/FindIdFailureCard';
 import {FindAccountFooter} from '@/components/layout/FindAccountFooter';
 
 export default function FindIdPage() {
-  const {email, setEmail, emailError, step, result, handleSubmit} =
+  const {email, setEmail, emailError, step, result, handleSubmit, handleReset} =
     useFindIdForm();
 
   return (
@@ -21,7 +22,7 @@ export default function FindIdPage() {
           />
         )}
         {step === 'success' && result && <FindIdSuccessCard result={result} />}
-        {/* TODO: success, failure 화면은 다음 단계에서 추가 */}
+        {step === 'failure' && <FindIdFailureCard onRetry={handleReset} />}
       </div>
 
       <FindAccountFooter />
