@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import SearchNotFound from '@/assets/find-id/search-not-found.svg';
+import SearchNotFound from '@/assets/auth/find-id/search-not-found.svg';
 import {ROUTES} from '@/constants/routes';
 
 interface FindIdFailureCardProps {

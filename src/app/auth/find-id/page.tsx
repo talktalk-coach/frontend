@@ -1,9 +1,9 @@
 'use client';
 
 import {useFindIdForm} from '@/hooks/useFindIdForm';
-import {FindIdInputForm} from '@/components/find-id/FindIdInputForm';
-import {FindIdSuccessCard} from '@/components/find-id/FindIdSuccessCard';
-import {FindIdFailureCard} from '@/components/find-id/FindIdFailureCard';
+import {FindIdInputForm} from '@/components/auth/find-id/FindIdInputForm';
+import {FindIdSuccessCard} from '@/components/auth/find-id/FindIdSuccessCard';
+import {FindIdFailureCard} from '@/components/auth/find-id/FindIdFailureCard';
 import {FindAccountFooter} from '@/components/layout/FindAccountFooter';
 
 export default function FindIdPage() {

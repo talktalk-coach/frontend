@@ -1,9 +1,9 @@
 'use client';
 
 import {useFindPasswordForm} from '@/hooks/useFindPasswordForm';
-import {FindPasswordInputForm} from '@/components/find-password/FindPasswordInputForm';
-import {FindPasswordSuccessCard} from '@/components/find-password/FindPasswordSuccessCard';
-import {FindIdFailureCard} from '@/components/find-id/FindIdFailureCard';
+import {FindPasswordInputForm} from '@/components/auth/find-password/FindPasswordInputForm';
+import {FindPasswordSuccessCard} from '@/components/auth/find-password/FindPasswordSuccessCard';
+import {FindIdFailureCard} from '@/components/auth/find-id/FindIdFailureCard';
 import {FindAccountFooter} from '@/components/layout/FindAccountFooter';
 
 export default function FindPasswordPage() {

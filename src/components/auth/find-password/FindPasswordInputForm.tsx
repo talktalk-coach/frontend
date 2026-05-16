@@ -2,7 +2,7 @@
 
 import {ChangeEvent, FormEvent} from 'react';
 import Link from 'next/link';
-import Typewriter from '@/assets/find-id/typewriter.svg';
+import Typewriter from '@/assets/auth/find-id/typewriter.svg';
 import {ROUTES} from '@/constants/routes';
 
 interface FindPasswordInputFormProps {

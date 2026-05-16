@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import MailSentIcon from '@/assets/find-password/mail-sent.svg';
-import MailInfoIcon from '@/assets/find-password/mail-info.svg';
+import MailSentIcon from '@/assets/auth/find-password/mail-sent.svg';
+import MailInfoIcon from '@/assets/auth/find-password/mail-info.svg';
 import {ROUTES} from '@/constants/routes';
 import type {FindPasswordSent} from '@/mocks/find-account';
 

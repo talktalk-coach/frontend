@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ParrotIcon from '@/assets/icons/Speech-off.svg';
-import CheckCircle from '@/assets/find-id/check-circle.svg';
+import CheckCircle from '@/assets/auth/find-id/check-circle.svg';
 import {ROUTES} from '@/constants/routes';
 import type {FindIdResult} from '@/mocks/find-account';
 
