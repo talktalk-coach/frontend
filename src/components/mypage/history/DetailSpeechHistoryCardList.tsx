@@ -6,7 +6,7 @@ interface DetailSpeechHistoryListProps {
   speeches: SpeechHistoryItem[];
 }
 
-export const DetailSpeechHistoyCardList = ({
+export const DetailSpeechHistoryCardList = ({
   speeches,
 }: DetailSpeechHistoryListProps) => {
   return (

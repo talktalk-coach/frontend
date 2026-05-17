@@ -3,7 +3,7 @@
 import {useState, useMemo} from 'react';
 import {UpDownButton} from '@/components/common/buttons/UpDownButton';
 import {ToggleSegment} from '@/components/mypage/history/ToggleSegment';
-import {DetailSpeechHistoyCardList} from '@/components/mypage/history/DetailSpeechHistoyCardList';
+import {DetailSpeechHistoryCardList} from '@/components/mypage/history/DetailSpeechHistoryCardList';
 import {mockSpeechHistory} from '@/mocks/mypage';
 
 type SortType = 'date' | 'score';
@@ -46,7 +46,7 @@ export default function Historypage() {
           onDownClick={() => setSelectedArrow('down')}
         />
       </div>
-      <DetailSpeechHistoyCardList speeches={sortedSpeeches} />
+      <DetailSpeechHistoryCardList speeches={sortedSpeeches} />
     </div>
   );
 }
