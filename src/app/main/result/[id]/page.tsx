@@ -20,8 +20,6 @@ interface ResultPageProps {
 export default function Resultpage({params}: ResultPageProps) {
   const {id} = params;
 
-  console.log(id);
-
   return (
     <div className='flex flex-col gap-8 px-6 pt-10 pb-10'>
       <section className='gap-10 rounded-[40px] bg-[#606C38] p-6'>
