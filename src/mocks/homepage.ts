@@ -2,10 +2,11 @@ export const mockUserName = '홍길동';
 
 export const mockRadarChart = [
   {label: '어휘', score: 80},
-  {label: '표현', score: 75},
-  {label: '논리', score: 45},
-  {label: '정확도', score: 70},
-  {label: '속도', score: 65},
+  {label: '표현', score: 62},
+  {label: '논리', score: 80},
+  {label: '정확도', score: 85},
+  {label: '속도', score: 78},
+  {label: '발음', score: 76},
 ];
 
 export const mockMonthlyScore = {

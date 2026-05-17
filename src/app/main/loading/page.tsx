@@ -12,7 +12,7 @@ export default function Loadingpage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push(ROUTES.RESULT);
+      router.push(`${ROUTES.RESULT}/${1}`);
     }, 5000);
 
     return () => clearTimeout(timer);
