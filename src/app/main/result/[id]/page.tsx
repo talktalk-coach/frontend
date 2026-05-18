@@ -2,16 +2,24 @@ import {
   mockScore,
   mockPerformanceMetrics,
   mockImprovementPlans,
-  mockScript,
+  mockOverallFeedback,
 } from '@/mocks/result';
 import {MetricBarList} from '@/components/result/MetricBarList';
 import {Score} from '@/components/result/Score';
 import {ImprovementPlanList} from '@/components/result/ImprovementPlanList';
-import {Script} from '@/components/result/Script';
 import {ROUTES} from '@/constants/routes';
 import {NavigationButton} from '@/components/common/buttons/NavigationButton';
+import {OverallFeedback} from '@/components/result/OverallFeedback';
 
-export default function Resultpage() {
+interface ResultPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Resultpage({params}: ResultPageProps) {
+  const {id} = params;
+
   return (
     <div className='flex flex-col gap-8 px-6 pt-10 pb-10'>
       <section className='gap-10 rounded-[40px] bg-[#606C38] p-6'>
@@ -37,7 +45,7 @@ export default function Resultpage() {
       </section>
 
       <section>
-        <Script text={mockScript} />
+        <OverallFeedback text={mockOverallFeedback} />
       </section>
 
       <section className='flex flex-col gap-6 text-center font-semibold'>
