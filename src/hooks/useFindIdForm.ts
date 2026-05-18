@@ -1,8 +1,7 @@
 import {useState, useMemo, FormEvent} from 'react';
+import {EMAIL_REGEX} from '@/constants/auth';
 import {mockFindIdSuccess} from '@/mocks/find-account';
 import type {FindIdResult} from '@/mocks/find-account';
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export type FindIdStep = 'input' | 'success' | 'failure';
 
