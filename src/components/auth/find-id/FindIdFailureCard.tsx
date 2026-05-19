@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 import SearchNotFound from '@/assets/auth/find-id/search-not-found.svg';
 import {ROUTES} from '@/constants/routes';
 
@@ -37,11 +37,11 @@ export const FindIdFailureCard = ({onRetry}: FindIdFailureCardProps) => {
       </header>
 
       <div className='flex w-full flex-col gap-4'>
-        <Link
+        <NavigationButton
           href={ROUTES.SIGNUP}
-          className='bg-primary hover:bg-primary-gradient flex w-full items-center justify-center rounded-full py-4 text-base font-bold text-white shadow-md transition-all'>
-          회원가입하기
-        </Link>
+          label='회원가입하기'
+          variant='primary'
+        />
 
         <button
           type='button'

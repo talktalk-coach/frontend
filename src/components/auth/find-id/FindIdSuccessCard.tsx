@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 import ParrotIcon from '@/assets/icons/Speech-off.svg';
 import CheckCircle from '@/assets/auth/find-id/check-circle.svg';
 import {ROUTES} from '@/constants/routes';
@@ -59,11 +60,11 @@ export const FindIdSuccessCard = ({result}: FindIdSuccessCardProps) => {
       </div>
 
       <div className='flex w-full flex-col gap-8'>
-        <Link
+        <NavigationButton
           href={ROUTES.LOGIN}
-          className='bg-primary hover:bg-primary-gradient flex w-full items-center justify-center rounded-full py-4 text-base font-bold text-white shadow-md transition-all'>
-          로그인하러 가기
-        </Link>
+          label='로그인하러 가기'
+          variant='primary'
+        />
 
         <p className='text-primary2 text-center text-sm'>
           비밀번호가 기억나지 않으시나요?{' '}

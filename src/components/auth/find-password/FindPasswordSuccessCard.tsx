@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 import MailSentIcon from '@/assets/auth/find-password/mail-sent.svg';
 import MailInfoIcon from '@/assets/auth/find-password/mail-info.svg';
 import {ROUTES} from '@/constants/routes';
@@ -46,11 +47,11 @@ export const FindPasswordSuccessCard = ({
       </div>
 
       <div className='flex w-full flex-col gap-8'>
-        <Link
+        <NavigationButton
           href={ROUTES.LOGIN}
-          className='bg-primary hover:bg-primary-gradient flex w-full items-center justify-center rounded-full py-4 text-base font-bold text-white shadow-md transition-all'>
-          로그인 페이지로
-        </Link>
+          label='로그인 페이지로'
+          variant='primary'
+        />
       </div>
     </section>
   );
