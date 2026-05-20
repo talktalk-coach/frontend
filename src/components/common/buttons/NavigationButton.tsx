@@ -14,13 +14,14 @@ export const NavigationButton = ({
   variant = 'primary',
 }: NavigationButtonProps) => {
   const variantStyle = {
-    primary: 'bg-primary text-white',
+    primary: 'bg-primary text-white hover:bg-primary-gradient',
     oatmeal: 'bg-oatmeal text-brown',
   };
+
   return (
     <Link
       href={href}
-      className={`flex w-full items-center justify-center rounded-full p-3 font-bold shadow-xl ${variantStyle[variant]}`}>
+      className={`flex w-full items-center justify-center rounded-full py-4 font-bold shadow-md transition-all ${variantStyle[variant]}`}>
       {label}
     </Link>
   );
