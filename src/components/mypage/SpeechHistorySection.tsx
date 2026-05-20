@@ -24,7 +24,7 @@ export const SpeechHistorySection = ({speeches}: SpeechHistorySectionProps) => {
       </div>
 
       <div className='flex flex-col gap-3'>
-        {speeches.slice(0, 4).map((speech) => (
+        {speeches.slice(0, 3).map((speech) => (
           <SpeechHistoryCard key={speech.id} speech={speech} />
         ))}
       </div>
