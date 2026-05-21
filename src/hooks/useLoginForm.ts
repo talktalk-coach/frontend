@@ -1,15 +1,50 @@
 'use client';
 
 import {useMemo, useState} from 'react';
-import {useRouter} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {EMAIL_REGEX, PASSWORD_REGEX} from '@/constants/auth';
+import {useQuickSignup} from '@/hooks/queries/useAuth';
+import {StatusModalVariant} from '@/components/common/StatusModal';
+
+interface ModalState {
+  isOpen: boolean;
+  variant: StatusModalVariant;
+  message: string;
+  redirectPath?: string;
+}
 
 export const useLoginForm = () => {
-  const router = useRouter();
+  const {mutateAsync: quickSignup} = useQuickSignup();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // modal state
+  const [modal, setModal] = useState<ModalState>({
+    isOpen: false,
+    variant: 'info',
+    message: '',
+  });
+
+  const openModal = (
+    variant: StatusModalVariant,
+    message: string,
+    redirectPath?: string
+  ) => {
+    setModal({
+      isOpen: true,
+      variant,
+      message,
+      redirectPath,
+    });
+  };
+
+  const closeModal = () => {
+    setModal((prev) => ({
+      ...prev,
+      isOpen: false,
+    }));
+  };
 
   const emailError = useMemo(() => {
     if (!email) return '';
@@ -35,15 +70,25 @@ export const useLoginForm = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      alert('이메일과 비밀번호를 입력하세요.');
+      openModal('error', '이메일과 비밀번호를 입력하세요.');
       return;
     }
 
     if (emailError || passwordError) {
       return;
     }
-    // TODO: login API
-    router.push(ROUTES.HOMEPAGE);
+    try {
+      await quickSignup({
+        // TODO: 나중에 실제 login API로 교체
+        email,
+        password,
+        nickname: '테스트유저',
+        targetLevel: 'MIDDLE_1_2',
+      });
+      openModal('success', '로그인에 성공했습니다.', ROUTES.HOMEPAGE);
+    } catch (error) {
+      openModal('error', '로그인에 실패했습니다.');
+    }
   };
 
   return {
@@ -56,5 +101,7 @@ export const useLoginForm = () => {
     passwordError,
 
     handleLoginSubmit,
+    modal,
+    closeModal,
   };
 };
