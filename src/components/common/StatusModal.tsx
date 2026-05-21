@@ -2,6 +2,7 @@
 
 import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
+import CheckIcon from '@/assets/icons/check.svg';
 
 export type StatusModalVariant = 'info' | 'success' | 'error';
 
@@ -66,14 +67,22 @@ export const StatusModal = ({
         onClick={onClose}
       />
 
-      <div className='bg-background relative z-10 w-full max-w-sm rounded-3xl p-6 shadow-xl'>
+      <div className='bg-background relative z-10 w-full max-w-sm rounded-3xl p-7 shadow-xl'>
+        {variant === 'success' && (
+          <div className='mb-2 flex justify-center'>
+            <div className='success-check'>
+              <CheckIcon className='h-16 w-16 text-green-600' />
+            </div>
+          </div>
+        )}
+
         <p
           id='modal-title'
           className={`mt-3 text-center text-sm leading-relaxed whitespace-pre-line ${textColor}`}>
           {message}
         </p>
 
-        <div className='mt-6 flex justify-center gap-3'>
+        <div className='mt-5 flex justify-center gap-3'>
           <button
             type='button'
             onClick={handleComfirm}
