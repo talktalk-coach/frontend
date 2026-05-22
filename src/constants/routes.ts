@@ -14,4 +14,6 @@ export const ROUTES = {
   MYPAGE_HISTORY: '/mypage/history',
   MYPAGE_DIFFICULTY: '/mypage/difficulty',
   DIFFICULTY: '/auth/difficulty',
+  FIND_ID: '/auth/find-id',
+  FIND_PASSWORD: '/auth/find-password',
 };
