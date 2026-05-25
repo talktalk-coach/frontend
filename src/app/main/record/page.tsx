@@ -10,6 +10,7 @@ import {StatusMessage} from '@/components/record/StatusMessage';
 import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
 import {useRecord} from '@/hooks/useRecord';
+import {useSubmitSpeechMutation} from '@/hooks/queries/useSpeechQueries';
 
 type RecordStatus = 'idle' | 'recording' | 'paused';
 
@@ -20,11 +21,24 @@ type ToastState = {
 
 const INITIAL_TOAST_STATE: ToastState = {isVisible: false, message: ''};
 
+/**
+ * TODO: category는 사용자 선택 값이나 선택 UI(모달)가 아직 미구현이라 고정값 사용.
+ * title은 "날짜 + 카테고리" 형식으로 확정(별도 입력 UI 없음).
+ */
+const DEFAULT_CATEGORY = 'PRESENTATION';
+const createTitleParam = (category: string): string => {
+  const today = new Date().toISOString().slice(0, 10);
+  return `${today} ${category}`;
+};
+
 export default function RecordPage(): ReactElement {
   const router = useRouter();
 
   const {startRecording, pauseRecording, resumeRecording, stopRecording} =
     useRecord();
+
+  const {mutateAsync: submitSpeech, isPending: isSubmitting} =
+    useSubmitSpeechMutation();
 
   /**
    * idle: 대기 중, recording: 녹음 진행 중, paused: 일시정지됨
@@ -42,10 +56,29 @@ export default function RecordPage(): ReactElement {
     setToast((prev) => ({...prev, isVisible: false}));
   }, []);
 
+  /**
+   * 녹음을 종료하고 오디오를 업로드한 뒤 결과 로딩 페이지로 이동한다.
+   * stopRecording()은 recording/paused 상태 모두 정상 종료된다.
+   * 동적 라우트 경로로 다음 페이지에 전달한다
+   * 업로드 실패 시 라우팅하지 않고 토스트로 안내한다.
+   */
   const handleSubmit = useCallback(async (): Promise<void> => {
-    await stopRecording();
-    router.push(ROUTES.RESULT_LOADING);
-  }, [stopRecording, router]);
+    const audioBlob = await stopRecording();
+
+    try {
+      const speechId = await submitSpeech({
+        audio: audioBlob,
+        title: createTitleParam(DEFAULT_CATEGORY),
+        duration: elapsedSeconds,
+        category: DEFAULT_CATEGORY,
+      });
+
+      router.push(ROUTES.RESULT_LOADING(speechId));
+    } catch {
+      showToast('업로드에 실패했습니다. 다시 시도해 주세요');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stopRecording, submitSpeech, router, showToast]);
 
   /* 12분 경과 - 남은 시간 안내 토스트 */
   const handleWarning = useCallback((): void => {
@@ -89,6 +122,7 @@ export default function RecordPage(): ReactElement {
   };
 
   const handleSubmitClick = async (): Promise<void> => {
+    if (isSubmitting) return;
     await handleSubmit();
   };
 
@@ -128,6 +162,7 @@ export default function RecordPage(): ReactElement {
         status={status}
         elapsedSeconds={elapsedSeconds}
         isDanger={isDanger}
+        isSubmitting={isSubmitting}
         onPause={handlePauseClick}
         onResume={handleResumeClick}
         onSubmit={handleSubmitClick}

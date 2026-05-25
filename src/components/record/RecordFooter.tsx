@@ -7,6 +7,7 @@ interface RecordFooterProps {
   status: 'idle' | 'recording' | 'paused';
   elapsedSeconds: number;
   isDanger: boolean;
+  isSubmitting: boolean;
   onPause: () => void;
   onResume: () => void;
   onSubmit: () => void;
@@ -16,6 +17,7 @@ export const RecordFooter = ({
   status,
   elapsedSeconds,
   isDanger,
+  isSubmitting,
   onPause,
   onResume,
   onSubmit,
@@ -64,8 +66,8 @@ export const RecordFooter = ({
       <button
         className='bg-primary w-full rounded-[48px] py-4 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50'
         onClick={onSubmit}
-        disabled={status === 'idle'}>
-        제출하기
+        disabled={status === 'idle' || isSubmitting}>
+        {isSubmitting ? '제출 중...' : '제출하기'}
       </button>
     </footer>
   );
