@@ -6,7 +6,7 @@ export const ROUTES = {
   MAIN: '/main',
   HOMEPAGE: '/homepage',
   RECORD: '/main/record',
-  RESULT: '/main/result',
+  RESULT: (speechId: number) => `/main/result/${speechId}`,
   RESULT_LOADING: (speechId: number) => `/main/loading/${speechId}`,
   RESULT_SHARE: '/main/share',
   MYPAGE: '/mypage',
