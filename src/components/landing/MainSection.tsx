@@ -11,14 +11,13 @@ export const MainSection = () => {
         <CircleIcon variant='landing' />
       </div>
 
-      <div className='flex w-full flex-col items-center gap-4'>
-        <h1 className='text-primary text-xl leading-7 font-extrabold tracking-[-0.5px]'>
-          AI 스피치 교정 서비스
+      <div className='flex w-full flex-col items-center gap-3'>
+        <h1 className='text-centerleading-7 font-extrabold tracking-[-0.5px]'>
+          <p className='text-primary2/80 text-center'>초·중학생을 위한</p>
+          <p className='text-primary text-xl'>AI 스피치 교정 서비스</p>
         </h1>
-        <p className='text-primary2/80 text-center text-base leading-[26px]'>
-          당신의 목소리에 자신감을 더하세요.
-          <br />
-          전문적인 AI 코칭으로 완성되는 완벽한 발음과 톤
+        <p className='text-primary2/80 text- text-center leading-[26px]'>
+          AI 스피치 코치와 자신감을 키워보세요
         </p>
       </div>
     </div>
