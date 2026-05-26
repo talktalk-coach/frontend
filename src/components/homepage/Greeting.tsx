@@ -2,7 +2,7 @@ export const Greeting = ({userName}: {userName: string}) => {
   return (
     <section className='flex flex-col gap-2 text-center'>
       <h2 className='text-primary text-3xl font-extrabold'>
-        Hello, {userName}.
+        안녕하세요, {userName}.
       </h2>
       <p className='text-primary2 flex flex-col gap-1 text-xs'>
         <span>작은 연습이 큰 변화를 만듭니다.</span>
