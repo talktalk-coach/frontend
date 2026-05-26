@@ -6,8 +6,8 @@ export type ImprovementPlanProps = {
 };
 
 const TITLE_ICONS = {
-  '어휘 표현': BookText,
-  '논리 표현': Workflow,
+  어휘: BookText,
+  논리: Workflow,
   '문장 구조': AlignLeft,
 };
 

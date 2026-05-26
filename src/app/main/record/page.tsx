@@ -1,17 +1,16 @@
 'use client';
 
-import {useCallback, useState, ReactElement} from 'react';
+import {useCallback, useState, ReactElement, useEffect} from 'react';
 import Toast from '@/components/common/Toast';
 import {useRecordTimer} from '@/hooks/useRecordTimer';
-import {useRouter} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {WaveForm} from '@/components/record/WaveForm';
 import {StatusMessage} from '@/components/record/StatusMessage';
 import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
 import {useRecord} from '@/hooks/useRecord';
-import {useSubmitSpeechMutation} from '@/hooks/queries/useSpeechQueries';
-
+import {useSubmitSpeechMutation} from '@/hooks/queries/useSpeech';
 type RecordStatus = 'idle' | 'recording' | 'paused';
 
 type ToastState = {
@@ -43,6 +42,8 @@ export default function RecordPage(): ReactElement {
   /**
    * idle: 대기 중, recording: 녹음 진행 중, paused: 일시정지됨
    */
+  const searchParams = useSearchParams();
+
   const [status, setStatus] = useState<RecordStatus>('idle');
 
   const [toast, setToast] = useState<ToastState>(INITIAL_TOAST_STATE);
@@ -56,6 +57,12 @@ export default function RecordPage(): ReactElement {
     setToast((prev) => ({...prev, isVisible: false}));
   }, []);
 
+  useEffect(() => {
+    if (searchParams.get('error') === 'analysis_failed') {
+      showToast('분석에 실패했습니다. 다시 시도해 주세요');
+    }
+  }, [searchParams, showToast]);
+
   /**
    * 녹음을 종료하고 오디오를 업로드한 뒤 결과 로딩 페이지로 이동한다.
    * stopRecording()은 recording/paused 상태 모두 정상 종료된다.
@@ -63,7 +70,11 @@ export default function RecordPage(): ReactElement {
    * 업로드 실패 시 라우팅하지 않고 토스트로 안내한다.
    */
   const handleSubmit = useCallback(async (): Promise<void> => {
-    const audioBlob = await stopRecording();
+    //시연용: public/test.wav 파일 사용
+    // const audioBlob = await stopRecording();
+    // console.log(audioBlob.type);
+    const response = await fetch('/record/test.wav');
+    const audioBlob = await response.blob();
 
     try {
       const speechId = await submitSpeech({

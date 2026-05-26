@@ -1,22 +1,16 @@
 'use client';
 
-import {useEffect} from 'react';
-import {useRouter} from 'next/navigation';
-import {ROUTES} from '@/constants/routes';
+import {useParams} from 'next/navigation';
 import Overlay from '@/assets/result/overlay.svg';
 import Icon from '@/assets/icons/Speech-off.svg';
 import {WaveForm} from '@/components/loading/WaveForm';
+import {useSpeechStatus} from '@/hooks/queries/useSpeech';
 
 export default function Loadingpage() {
-  const router = useRouter();
+  const params = useParams();
+  const speechId = Number(params.speechId);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      router.push(`${ROUTES.RESULT}/${1}`);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [router]);
+  useSpeechStatus(speechId);
 
   return (
     <div className='to-background flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-[#F7F8E9] p-8'>
@@ -40,7 +34,7 @@ export default function Loadingpage() {
           <br />
           당신의 발음, 속도, 그리고 표현력을 인공지능이 세밀하게
           <br />
-          파헤치고 있습니다.
+          분석하고 있습니다.
         </p>
       </div>
 

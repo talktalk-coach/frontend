@@ -8,5 +8,7 @@ export const API_ENDPOINTS = {
   },
   speech: {
     azure: `/api/speech/azure`,
+    status: (speechId: number) => `/api/speech/status/${speechId}`,
+    result: (speechId: number) => `/api/speech/results/${speechId}`,
   },
 };
