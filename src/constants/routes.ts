@@ -7,7 +7,7 @@ export const ROUTES = {
   HOMEPAGE: '/homepage',
   RECORD: '/main/record',
   RESULT: '/main/result',
-  RESULT_LOADING: '/main/loading',
+  RESULT_LOADING: (speechId: number) => `/main/loading/${speechId}`,
   RESULT_SHARE: '/main/share',
   MYPAGE: '/mypage',
   MYPAGE_STATS: '/mypage/stats',
