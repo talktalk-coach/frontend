@@ -1,6 +1,7 @@
 'use client';
 
 import {useRef, useState} from 'react';
+import audioBufferToWav from 'audiobuffer-to-wav';
 
 /**
  * useRecord 커스텀 훅은 브라우저에서 오디오 녹음을 시작하고, 녹음이 완료되면 오디오 Blob을 반환합니다.
@@ -28,6 +29,7 @@ export function useRecord(): {
   const mediaRecorderRef = useRef<MediaRecorder>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const recordingPromiseRef = useRef<(value: Blob) => void>(() => {});
+  const recordingRejectRef = useRef<(reason: Error) => void>(() => {});
   const streamRef = useRef<MediaStream>(null);
 
   const startRecording = async () => {
@@ -49,13 +51,25 @@ export function useRecord(): {
         }
       };
 
-      mediaRecorderRef.current.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, {
-          type: 'audio/wav',
-        });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        setAudio(audioUrl);
-        recordingPromiseRef.current?.(audioBlob);
+      mediaRecorderRef.current.onstop = async () => {
+        try {
+          const recordedBlob = new Blob(audioChunksRef.current);
+          const arrayBuffer = await recordedBlob.arrayBuffer();
+          const audioContext = new AudioContext();
+          const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+          await audioContext.close();
+
+          const wavArrayBuffer = audioBufferToWav(audioBuffer);
+          const wavBlob = new Blob([wavArrayBuffer], {type: 'audio/wav'});
+
+          const audioUrl = URL.createObjectURL(wavBlob);
+          setAudio(audioUrl);
+          recordingPromiseRef.current?.(wavBlob);
+        } catch (e) {
+          recordingRejectRef.current?.(
+            e instanceof Error ? e : new Error('WAV 변환에 실패했습니다')
+          );
+        }
       };
 
       mediaRecorderRef.current.start();
@@ -86,8 +100,9 @@ export function useRecord(): {
   };
 
   const stopRecording = (): Promise<Blob> => {
-    return new Promise<Blob>((resolve) => {
+    return new Promise<Blob>((resolve, reject) => {
       recordingPromiseRef.current = resolve;
+      recordingRejectRef.current = reject;
 
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => {

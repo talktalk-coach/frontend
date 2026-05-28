@@ -49,7 +49,6 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
 
     const previewUrl = URL.createObjectURL(file);
     setImageUrl(previewUrl);
-    setUser({profileImage: previewUrl});
   };
 
   const handleNameMenuClick = (): void => {
