@@ -34,7 +34,7 @@ export const CategoryModal = ({
         <div className='bg-background mb-3 overflow-hidden rounded-3xl shadow-xl'>
           <header className='border-b border-[#E9E9E0] px-6 py-4'>
             <h2 className='text-text text-center text-base font-bold'>
-              스피치 카테고리를 선택해 주세요
+              스피치 유형을 선택해 주세요
             </h2>
           </header>
           {SPEECH_CATEGORIES.map(({value, label}, index) => (
