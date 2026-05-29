@@ -1,7 +1,11 @@
 import ParrotIcon from '@/assets/share/Parrot.svg';
-import type {PerformanceMetric} from '@/mocks/result';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
+
+interface PerformanceMetric {
+  label: string;
+  value: number;
+}
 
 interface ShareCardProps {
   score: number;
