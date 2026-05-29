@@ -1,10 +1,14 @@
 import ParrotIcon from '@/assets/share/Parrot.svg';
-import {mockScore, mockPerformanceMetrics} from '@/mocks/result';
+import type {PerformanceMetric} from '@/mocks/result';
 
 const SHARE_QUOTE = '우리의 목소리는 진심을 전달하는 가장 강력한 도구입니다.';
-const topMetrics = mockPerformanceMetrics;
 
-export const ShareCard = () => {
+interface ShareCardProps {
+  score: number;
+  metrics: PerformanceMetric[];
+}
+
+export const ShareCard = ({score, metrics}: ShareCardProps) => {
   return (
     <article
       aria-label='분석 결과 공유 카드'
@@ -49,7 +53,7 @@ export const ShareCard = () => {
         <section aria-label='총점'>
           <div className='relative h-18'>
             <strong className='font-pretendard text-primary absolute top-0 left-0 text-[75px] leading-none font-extrabold tracking-[-4.8px]'>
-              {mockScore}
+              {score}
             </strong>
             <span
               className='bg-brown absolute top-[-8px] left-[130px] h-3 w-3 rounded-full'
@@ -60,7 +64,7 @@ export const ShareCard = () => {
 
         <section aria-label='세부 지표'>
           <ul className='flex flex-col gap-7 pt-4'>
-            {topMetrics.map((metric) => (
+            {metrics.map((metric) => (
               <li key={metric.label}>
                 <div className='flex items-end justify-between'>
                   <span className='font-pretendard text-text text-sm font-semibold'>
