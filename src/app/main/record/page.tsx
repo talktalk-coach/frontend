@@ -70,11 +70,7 @@ export default function RecordPage(): ReactElement {
    * 업로드 실패 시 라우팅하지 않고 토스트로 안내한다.
    */
   const handleSubmit = useCallback(async (): Promise<void> => {
-    //시연용: public/test.wav 파일 사용
-    // const audioBlob = await stopRecording();
-    // console.log(audioBlob.type);
-    const response = await fetch('/record/test.wav');
-    const audioBlob = await response.blob();
+    const audioBlob = await stopRecording();
 
     try {
       const speechId = await submitSpeech({

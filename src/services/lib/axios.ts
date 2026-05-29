@@ -1,9 +1,8 @@
 /** axios 인스턴스 기본 설정 파일 */
-import {API_BASE_URL} from '@/services/constant/endpoint';
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: '/',
   headers: {'Content-Type': 'application/json'},
 });
 
