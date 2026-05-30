@@ -9,7 +9,7 @@ import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 import {OverallFeedback} from '@/components/result/OverallFeedback';
 import {ErrorScreen} from '@/components/common/ErrorScreen.';
 import {Spinner} from '@/components/common/Spinner';
-import {mapScoreLabel} from '@/utils/labelMapping';
+import {mapScoreLabel, mapGradeLabel} from '@/utils/labelMapping';
 import {mapImprovementPlanLabel} from '@/utils/labelMapping';
 import {useSpeechResult} from '@/hooks/queries/useSpeech';
 
@@ -27,7 +27,7 @@ export default function Resultpage() {
     <div className='flex flex-col gap-8 px-6 pt-10 pb-10'>
       <section className='gap-10 rounded-[40px] bg-[#606C38] p-6'>
         <h2 className='font-pretendard text-3xl font-bold text-[#DFEDAC]'>
-          Excellent Progress!
+          {mapGradeLabel(data.averageScore)} Progress!
         </h2>
         <p className='mt-2 font-bold text-[#DFEDAC]/80'>{data.progress}</p>
       </section>
