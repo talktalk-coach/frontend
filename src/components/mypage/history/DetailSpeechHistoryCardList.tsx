@@ -1,6 +1,5 @@
 import {AnimatedCard} from '@/components/mypage/history/AnimatedCard';
 import {DetailSpeechHistoryCard} from '@/components/mypage/history/DetailSpeechHistoryCard';
-import type {SpeechHistoryItem} from '@/mocks/mypage';
 import type {Speech} from '@/services/api/user/userSpeechesApi';
 
 interface DetailSpeechHistoryListProps {
