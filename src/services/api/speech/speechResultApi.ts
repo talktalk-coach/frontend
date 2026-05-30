@@ -20,6 +20,7 @@ export interface SpeechResultResponse {
   overallFeedback: string;
   customPlan: string;
   transcript: string;
+  progress: string;
 }
 
 export const getSpeechResult = async (
