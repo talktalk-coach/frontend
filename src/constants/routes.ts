@@ -8,7 +8,7 @@ export const ROUTES = {
   RECORD: '/main/record',
   RESULT: (speechId: number) => `/main/result/${speechId}`,
   RESULT_LOADING: (speechId: number) => `/main/loading/${speechId}`,
-  RESULT_SHARE: '/main/share',
+  RESULT_SHARE: (speechId: number) => `/main/share/${speechId}`,
   MYPAGE: '/mypage',
   MYPAGE_STATS: '/mypage/stats',
   MYPAGE_HISTORY: '/mypage/history',

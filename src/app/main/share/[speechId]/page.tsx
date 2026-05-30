@@ -1,11 +1,21 @@
 'use client';
 
 import {useRef} from 'react';
+import {useParams} from 'next/navigation';
 import {toPng} from 'html-to-image';
 import {SaveImageButton} from '@/components/common/buttons/SaveImageButton';
 import {ShareCard} from '@/components/share/ShareCard';
+import {useSpeechResult} from '@/hooks/queries/useSpeech';
+import {round1} from '@/utils/number';
+import {Spinner} from '@/components/common/Spinner';
+import {ErrorScreen} from '@/components/common/ErrorScreen.';
 
 export default function ResultSharePage() {
+  const params = useParams();
+  const speechId = Number(params.speechId);
+
+  const {data, isLoading, isError} = useSpeechResult(speechId);
+
   const captureRef = useRef<HTMLDivElement>(null);
 
   const handleSaveImage = async (): Promise<void> => {
@@ -45,10 +55,25 @@ export default function ResultSharePage() {
     }
   };
 
+  if (isLoading) return <Spinner />;
+
+  if (isError || !data) return <ErrorScreen />;
+
+  const performanceMetrics = [
+    {label: '정확도', value: round1(data.accuracyScore)},
+    {label: '유창성', value: round1(data.fluencyScore)},
+    {label: '운율', value: round1(data.prosodyScore)},
+    {label: '어휘력', value: round1(data.vocabularyScore)},
+    {label: '논리성', value: round1(data.logicScore)},
+    {label: '구조', value: round1(data.structureScore)},
+  ];
+
+  const score = Math.round(data.averageScore);
+
   return (
     <main className='flex min-h-screen flex-col items-center px-6 py-10'>
       <div className='w-full max-w-[448px]'>
-        <ShareCard />
+        <ShareCard score={score} metrics={performanceMetrics} />
       </div>
 
       <SaveImageButton onClick={handleSaveImage} />
@@ -68,7 +93,7 @@ export default function ResultSharePage() {
           pointerEvents: 'none',
         }}>
         <div ref={captureRef} className='bg-background w-[448px] p-8'>
-          <ShareCard />
+          <ShareCard score={score} metrics={performanceMetrics} />
         </div>
       </div>
     </main>

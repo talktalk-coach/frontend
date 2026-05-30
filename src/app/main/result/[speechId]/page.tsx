@@ -50,7 +50,7 @@ export default function Resultpage() {
 
       <section className='flex flex-col gap-6 text-center font-semibold'>
         <NavigationButton
-          href={ROUTES.RESULT_SHARE}
+          href={ROUTES.RESULT_SHARE(speechId)}
           variant='oatmeal'
           label='공유하기'
         />
