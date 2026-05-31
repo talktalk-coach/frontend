@@ -9,4 +9,8 @@ export const API_ENDPOINTS = {
     status: (speechId: number) => `/api/speech/status/${speechId}`,
     result: (speechId: number) => `/api/speech/results/${speechId}`,
   },
+  users: {
+    me: '/api/users/me',
+    grade: '/api/users/me/grade',
+  },
 };
