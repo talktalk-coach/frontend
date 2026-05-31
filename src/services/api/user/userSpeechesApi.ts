@@ -27,6 +27,6 @@ export interface SpeechListParams {
 export const getUserSpeeches = async (
   params?: SpeechListParams
 ): Promise<UserSpeechesResponse> => {
-  const response = await api.get(API_ENDPOINTS.user.speeches, {params});
+  const response = await api.get(API_ENDPOINTS.users.speeches, {params});
   return response.data;
 };

@@ -17,7 +17,9 @@ export const API_ENDPOINTS = {
     today: `/api/quiz/today`,
     submit: `/api/quiz/submit`,
   },
-  user: {
+  users: {
+    me: '/api/users/me',
+    grade: '/api/users/me/grade',
     speeches: `/api/users/me/speeches`,
   },
 };

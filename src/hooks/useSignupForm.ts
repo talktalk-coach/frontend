@@ -161,7 +161,7 @@ export const useSignupForm = () => {
       }
     }
 
-    openModal('success', '회원가입이 완료되었습니다.', ROUTES.HOMEPAGE);
+    openModal('success', '회원가입이 완료되었습니다.', ROUTES.DIFFICULTY);
   };
 
   return {

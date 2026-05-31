@@ -45,3 +45,28 @@ export const DIFFICULTY_OPTIONS: DifficultyOption[] = [
     icon: MedalIcon,
   },
 ];
+
+export type GradeCode =
+  | 'ELEM_1_2'
+  | 'ELEM_3_4'
+  | 'ELEM_5_6'
+  | 'MIDDLE_1_2'
+  | 'MIDDLE_3';
+
+/* 화면 표시용 한글 라벨 → 서버 enum 코드 (PATCH 요청 시 사용) */
+export const GRADE_LABEL_TO_CODE: Record<DifficultyLevel, GradeCode> = {
+  '초등학교 1-2학년': 'ELEM_1_2',
+  '초등학교 3-4학년': 'ELEM_3_4',
+  '초등학교 5-6학년': 'ELEM_5_6',
+  '중학교 1-2학년': 'MIDDLE_1_2',
+  '중학교 3학년': 'MIDDLE_3',
+};
+
+/* 서버 enum 코드 → 화면 표시용 한글 라벨 (GET 응답 매핑 시 사용) */
+export const GRADE_CODE_TO_LABEL: Record<GradeCode, DifficultyLevel> = {
+  ELEM_1_2: '초등학교 1-2학년',
+  ELEM_3_4: '초등학교 3-4학년',
+  ELEM_5_6: '초등학교 5-6학년',
+  MIDDLE_1_2: '중학교 1-2학년',
+  MIDDLE_3: '중학교 3학년',
+};
