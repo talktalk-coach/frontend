@@ -41,7 +41,7 @@ export default function MypageDifficultyPage() {
         {isLoading ? (
           <Spinner />
         ) : isError || !userInfo ? (
-          <div className='flex flex-col items-center gap-4 pt-8'>
+          <div className='flex flex-col items-center gap-4'>
             <p className='text-primary2 text-base font-semibold'>
               정보를 불러오지 못했습니다. 다시 시도해 주세요
             </p>
