@@ -4,7 +4,7 @@ import {useState, useMemo} from 'react';
 import {UpDownButton} from '@/components/common/buttons/UpDownButton';
 import {ToggleSegment} from '@/components/mypage/history/ToggleSegment';
 import {DetailSpeechHistoryCardList} from '@/components/mypage/history/DetailSpeechHistoryCardList';
-import {useSpeechList} from '@/hooks/queries/userUser';
+import {useSpeechList} from '@/hooks/queries/useUser';
 import {Spinner} from '@/components/common/Spinner';
 import {ErrorScreen} from '@/components/common/ErrorScreen.';
 
