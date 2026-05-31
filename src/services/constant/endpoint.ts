@@ -9,4 +9,15 @@ export const API_ENDPOINTS = {
     status: (speechId: number) => `/api/speech/status/${speechId}`,
     result: (speechId: number) => `/api/speech/results/${speechId}`,
   },
+  home: {
+    root: `/api/home`,
+    refreshFeedback: `/api/home/refresh-feedback`,
+  },
+  quiz: {
+    today: `/api/quiz/today`,
+    submit: `/api/quiz/submit`,
+  },
+  user: {
+    speeches: `/api/users/me/speeches`,
+  },
 };
