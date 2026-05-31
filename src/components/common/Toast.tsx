@@ -49,8 +49,8 @@ interface ToastProps {
 /* variant별 기본 노출 시간 */
 const DEFAULT_DURATIONS: Record<ToastVariant, number> = {
   info: 3000,
-  error: 1500,
-  success: 1500,
+  error: 1000,
+  success: 1000,
 };
 
 /* variant별 색상/테두리 */
