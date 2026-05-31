@@ -2,20 +2,20 @@
 
 import {useRouter} from 'next/navigation';
 import {DifficultySelectionList} from '@/components/difficulty/DifficultySelectionList';
+import {Spinner} from '@/components/common/Spinner';
 import {ROUTES} from '@/constants/routes';
-import type {DifficultyLevel} from '@/constants/difficulty';
-import {mockDifficultyLevel} from '@/mocks/mypage';
+import {GRADE_CODE_TO_LABEL} from '@/constants/difficulty';
+import {useUserInfo} from '@/hooks/queries/useUser';
 
 /**
- * - 현재 학습 수준이 미리 선택되어 있다.
+ * - 현재 학습 수준을 서버에서 조회해 미리 선택되어 있다.
  * - 변경 완료 시 마이페이지로 돌아간다.
  */
 export default function MypageDifficultyPage() {
   const router = useRouter();
+  const {data: userInfo, isLoading, isError, refetch} = useUserInfo();
 
-  const handleConfirm = (level: DifficultyLevel): void => {
-    /* TODO: 학습 수준 변경 API 연동 */
-    console.log('학습 수준 변경:', level);
+  const handleConfirm = (): void => {
     router.push(ROUTES.MYPAGE);
   };
 
@@ -38,11 +38,27 @@ export default function MypageDifficultyPage() {
           </p>
         </header>
 
-        <DifficultySelectionList
-          initialSelected={mockDifficultyLevel}
-          buttonText='변경 완료'
-          onConfirm={handleConfirm}
-        />
+        {isLoading ? (
+          <Spinner />
+        ) : isError || !userInfo ? (
+          <div className='flex flex-col items-center gap-4 pt-8'>
+            <p className='text-primary2 text-base font-semibold'>
+              정보를 불러오지 못했습니다. 다시 시도해 주세요
+            </p>
+            <button
+              type='button'
+              onClick={() => refetch()}
+              className='bg-primary rounded-full px-8 py-3 text-base font-semibold text-white transition'>
+              다시 시도
+            </button>
+          </div>
+        ) : (
+          <DifficultySelectionList
+            initialSelected={GRADE_CODE_TO_LABEL[userInfo.targetLevel]}
+            buttonText='변경 완료'
+            onConfirm={handleConfirm}
+          />
+        )}
       </div>
     </main>
   );
