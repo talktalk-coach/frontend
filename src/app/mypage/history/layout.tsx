@@ -5,7 +5,7 @@ import BackIcon from '@/assets/mypage/back.svg';
 export default function Historylayout({children}: {children: React.ReactNode}) {
   const router = useRouter();
   return (
-    <div className='min-h-screen'>
+    <div className='flex min-h-screen flex-col'>
       <header className='bg-background relative sticky top-0 z-50 flex items-center justify-between px-8 py-5'>
         <button onClick={() => router.back()} className='flex items-center'>
           <BackIcon />

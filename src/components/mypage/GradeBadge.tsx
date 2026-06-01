@@ -1,7 +1,8 @@
-import type {SpeechGrade} from '@/mocks/mypage';
+import type {SpeechGrade} from '@/types/common';
+import {mapGradeLabel} from '@/utils/labelMapping';
 
 interface GradeBadgeProps {
-  grade: SpeechGrade;
+  score: number;
 }
 
 /**
@@ -17,7 +18,9 @@ const GRADE_STYLES: Record<SpeechGrade, string> = {
   Mastery: 'bg-mastery-bg text-mastery-text',
 };
 
-export const GradeBadge = ({grade}: GradeBadgeProps) => {
+export const GradeBadge = ({score}: GradeBadgeProps) => {
+  const grade = mapGradeLabel(score);
+
   return (
     <span
       className={`inline-flex items-center rounded-full px-3 py-1 text-[10px] font-extrabold ${GRADE_STYLES[grade]}`}>

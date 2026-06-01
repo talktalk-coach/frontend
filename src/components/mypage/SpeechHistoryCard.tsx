@@ -12,7 +12,7 @@ export const SpeechHistoryCard = ({speech}: SpeechHistoryCardProps) => {
         <h3 className='text-text text-xl font-extrabold'>{speech.title}</h3>
         <div className='flex items-center gap-2'>
           <p className='text-sm font-semibold text-[#46483C]'>{speech.date}</p>
-          <GradeBadge grade={speech.grade} />
+          <GradeBadge score={speech.score} />
         </div>
       </div>
 

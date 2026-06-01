@@ -3,21 +3,22 @@ import CheckedIcon from '@/assets/homepage/checkedicon.svg';
 import UnCheckedIcon from '@/assets/homepage/uncheckedicon.svg';
 import SuccessIcon from '@/assets/homepage/partypopper.svg';
 import Toast from '@/components/common/Toast';
+import {useSubmitQuiz} from '@/hooks/queries/useQuiz';
 
 export type DailyQuizProps = {
+  wordId: number;
   question: string;
   options: string[];
-  answer: string;
   currentIndex: number;
   isFinished: boolean;
   totalIndex: number;
-  onNext?: () => void;
+  onNext?: (todayCorrectCount: number) => void;
 };
 
 export const DailyQuiz = ({
+  wordId,
   question,
   options,
-  answer,
   currentIndex,
   totalIndex,
   isFinished,
@@ -26,24 +27,39 @@ export const DailyQuiz = ({
   const [selected, setSelected] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  const {mutate: submit} = useSubmitQuiz();
 
   const handleOptionClick = (option: string) => {
-    if (isCorrect) return;
+    if (selected) return;
 
     setSelected(option);
-    const correct = option === answer;
-    setIsCorrect(correct);
 
-    if (correct) {
-      setTimeout(() => {
-        setSelected(null);
-        setIsCorrect(null);
+    submit(
+      {wordId, selectedOption: option},
+      {
+        onSuccess: (data) => {
+          setIsCorrect(data.isCorrect);
 
-        onNext?.();
-      }, 1000);
-    } else {
-      setShowToast(true);
-    }
+          if (data.isCorrect) {
+            setTimeout(() => {
+              setSelected(null);
+              setIsCorrect(null);
+              onNext?.(data.todayCorrectCount);
+            }, 1000);
+          } else {
+            setToastMessage('오답입니다 다시 시도해보세요');
+            setShowToast(true);
+          }
+        },
+        onError: () => {
+          setSelected(null);
+          setToastMessage('제출에 실패했습니다.');
+          setShowToast(true);
+        },
+      }
+    );
   };
 
   return (
@@ -79,7 +95,7 @@ export const DailyQuiz = ({
                 key={option}
                 onClick={() => handleOptionClick(option)}
                 className={`flex items-center justify-between rounded-[48px] bg-white p-4 text-black transition ${
-                  selected === option
+                  selected === option && isCorrect !== null
                     ? isCorrect
                       ? 'border-2 border-green-400 font-bold'
                       : 'border-2 border-red-400 font-bold'
@@ -96,11 +112,15 @@ export const DailyQuiz = ({
           })}
         </div>
         <Toast
-          message='오답입니다 다시 시도해보세요'
+          message={toastMessage}
           isVisible={showToast}
           variant='error'
           position='container-bottom'
-          onClose={() => setShowToast(false)}
+          onClose={() => {
+            setShowToast(false);
+            setSelected(null);
+            setIsCorrect(null);
+          }}
         />
       </div>
     </div>
