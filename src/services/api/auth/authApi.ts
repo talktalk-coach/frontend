@@ -13,3 +13,7 @@ export const quickSignup = async (data: QuickSignupRequest) => {
   const response = await api.post(API_ENDPOINTS.auth.quickSignup, data);
   return response.data;
 };
+
+export const logout = async (): Promise<void> => {
+  await api.post(API_ENDPOINTS.auth.logout);
+};

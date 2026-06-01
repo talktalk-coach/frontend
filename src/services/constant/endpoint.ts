@@ -3,6 +3,7 @@ export const API_ENDPOINTS = {
   auth: {
     quickSignup: '/api/test/quick-signup',
     login: '/api/auth/login',
+    logout: '/api/auth/logout',
   },
   speech: {
     azure: `/api/speech/azure`,
