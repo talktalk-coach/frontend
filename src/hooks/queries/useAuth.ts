@@ -1,7 +1,7 @@
 /** 인증 관련 React Query 훅 모음(로딩중인지, 성공했는지, 실패했는지 상태관리) */
 'use client';
-import {useMutation} from '@tanstack/react-query';
-import {quickSignup} from '@/services/api/auth/authApi';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {quickSignup, logout} from '@/services/api/auth/authApi';
 
 export const useQuickSignup = () =>
   useMutation({
@@ -11,3 +11,16 @@ export const useQuickSignup = () =>
       localStorage.setItem('refreshToken', data.refreshToken);
     },
   });
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: logout,
+    onSettled: () => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      queryClient.clear();
+    },
+  });
+};
