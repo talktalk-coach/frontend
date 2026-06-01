@@ -7,7 +7,7 @@ export interface Speech {
   title: string;
   averageScore: number;
   duration: number;
-  targerLevel: TargetLevel;
+  targetLevel: TargetLevel;
   status: SpeechStatus;
   createdAt: string;
 }
