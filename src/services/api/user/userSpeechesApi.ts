@@ -21,12 +21,15 @@ export interface UserSpeechesResponse {
 
 export interface SpeechListParams {
   page?: number;
-  size?: number;
+  sort?: 'date_desc';
 }
 
 export const getUserSpeeches = async (
   params?: SpeechListParams
 ): Promise<UserSpeechesResponse> => {
-  const response = await api.get(API_ENDPOINTS.users.speeches, {params});
+  const response = await api.get<UserSpeechesResponse>(
+    API_ENDPOINTS.users.speeches,
+    {params}
+  );
   return response.data;
 };
