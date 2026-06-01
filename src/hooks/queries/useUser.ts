@@ -1,8 +1,9 @@
 'use client';
-
 import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query';
 import {getUserInfo} from '@/services/api/user/userInfoApi';
 import {patchUserGrade} from '@/services/api/user/userGradeApi';
+import {getUserSpeeches} from '@/services/api/user/userSpeechesApi';
+import type {SpeechListParams} from '@/services/api/user/userSpeechesApi';
 
 const USER_INFO_QUERY_KEY = ['userInfo'] as const;
 
@@ -25,5 +26,13 @@ export const useUpdateUserGradeMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: USER_INFO_QUERY_KEY});
     },
+  });
+};
+
+//스피치 목록 조회
+export const useSpeechList = (params?: SpeechListParams) => {
+  return useQuery({
+    queryKey: ['speechList', params],
+    queryFn: () => getUserSpeeches(params),
   });
 };

@@ -10,7 +10,7 @@ import Growthchart from '@/assets/homepage/growthchart.svg';
 
 type GrowthChartDataProps = {
   label: string;
-  score: number;
+  value: number;
 };
 
 type GrowthChartProps = {
@@ -47,8 +47,8 @@ export const GrowthChart = ({data}: GrowthChartProps) => {
                 domain={[0, 100]}
               />
               <Radar
-                name='score'
-                dataKey='score'
+                name='value'
+                dataKey='value'
                 stroke='#485422'
                 fill='#485422'
                 fillOpacity={0.2}
