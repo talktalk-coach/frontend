@@ -18,12 +18,10 @@ export const useHome = () => {
   });
 
   useEffect(() => {
-    if (query.data) {
-    }
     if (query.data?.summaryFeedback === null) {
       refreshFeedback();
     }
-  }, [query.data?.summaryFeedback]);
+  }, [query.data?.summaryFeedback, refreshFeedback]);
 
   return query;
 };
