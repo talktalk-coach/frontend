@@ -3,7 +3,7 @@
 import {useState, useRef, ChangeEvent} from 'react';
 import Image from 'next/image';
 import EditIcon from '@/assets/mypage/edit-profile.svg';
-import type {UserProfile} from '@/mocks/mypage';
+import type {UserProfile} from '@/types/mypage';
 import {useUserStore} from '@/stores/userStore';
 
 interface ProfileSectionProps {
