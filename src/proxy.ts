@@ -10,7 +10,7 @@ const PUBLIC_PATHS = [
 ];
 
 /** 로그인한 유저가 접근하면 홈으로 리다이렉트할 경로 */
-const AUTH_PATHS = ['/auth/login', '/auth/signup'];
+const AUTH_PATHS = ['/auth/login'];
 
 export const proxy = (request: NextRequest) => {
   const {pathname} = request.nextUrl;
