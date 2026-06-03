@@ -18,6 +18,8 @@ export const SignupForm = () => {
     setPassword,
     confirmPassword,
     setConfirmPassword,
+    birthDate,
+    setBirthDate,
 
     parentEmail,
     setParentEmail,
@@ -25,7 +27,6 @@ export const SignupForm = () => {
     setParentVerificationCode,
 
     isUnder14,
-    setIsUnder14,
     isPrivacyChecked,
     setIsPrivacyChecked,
     isVoiceChecked,
@@ -35,6 +36,7 @@ export const SignupForm = () => {
     parentEmailError,
     passwordError,
     confirmPasswordError,
+    birthDateError,
 
     handleSendVerification,
     handleVerifyCode,
@@ -82,16 +84,13 @@ export const SignupForm = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             error={confirmPasswordError}
           />
+          <AuthInputField
+            label='BIRTH_DATE'
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            error={birthDateError}
+          />
         </div>
-
-        <AgreementCheckBoxList
-          isUnder14={isUnder14}
-          setIsUnder14={setIsUnder14}
-          isPrivacyChecked={isPrivacyChecked}
-          setIsPrivacyChecked={setIsPrivacyChecked}
-          isVoiceChecked={isVoiceChecked}
-          setIsVoiceChecked={setIsVoiceChecked}
-        />
 
         {isUnder14 && (
           <div className='flex flex-col'>
@@ -118,6 +117,13 @@ export const SignupForm = () => {
             </div>
           </div>
         )}
+
+        <AgreementCheckBoxList
+          isPrivacyChecked={isPrivacyChecked}
+          setIsPrivacyChecked={setIsPrivacyChecked}
+          isVoiceChecked={isVoiceChecked}
+          setIsVoiceChecked={setIsVoiceChecked}
+        />
 
         <AuthButton label='SIGNUP' />
       </form>
