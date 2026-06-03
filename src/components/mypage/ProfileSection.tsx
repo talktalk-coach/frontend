@@ -3,6 +3,7 @@
 import {useState, useRef, ChangeEvent} from 'react';
 import Image from 'next/image';
 import EditIcon from '@/assets/mypage/edit-profile.svg';
+import ProfileImage from '@/assets/user/user.svg';
 import type {UserProfile} from '@/types/mypage';
 import {useUserStore} from '@/stores/userStore';
 
@@ -85,13 +86,17 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
       <section className='flex flex-col items-center'>
         <div className='relative h-40 w-40'>
           <div className='h-full w-full overflow-hidden rounded-full bg-[#EEEEE5] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]'>
-            <Image
-              src={imageUrl}
-              alt={`${name} 프로필 이미지`}
-              width={160}
-              height={160}
-              className='h-full w-full object-cover'
-            />
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={`${name} 프로필 이미지`}
+                width={160}
+                height={160}
+                className='h-full w-full object-cover'
+              />
+            ) : (
+              <ProfileImage className='h-full w-full object-contain' />
+            )}
           </div>
 
           <button
