@@ -1,13 +1,14 @@
 'use client';
 
 import {useRouter} from 'next/navigation';
-import {GradeBadge} from '@/components/mypage/GradeBadge';
-import type {SpeechHistoryItem} from '@/mocks/mypage';
-import CalenderIcon from '@/assets/mypage/calender.svg';
 import {ROUTES} from '@/constants/routes';
+import {GradeBadge} from '@/components/mypage/GradeBadge';
+import type {Speech} from '@/services/api/user/userSpeechesApi';
+import CalenderIcon from '@/assets/mypage/calender.svg';
+import {formatDate} from '@/utils/formatDate';
 
 interface DetailSpeechHistoryCardProps {
-  speech: SpeechHistoryItem;
+  speech: Speech;
 }
 
 export const DetailSpeechHistoryCard = ({
@@ -16,7 +17,7 @@ export const DetailSpeechHistoryCard = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`${ROUTES.RESULT}/${1}`);
+    router.push(`${ROUTES.RESULT}/${speech.speechId}`);
   };
 
   return (
@@ -31,14 +32,16 @@ export const DetailSpeechHistoryCard = ({
           </h3>
 
           <div className='h-3'>
-            <GradeBadge grade={speech.grade} />
+            <GradeBadge score={speech.averageScore} />
           </div>
         </div>
 
         <div className='flex place-items-end justify-between'>
           <div className='flex items-center gap-2'>
             <CalenderIcon className='mb-0.5' />
-            <p className='text-primary2 text-sm font-semibold'>{speech.date}</p>
+            <p className='text-primary2 text-sm font-semibold'>
+              {formatDate(speech.createdAt)}
+            </p>
           </div>
 
           <div className='flex flex-col'>
@@ -47,7 +50,7 @@ export const DetailSpeechHistoryCard = ({
             </span>
 
             <span className='text-primary text-4xl leading-none font-extrabold'>
-              {speech.score}
+              {Math.round(speech.averageScore)}
             </span>
           </div>
         </div>
