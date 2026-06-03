@@ -1,6 +1,5 @@
 'use client';
 
-import {mockUserName} from '@/mocks/homepage';
 import {ROUTES} from '@/constants/routes';
 import {useRouter} from 'next/navigation';
 import {Greeting} from '@/components/homepage/Greeting';
@@ -13,12 +12,18 @@ import {HomePageButton} from '@/components/common/buttons/HomePageButton';
 import {ErrorScreen} from '@/components/common/ErrorScreen.';
 import {Spinner} from '@/components/common/Spinner';
 import {mapScoreLabel} from '@/utils/labelMapping';
+import {useUserInfo} from '@/hooks/queries/useUser';
 import {useHome} from '@/hooks/queries/useHome';
 import {useTodayQuiz} from '@/hooks/queries/useQuiz';
 import {useQuizProgress} from '@/hooks/useQuizProgress';
 
 export default function Homepage() {
   const router = useRouter();
+  const {
+    data: userInfo,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useUserInfo();
   const {
     data: homeData,
     isLoading: isHomeLoading,
@@ -32,8 +37,15 @@ export default function Homepage() {
 
   const {index, quizFinished, handleQuizNext} = useQuizProgress(quizData);
 
-  if (isHomeLoading || isQuizLoading) return <Spinner />;
-  if (isHomeError || !homeData || isQuizError || !quizData)
+  if (isHomeLoading || isQuizLoading || isUserLoading) return <Spinner />;
+  if (
+    isHomeError ||
+    !homeData ||
+    isQuizError ||
+    !quizData ||
+    isUserError ||
+    !userInfo
+  )
     return <ErrorScreen />;
 
   const current = quizData[index];
@@ -47,7 +59,7 @@ export default function Homepage() {
     ? score - prevMonth.averageScore
     : 0;
 
-  const monthlyMessage = prevMonth?.message ?? '';
+  const monthlyMessage = currentMonth?.message ?? '';
 
   const handleButtonClick = () => {
     router.push(ROUTES.RECORD);
@@ -55,8 +67,7 @@ export default function Homepage() {
 
   return (
     <div className='flex flex-col gap-8 p-6 px-6 pt-8 pb-29'>
-      {/* user api 연동 후 반영할 예정 */}
-      <Greeting userName={mockUserName} />
+      <Greeting userName={userInfo.nickname} />
 
       <GrowthChart data={mapScoreLabel(homeData.radarAverage)} />
 
@@ -65,7 +76,6 @@ export default function Homepage() {
         changeRate={changeRate}
         message={monthlyMessage}
       />
-
       <TodayPractice minutes={homeData.todayPracticeMinutes} />
 
       <section>
