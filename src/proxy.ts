@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from 'next/server';
 
 /** 로그인 없이 접근 가능한 공개 경로 */
 const PUBLIC_PATHS = [
+  '/',
   '/auth/landing',
   '/auth/login',
   '/auth/signup',
