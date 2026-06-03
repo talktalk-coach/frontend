@@ -59,7 +59,7 @@ export default function Homepage() {
     ? score - prevMonth.averageScore
     : 0;
 
-  const monthlyMessage = currentMonth?.message ?? '';
+  const monthlyMessage = currentMonth?.message ?? prevMonth?.message ?? '';
 
   const handleButtonClick = () => {
     router.push(ROUTES.RECORD);
