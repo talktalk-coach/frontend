@@ -1,7 +1,6 @@
 /** API 엔드포인트 URL 모음 */
 export const API_ENDPOINTS = {
   auth: {
-    quickSignup: '/api/test/quick-signup',
     emailParentSend: '/api/auth/email/parent/send',
     emailParentVerify: '/api/auth/email/parent/verify',
     emailSend: '/api/auth/email/send',
