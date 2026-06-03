@@ -6,7 +6,7 @@ import {ToggleSegment} from '@/components/mypage/history/ToggleSegment';
 import {DetailSpeechHistoryCardList} from '@/components/mypage/history/DetailSpeechHistoryCardList';
 import {useSpeechList} from '@/hooks/queries/useUser';
 import {Spinner} from '@/components/common/Spinner';
-import {ErrorScreen} from '@/components/common/ErrorScreen.';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
 
 type SortType = 'date' | 'score';
 type ArrowType = 'up' | 'down';

@@ -7,7 +7,7 @@ import {SaveImageButton} from '@/components/common/buttons/SaveImageButton';
 import {ShareCard} from '@/components/share/ShareCard';
 import {useSpeechResult} from '@/hooks/queries/useSpeech';
 import {Spinner} from '@/components/common/Spinner';
-import {ErrorScreen} from '@/components/common/ErrorScreen.';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
 import {mapScoreLabel} from '@/utils/labelMapping';
 
 export default function ResultSharePage() {
