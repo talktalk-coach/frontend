@@ -7,12 +7,14 @@ import PassWordIcon from '@/assets/auth/password.svg';
 import SecurityIcon from '@/assets/auth/security.svg';
 import NicknameIcon from '@/assets/auth/nickname.svg';
 import ConfirmPasswordIcon from '@/assets/auth/confirmpassword.svg';
+import CalendarIcon from '@/assets/auth/calendar.svg';
 import {ROUTES} from '@/constants/routes';
 
 export type InputType =
   | 'EMAIL'
   | 'VERIFICATION_CODE'
   | 'NICKNAME'
+  | 'BIRTH_DATE'
   | 'PASSWORD'
   | 'CONFIRM_PASSWORD'
   | 'PARENT_EMAIL'
@@ -24,6 +26,7 @@ type FieldConfig = {
   placeholder: string;
   icon: React.ElementType;
   buttonLabel?: string;
+  iconClassName?: string;
 };
 
 export const INPUT_FIELD_MAP: Record<InputType, FieldConfig> = {
@@ -72,6 +75,13 @@ export const INPUT_FIELD_MAP: Record<InputType, FieldConfig> = {
     placeholder: '보호자 인증 코드를 입력해주세요',
     icon: SecurityIcon,
     buttonLabel: '코드 확인',
+  },
+  BIRTH_DATE: {
+    displayLabel: 'BIRTH DATE',
+    type: 'date',
+    placeholder: '년도-월-일',
+    icon: CalendarIcon,
+    iconClassName: 'w-4 h-4',
   },
 };
 
