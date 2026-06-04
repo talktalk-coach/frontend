@@ -30,5 +30,7 @@ export const API_ENDPOINTS = {
     speeches: `/api/users/me/speeches`,
     nickname: '/api/users/me/nickname',
     image: '/api/users/me/image',
+    statistics: '/api/users/me/statistics',
+    growthHistory: '/api/users/me/growth-history',
   },
 };
