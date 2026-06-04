@@ -34,9 +34,9 @@ export const mapImprovementPlanLabel = (data: ImprovementPlanLabel) => [
 
 // 스피치 등급 매핑 함수
 export const mapGradeLabel = (score: number): SpeechGrade => {
-  if (score <= 40) return 'Bad';
-  if (score <= 60) return 'Normal';
-  if (score <= 85) return 'Good';
+  if (score <= 70) return 'Bad';
+  if (score <= 80) return 'Normal';
+  if (score <= 90) return 'Good';
   if (score <= 95) return 'Excellent';
   return 'Mastery';
 };
