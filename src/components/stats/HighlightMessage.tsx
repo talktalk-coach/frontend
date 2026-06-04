@@ -1,5 +1,5 @@
 import SparkleIcon from '@/assets/stats/sparkle.svg';
-import type {Highlight} from '@/mocks/stats';
+import type {Highlight} from '@/types/stats';
 
 interface HighlightMessageProps {
   highlight: Highlight;
@@ -12,7 +12,7 @@ export const HighlightMessage = ({highlight}: HighlightMessageProps) => {
         <SparkleIcon className='h-[22px] w-[22px]' />
       </div>
       <div className='flex flex-col gap-2'>
-        <h3 className='text-primary text-2xl leading-[1.25] font-extrabold tracking-[-0.6px] whitespace-pre-line'>
+        <h3 className='text-primary text-2xl leading-[1.25] font-extrabold tracking-[-0.6px] break-keep whitespace-pre-line'>
           {highlight.title}
         </h3>
         <p className='text-primary2 text-base font-bold tracking-[-0.32px]'>
