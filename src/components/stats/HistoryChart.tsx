@@ -1,10 +1,10 @@
 'use client';
 
 import {LineChart, Line, XAxis, ResponsiveContainer} from 'recharts';
-import type {GradeCode} from '@/constants/difficulty';
+import type {TargetLevel} from '@/types/common';
 import type {GrowthHistoryItem} from '@/services/api/user/userGrowthHistoryApi';
 
-const LEVEL_COLORS: Record<GradeCode, string> = {
+const LEVEL_COLORS: Record<TargetLevel, string> = {
   ELEM_1_2: '#D4C28A',
   ELEM_3_4: '#BFCD8F',
   ELEM_5_6: '#8A9A5B',
@@ -12,19 +12,46 @@ const LEVEL_COLORS: Record<GradeCode, string> = {
   MIDDLE_3: '#485422',
 };
 
+const STEPS = 24;
+
 interface HistoryChartProps {
   history: GrowthHistoryItem[];
 }
 
-type ChartRow = {x: number} & Partial<Record<GradeCode, number>>;
+type ChartRow = {label: string} & Partial<Record<TargetLevel, number>>;
+
+const resample = (values: number[]): number[] => {
+  if (values.length === 0) return [];
+  if (values.length === 1) return Array(STEPS + 1).fill(values[0]);
+  return Array.from({length: STEPS + 1}, (_, s) => {
+    const pos = (s / STEPS) * (values.length - 1);
+    const lo = Math.floor(pos);
+    const hi = Math.ceil(pos);
+    return (
+      Math.round((values[lo] + (values[hi] - values[lo]) * (pos - lo)) * 10) /
+      10
+    );
+  });
+};
 
 export const HistoryChart = ({history}: HistoryChartProps) => {
-  const rows: ChartRow[] = history.flatMap((item) => {
-    const n = item.scores.length;
-    return item.scores.map((score, i) => ({
-      x: n === 1 ? 0.5 : i / (n - 1),
-      [item.targetLevel]: score.averageScore,
+  const series = history
+    .filter((item) => item.scores.length > 0)
+    .map((item) => ({
+      targetLevel: item.targetLevel,
+      levelLabel: item.levelLabel,
+      points: resample(item.scores.map((s) => s.averageScore)),
     }));
+
+  const rows: ChartRow[] = Array.from({length: STEPS + 1}, (_, s) => {
+    const row: ChartRow = {
+      label:
+        s === 0 ? '시작' : s === STEPS / 2 ? '중간' : s === STEPS ? '최근' : '',
+    };
+    series.forEach(({targetLevel, points}) => {
+      row[targetLevel] = points[s];
+    });
+    return row;
   });
 
   return (
@@ -35,7 +62,7 @@ export const HistoryChart = ({history}: HistoryChartProps) => {
         </h3>
 
         <ul className='flex flex-wrap gap-x-4 gap-y-2'>
-          {history.map((item) => (
+          {series.map((item) => (
             <li key={item.targetLevel} className='flex items-center gap-1.5'>
               <span
                 className='h-1 w-3 rounded-full'
@@ -65,30 +92,21 @@ export const HistoryChart = ({history}: HistoryChartProps) => {
           <LineChart
             data={rows}
             margin={{top: 40, right: 4, left: 4, bottom: 0}}>
-            {history.map((item) => (
+            {series.map((item) => (
               <Line
                 key={item.targetLevel}
                 type='monotone'
                 dataKey={item.targetLevel}
                 stroke={LEVEL_COLORS[item.targetLevel]}
                 strokeWidth={3}
-                dot={
-                  item.scores.length === 1
-                    ? {r: 4, fill: LEVEL_COLORS[item.targetLevel]}
-                    : false
-                }
+                dot={false}
                 activeDot={{r: 4, fill: LEVEL_COLORS[item.targetLevel]}}
-                connectNulls
+                isAnimationActive={false}
               />
             ))}
             <XAxis
-              dataKey='x'
-              type='number'
-              domain={[0, 1]}
-              ticks={[0, 0.5, 1]}
-              tickFormatter={(v) =>
-                v === 0 ? '시작' : v === 1 ? '최근' : '중간'
-              }
+              dataKey='label'
+              interval={0}
               axisLine={false}
               tickLine={false}
               tick={{fill: '#46483C', fontSize: 11, fontWeight: 500}}

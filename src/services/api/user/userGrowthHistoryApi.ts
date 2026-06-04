@@ -1,7 +1,7 @@
 /** 성장치 히스토리 조회 API */
 import {api} from '@/services/lib/axios';
 import {API_ENDPOINTS} from '@/services/constant/endpoint';
-import type {GradeCode} from '@/constants/difficulty';
+import type {TargetLevel} from '@/types/common';
 
 export interface GrowthHistoryScore {
   index: number;
@@ -10,7 +10,7 @@ export interface GrowthHistoryScore {
 }
 
 export interface GrowthHistoryItem {
-  targetLevel: GradeCode;
+  targetLevel: TargetLevel;
   levelLabel: string;
   scores: GrowthHistoryScore[];
 }
