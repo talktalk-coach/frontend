@@ -1,10 +1,12 @@
 'use client';
 
 import {useMemo, useState} from 'react';
+import {useRouter} from 'next/navigation';
 import {ROUTES} from '@/constants/routes';
 import {EMAIL_REGEX, PASSWORD_REGEX} from '@/constants/auth';
-import {useQuickSignup} from '@/hooks/queries/useAuth';
 import {StatusModalVariant} from '@/components/common/StatusModal';
+import {useLogin} from '@/hooks/queries/useAuth';
+import {setTokens} from '@/utils/auth/token';
 
 interface ModalState {
   isOpen: boolean;
@@ -14,8 +16,8 @@ interface ModalState {
 }
 
 export const useLoginForm = () => {
-  const {mutateAsync: quickSignup} = useQuickSignup();
-
+  const router = useRouter();
+  const {mutateAsync: login} = useLogin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -74,20 +76,21 @@ export const useLoginForm = () => {
       return;
     }
 
-    if (emailError || passwordError) {
-      return;
-    }
+    if (emailError || passwordError) return;
+
     try {
-      await quickSignup({
-        // TODO: 나중에 실제 login API로 교체
-        email,
-        password,
-        nickname: '테스트유저',
-        targetLevel: 'MIDDLE_1_2',
-      });
-      openModal('success', '로그인에 성공했습니다.', ROUTES.HOMEPAGE);
-    } catch (error) {
-      openModal('error', '로그인에 실패했습니다.');
+      const data = await login({email, password});
+      setTokens(data.accessToken, data.refreshToken);
+
+      if (data.newUser) {
+        // 신규 유저
+        router.push(ROUTES.DIFFICULTY);
+      } else {
+        // 기존 유저
+        router.push(ROUTES.HOMEPAGE);
+      }
+    } catch {
+      openModal('error', '이메일 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
