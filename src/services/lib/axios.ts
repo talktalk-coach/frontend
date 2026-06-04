@@ -35,7 +35,7 @@ api.interceptors.response.use(
       const refreshToken = getRefreshToken();
       if (!refreshToken) {
         removeTokens();
-        window.location.href = '/login';
+        window.location.href = ROUTES.LOGIN;
         return Promise.reject(error);
       }
 
