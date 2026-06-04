@@ -12,7 +12,7 @@ export interface GrowthHistoryScore {
 export interface GrowthHistoryItem {
   targetLevel: TargetLevel;
   levelLabel: string;
-  scores: GrowthHistoryScore[];
+  scores: number[];
 }
 
 export type GrowthHistoryResponse = GrowthHistoryItem[];
