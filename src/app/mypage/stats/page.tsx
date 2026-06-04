@@ -47,13 +47,13 @@ export default function StatsPage() {
     ) / 10;
 
   return (
-    <>
+    <main className='flex flex-col gap-6 px-6 pt-8 pb-10'>
       <PageTitle />
       <HighlightMessage highlight={highlight} />
       <GrowthRateCard growthRate={growthRate} />
       <MasteryCard metrics={metrics} overallAverage={overallAverage} />
       <DailyScoreChart scores={dailyScores} average={dailyAverage} />
       <HistoryChart history={history} />
-    </>
+    </main>
   );
 }
