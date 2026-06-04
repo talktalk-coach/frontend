@@ -1,14 +1,32 @@
 'use client';
 
 import {LineChart, Line, XAxis, ResponsiveContainer} from 'recharts';
-import {HISTORY_GROUPS} from '@/mocks/stats';
-import type {MonthlyScoreItem} from '@/mocks/stats';
+import type {GradeCode} from '@/constants/difficulty';
+import type {GrowthHistoryItem} from '@/services/api/user/userGrowthHistoryApi';
+
+const LEVEL_COLORS: Record<GradeCode, string> = {
+  ELEM_1_2: '#D4C28A',
+  ELEM_3_4: '#BFCD8F',
+  ELEM_5_6: '#8A9A5B',
+  MIDDLE_1_2: '#606C38',
+  MIDDLE_3: '#485422',
+};
 
 interface HistoryChartProps {
-  scores: MonthlyScoreItem[];
+  history: GrowthHistoryItem[];
 }
 
-export const HistoryChart = ({scores}: HistoryChartProps) => {
+type ChartRow = {x: number} & Partial<Record<GradeCode, number>>;
+
+export const HistoryChart = ({history}: HistoryChartProps) => {
+  const rows: ChartRow[] = history.flatMap((item) => {
+    const n = item.scores.length;
+    return item.scores.map((score, i) => ({
+      x: n === 1 ? 0.5 : i / (n - 1),
+      [item.targetLevel]: score.averageScore,
+    }));
+  });
+
   return (
     <section className='bg-surface border-divider/30 flex w-full flex-col gap-6 rounded-[32px] border p-6 shadow-sm'>
       <div className='flex flex-col gap-3'>
@@ -17,15 +35,15 @@ export const HistoryChart = ({scores}: HistoryChartProps) => {
         </h3>
 
         <ul className='flex flex-wrap gap-x-4 gap-y-2'>
-          {HISTORY_GROUPS.map((group) => (
-            <li key={group.key} className='flex items-center gap-1.5'>
+          {history.map((item) => (
+            <li key={item.targetLevel} className='flex items-center gap-1.5'>
               <span
                 className='h-1 w-3 rounded-full'
-                style={{backgroundColor: group.color}}
+                style={{backgroundColor: LEVEL_COLORS[item.targetLevel]}}
                 aria-hidden='true'
               />
               <span className='text-primary2 text-[11px] font-bold tracking-[-0.32px]'>
-                {group.label}
+                {item.levelLabel}
               </span>
             </li>
           ))}
@@ -45,24 +63,34 @@ export const HistoryChart = ({scores}: HistoryChartProps) => {
 
         <ResponsiveContainer width='100%' height='100%'>
           <LineChart
-            data={scores}
+            data={rows}
             margin={{top: 40, right: 4, left: 4, bottom: 0}}>
-            {HISTORY_GROUPS.map((group) => (
+            {history.map((item) => (
               <Line
-                key={group.key}
+                key={item.targetLevel}
                 type='monotone'
-                dataKey={group.key}
-                stroke={group.color}
+                dataKey={item.targetLevel}
+                stroke={LEVEL_COLORS[item.targetLevel]}
                 strokeWidth={3}
-                dot={false}
-                activeDot={{r: 4, fill: group.color}}
+                dot={
+                  item.scores.length === 1
+                    ? {r: 4, fill: LEVEL_COLORS[item.targetLevel]}
+                    : false
+                }
+                activeDot={{r: 4, fill: LEVEL_COLORS[item.targetLevel]}}
+                connectNulls
               />
             ))}
             <XAxis
-              dataKey='month'
+              dataKey='x'
+              type='number'
+              domain={[0, 1]}
+              ticks={[0, 0.5, 1]}
+              tickFormatter={(v) =>
+                v === 0 ? '시작' : v === 1 ? '최근' : '중간'
+              }
               axisLine={false}
               tickLine={false}
-              interval={0}
               tick={{fill: '#46483C', fontSize: 11, fontWeight: 500}}
               tickMargin={8}
               padding={{left: 12, right: 12}}
