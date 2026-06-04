@@ -6,6 +6,7 @@ import ConfirmModal from '@/components/common/ConfirmModal';
 import LogoutIcon from '@/assets/mypage/logout.svg';
 import {ROUTES} from '@/constants/routes';
 import {useLogout} from '@/hooks/queries/useAuth';
+import {useDeleteUserMutation} from '@/hooks/queries/useUser';
 
 type ModalType = 'logout' | 'withdraw' | null;
 
@@ -20,6 +21,7 @@ export const AccountSection = () => {
   const [modalType, setModalType] = useState<ModalType>(null);
 
   const {mutate: logout} = useLogout();
+  const {mutate: withdraw} = useDeleteUserMutation();
 
   const handleLogoutClick = (): void => {
     setModalType('logout');
@@ -41,13 +43,10 @@ export const AccountSection = () => {
   };
 
   const handleWithdrawConfirm = (): void => {
-    /* TODO: 회원탈퇴 API 연동
-     * - 탈퇴 시 모든 사용자 데이터 즉시 삭제
-     * - localStorage 토큰 삭제 후 루트 페이지로 이동
-     */
-    console.log('회원탈퇴 실행');
     setModalType(null);
-    router.push(ROUTES.ROOT);
+    withdraw(undefined, {
+      onSuccess: () => router.push(ROUTES.ROOT),
+    });
   };
 
   return (

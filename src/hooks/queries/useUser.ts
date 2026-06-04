@@ -5,6 +5,7 @@ import {getUserInfo} from '@/services/api/user/userInfoApi';
 import {patchUserGrade} from '@/services/api/user/userGradeApi';
 import {patchUserNickname} from '@/services/api/user/userNicknameApi';
 import {postUserImage} from '@/services/api/user/userImageApi';
+import {deleteUser} from '@/services/api/user/userWithdrawApi';
 import {getUserSpeeches} from '@/services/api/user/userSpeechesApi';
 import type {SpeechListParams} from '@/services/api/user/userSpeechesApi';
 import {useUserStore} from '@/stores/userStore';
@@ -55,6 +56,22 @@ export const useUploadProfileImageMutation = () => {
     mutationFn: postUserImage,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: USER_INFO_QUERY_KEY});
+    },
+  });
+};
+
+/** 회원 탈퇴 — 성공 시 토큰·스토어·쿼리 캐시를 모두 비운다. */
+export const useDeleteUserMutation = () => {
+  const queryClient = useQueryClient();
+  const resetUser = useUserStore((state) => state.resetUser);
+
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      resetUser();
+      queryClient.clear();
     },
   });
 };
