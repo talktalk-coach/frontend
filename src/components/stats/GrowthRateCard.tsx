@@ -16,7 +16,8 @@ export const GrowthRateCard = ({growthRate}: GrowthRateCardProps) => {
           {growthRate.label}
         </span>
         <span className='font-pretendard text-primary text-2xl font-black'>
-          {growthRate.value >= 0 ? '+' : ''}+{growthRate.value}%
+          {growthRate.value >= 0 ? '+' : ''}
+          {growthRate.value}%
         </span>
       </div>
     </div>
