@@ -14,6 +14,7 @@ import {ErrorScreen} from '@/components/common/ErrorScreen';
 import {useUserInfo, useSpeechList} from '@/hooks/queries/useUser';
 import {useUserStore} from '@/stores/userStore';
 import {GRADE_CODE_TO_LABEL} from '@/constants/difficulty';
+import type {TargetLevel} from '@/types/common';
 
 export default function MyPage() {
   const {
@@ -64,7 +65,9 @@ export default function MyPage() {
 
             <div className='mt-9 w-full max-w-[342px]'>
               <DifficultySection
-                currentLevel={GRADE_CODE_TO_LABEL[user.targetLevel]}
+                currentLevel={
+                  GRADE_CODE_TO_LABEL[user.targetLevel as TargetLevel]
+                }
               />
             </div>
 

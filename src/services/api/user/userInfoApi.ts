@@ -1,7 +1,7 @@
 /** 유저 정보 조회 API 호출 함수 */
 import {api} from '@/services/lib/axios';
 import {API_ENDPOINTS} from '@/services/constant/endpoint';
-import type {GradeCode} from '@/constants/difficulty';
+import type {TargetLevel} from '@/types/common';
 
 export interface UserInfoResponse {
   userId: number;
@@ -9,7 +9,7 @@ export interface UserInfoResponse {
   nickname: string;
   profileImageUrl: string;
   provider: string;
-  targetLevel: GradeCode;
+  targetLevel: TargetLevel;
   under14: boolean;
 }
 
