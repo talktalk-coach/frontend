@@ -2,7 +2,6 @@ import {NextRequest, NextResponse} from 'next/server';
 
 /** 로그인 없이 접근 가능한 공개 경로 */
 const PUBLIC_PATHS = [
-  '/',
   '/auth/landing',
   '/auth/login',
   '/auth/signup',
@@ -19,9 +18,8 @@ export const proxy = (request: NextRequest) => {
     request.cookies.get('accessToken')?.value ??
     request.headers.get('Authorization')?.replace('Bearer ', '');
 
-  // localStorage는 미들웨어에서 접근 불가 → 쿠키 기반으로 확인
-  // 토큰을 localStorage에 저장 중이므로 클라이언트 사이드에서 처리
-  const isPublicPath = PUBLIC_PATHS.some((path) => pathname.startsWith(path));
+  const isPublicPath =
+    pathname === '/' || PUBLIC_PATHS.some((path) => pathname.startsWith(path));
   const isAuthPath = AUTH_PATHS.some((path) => pathname.startsWith(path));
   const isLoggedIn = !!accessToken;
 
