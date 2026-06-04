@@ -5,7 +5,10 @@ import Image from 'next/image';
 import EditIcon from '@/assets/mypage/edit-profile.svg';
 import ProfileImage from '@/assets/user/user.svg';
 import type {UserProfile} from '@/types/mypage';
-import {useUserStore} from '@/stores/userStore';
+import {
+  useUpdateNicknameMutation,
+  useUploadProfileImageMutation,
+} from '@/hooks/queries/useUser';
 
 interface ProfileSectionProps {
   profile: UserProfile;
@@ -26,7 +29,8 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   const [name, setName] = useState<string>(profile.name);
   const [imageUrl, setImageUrl] = useState<string>(profile.imageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const setUser = useUserStore((state) => state.setUser);
+  const {mutate: updateNickname} = useUpdateNicknameMutation();
+  const {mutate: uploadImage} = useUploadProfileImageMutation();
 
   const handleEditMenuOpenClick = (): void => {
     setIsMenuOpen(true);
@@ -45,11 +49,9 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    /* TODO: 프로필 이미지 업로드 API 연동 필요 (POST /api/users/me/image) */
-    console.log('이미지 업로드:', file);
-
-    const previewUrl = URL.createObjectURL(file);
-    setImageUrl(previewUrl);
+    /* 미리보기를 먼저 보여주고, 서버 반영은 mutation에 맡긴다. */
+    setImageUrl(URL.createObjectURL(file));
+    uploadImage(file);
   };
 
   const handleNameMenuClick = (): void => {
@@ -63,10 +65,10 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   };
 
   const handleNameEditSaveClick = (): void => {
-    /* TODO: 닉네임 수정 API 연동 필요 (PATCH /api/users/me/nickname) */
-    console.log('닉네임 저장:', {name});
-    setUser({nickname: name});
-    setIsEditingName(false);
+    updateNickname(
+      {nickname: name},
+      {onSuccess: () => setIsEditingName(false)}
+    );
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {

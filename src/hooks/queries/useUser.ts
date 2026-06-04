@@ -1,9 +1,13 @@
 'use client';
+
 import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query';
 import {getUserInfo} from '@/services/api/user/userInfoApi';
 import {patchUserGrade} from '@/services/api/user/userGradeApi';
+import {patchUserNickname} from '@/services/api/user/userNicknameApi';
+import {postUserImage} from '@/services/api/user/userImageApi';
 import {getUserSpeeches} from '@/services/api/user/userSpeechesApi';
 import type {SpeechListParams} from '@/services/api/user/userSpeechesApi';
+import {useUserStore} from '@/stores/userStore';
 
 const USER_INFO_QUERY_KEY = ['userInfo'] as const;
 
@@ -23,6 +27,32 @@ export const useUpdateUserGradeMutation = () => {
 
   return useMutation({
     mutationFn: patchUserGrade,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: USER_INFO_QUERY_KEY});
+    },
+  });
+};
+
+/** 닉네임 수정 — 성공 시 store 닉네임을 즉시 갱신하고 내 정보 캐시를 무효화한다. */
+export const useUpdateNicknameMutation = () => {
+  const queryClient = useQueryClient();
+  const setNickname = useUserStore((state) => state.setNickname);
+
+  return useMutation({
+    mutationFn: patchUserNickname,
+    onSuccess: (_data, variables) => {
+      setNickname(variables.nickname);
+      queryClient.invalidateQueries({queryKey: USER_INFO_QUERY_KEY});
+    },
+  });
+};
+
+/** 프로필 이미지 업로드 — 성공 시 내 정보 캐시를 무효화해 새 이미지를 반영한다. */
+export const useUploadProfileImageMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: postUserImage,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: USER_INFO_QUERY_KEY});
     },

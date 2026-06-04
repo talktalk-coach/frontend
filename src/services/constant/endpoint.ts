@@ -22,5 +22,7 @@ export const API_ENDPOINTS = {
     me: '/api/users/me',
     grade: '/api/users/me/grade',
     speeches: `/api/users/me/speeches`,
+    nickname: '/api/users/me/nickname',
+    image: '/api/users/me/image',
   },
 };
