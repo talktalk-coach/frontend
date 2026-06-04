@@ -108,7 +108,7 @@ export const HistoryChart = ({history}: HistoryChartProps) => {
           ))}
         </div>
 
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer width='99%' height='100%'>
           <LineChart
             data={rows}
             margin={{top: 5, right: 4, left: 4, bottom: 0}}>

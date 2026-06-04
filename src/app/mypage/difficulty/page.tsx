@@ -6,6 +6,7 @@ import {Spinner} from '@/components/common/Spinner';
 import {ROUTES} from '@/constants/routes';
 import {GRADE_CODE_TO_LABEL} from '@/constants/difficulty';
 import {useUserInfo} from '@/hooks/queries/useUser';
+import type {TargetLevel} from '@/types/common';
 
 /**
  * - 현재 학습 수준을 서버에서 조회해 미리 선택되어 있다.
@@ -54,7 +55,9 @@ export default function MypageDifficultyPage() {
           </div>
         ) : (
           <DifficultySelectionList
-            initialSelected={GRADE_CODE_TO_LABEL[userInfo.targetLevel]}
+            initialSelected={
+              GRADE_CODE_TO_LABEL[userInfo.targetLevel as TargetLevel]
+            }
             buttonText='변경 완료'
             onConfirm={handleConfirm}
           />
