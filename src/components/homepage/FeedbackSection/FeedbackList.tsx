@@ -17,7 +17,7 @@ export const FeedbackList = ({feedbacks}: FeedbackListProps) => {
         {feedbacks ? (
           feedbacks.map((text, index) => <Feedback key={index} text={text} />)
         ) : (
-          <p className='items-centerfont-bold flex gap-1 text-gray-500'>
+          <p className='flex items-center gap-1 font-bold text-gray-500'>
             오늘 첫 스피치에 도전해보세요 <MicrophoneIcon className='mt-1' />
           </p>
         )}
