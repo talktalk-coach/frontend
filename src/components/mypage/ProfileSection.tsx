@@ -94,6 +94,7 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
                 alt={`${name} 프로필 이미지`}
                 width={160}
                 height={160}
+                priority
                 className='h-full w-full object-cover'
               />
             ) : (
