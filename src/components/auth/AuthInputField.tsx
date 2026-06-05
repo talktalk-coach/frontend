@@ -25,6 +25,7 @@ export const AuthInputField = ({
     placeholder,
     icon: Icon,
     buttonLabel,
+    iconClassName,
   } = INPUT_FIELD_MAP[label];
 
   return (
@@ -35,13 +36,20 @@ export const AuthInputField = ({
       <div className='flex w-full gap-2'>
         <div
           className={`bg-input flex items-center rounded-full px-5 py-4 ${buttonLabel ? 'flex-1' : 'w-full'}`}>
-          <Icon className='mr-3 shrink-0' />
+          <Icon
+            className={`mr-3 shrink-0 text-[#888F6E] ${iconClassName ?? ''}`}
+          />
           <input
             type={type}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className='w-full bg-transparent text-sm focus:outline-none'
+            onClick={(e) => {
+              if (type === 'date') {
+                (e.target as HTMLInputElement).showPicker();
+              }
+            }}
+            className='w-full bg-transparent text-sm placeholder:text-gray-500 focus:outline-none [&::-webkit-calendar-picker-indicator]:hidden'
           />
         </div>
         {buttonLabel && onButtonClick && (

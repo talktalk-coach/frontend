@@ -1,5 +1,5 @@
 import TrendUpIcon from '@/assets/stats/trend-up.svg';
-import type {GrowthRate} from '@/mocks/stats';
+import type {GrowthRate} from '@/types/stats';
 
 interface GrowthRateCardProps {
   growthRate: GrowthRate;
@@ -16,7 +16,8 @@ export const GrowthRateCard = ({growthRate}: GrowthRateCardProps) => {
           {growthRate.label}
         </span>
         <span className='font-pretendard text-primary text-2xl font-black'>
-          +{growthRate.value}%
+          {growthRate.value >= 0 ? '+' : ''}
+          {growthRate.value}%
         </span>
       </div>
     </div>

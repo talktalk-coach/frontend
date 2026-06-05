@@ -1,11 +1,21 @@
 'use client';
 
 import {useRef} from 'react';
+import {useParams} from 'next/navigation';
 import {toPng} from 'html-to-image';
 import {SaveImageButton} from '@/components/common/buttons/SaveImageButton';
 import {ShareCard} from '@/components/share/ShareCard';
+import {useSpeechResult} from '@/hooks/queries/useSpeech';
+import {Spinner} from '@/components/common/Spinner';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
+import {mapScoreLabel} from '@/utils/labelMapping';
 
 export default function ResultSharePage() {
+  const params = useParams();
+  const speechId = Number(params.speechId);
+
+  const {data, isLoading, isError} = useSpeechResult(speechId);
+
   const captureRef = useRef<HTMLDivElement>(null);
 
   const handleSaveImage = async (): Promise<void> => {
@@ -45,10 +55,16 @@ export default function ResultSharePage() {
     }
   };
 
+  if (isLoading) return <Spinner />;
+
+  if (isError || !data) return <ErrorScreen />;
+
+  const score = Math.round(data.averageScore);
+
   return (
     <main className='flex min-h-screen flex-col items-center px-6 py-10'>
       <div className='w-full max-w-[448px]'>
-        <ShareCard />
+        <ShareCard score={score} metrics={mapScoreLabel(data)} />
       </div>
 
       <SaveImageButton onClick={handleSaveImage} />
@@ -68,7 +84,7 @@ export default function ResultSharePage() {
           pointerEvents: 'none',
         }}>
         <div ref={captureRef} className='bg-background w-[448px] p-8'>
-          <ShareCard />
+          <ShareCard score={score} metrics={mapScoreLabel(data)} />
         </div>
       </div>
     </main>

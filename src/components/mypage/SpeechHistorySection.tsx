@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import {SpeechHistoryCard} from '@/components/mypage/SpeechHistoryCard';
 import {ROUTES} from '@/constants/routes';
-import type {SpeechHistoryItem} from '@/mocks/mypage';
+import type {Speech} from '@/services/api/user/userSpeechesApi';
 import ArrowUpRight from '@/assets/mypage/arrow-up-right.svg';
 
 interface SpeechHistorySectionProps {
-  speeches: SpeechHistoryItem[];
+  speeches: Speech[];
 }
 
 export const SpeechHistorySection = ({speeches}: SpeechHistorySectionProps) => {
@@ -25,7 +25,7 @@ export const SpeechHistorySection = ({speeches}: SpeechHistorySectionProps) => {
 
       <div className='flex flex-col gap-3'>
         {speeches.slice(0, 3).map((speech) => (
-          <SpeechHistoryCard key={speech.id} speech={speech} />
+          <SpeechHistoryCard key={speech.speechId} speech={speech} />
         ))}
       </div>
     </section>

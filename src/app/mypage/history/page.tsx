@@ -4,7 +4,9 @@ import {useState, useMemo} from 'react';
 import {UpDownButton} from '@/components/common/buttons/UpDownButton';
 import {ToggleSegment} from '@/components/mypage/history/ToggleSegment';
 import {DetailSpeechHistoryCardList} from '@/components/mypage/history/DetailSpeechHistoryCardList';
-import {mockSpeechHistory} from '@/mocks/mypage';
+import {useSpeechList} from '@/hooks/queries/useUser';
+import {Spinner} from '@/components/common/Spinner';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
 
 type SortType = 'date' | 'score';
 type ArrowType = 'up' | 'down';
@@ -13,28 +15,26 @@ export default function Historypage() {
   const [sortType, setSortType] = useState<SortType>('date');
   const [selectedArrow, setSelectedArrow] = useState<ArrowType>('down');
 
+  const {data, isLoading, isError} = useSpeechList();
+
   const sortedSpeeches = useMemo(() => {
-    const speeches = [...mockSpeechHistory];
+    const speeches = [...(data?.speeches ?? [])];
 
     return speeches.sort((a, b) => {
       if (sortType === 'date') {
-        const dateA = new Date(a.date.replaceAll('.', '-')).getTime();
-        const dateB = new Date(b.date.replaceAll('.', '-')).getTime();
-
-        if (selectedArrow === 'down') {
-          return dateB - dateA;
-        }
-
-        return dateA - dateB;
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        return selectedArrow === 'down' ? dateB - dateA : dateA - dateB;
       }
 
-      if (selectedArrow === 'down') {
-        return b.score - a.score;
-      }
-
-      return a.score - b.score;
+      return selectedArrow === 'down'
+        ? b.averageScore - a.averageScore
+        : a.averageScore - b.averageScore;
     });
-  }, [sortType, selectedArrow]);
+  }, [data?.speeches, sortType, selectedArrow]);
+
+  if (isLoading) return <Spinner />;
+  if (isError || !data) return <ErrorScreen />;
 
   return (
     <div className='flex min-h-screen flex-col gap-8 p-6'>

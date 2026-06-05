@@ -2,9 +2,9 @@
 import {useEffect} from 'react';
 import {useQuery, useMutation} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
+import {ROUTES} from '@/constants/routes';
 import {getSpeechStatus} from '@/services/api/speech/speechStatusApi';
 import {getSpeechResult} from '@/services/api/speech/speechResultApi';
-import {ROUTES} from '@/constants/routes';
 import {postSpeechAzure} from '@/services/api/speech/speechRecordApi';
 
 export const useSpeechStatus = (speechId: number) => {
@@ -23,8 +23,6 @@ export const useSpeechStatus = (speechId: number) => {
 
   useEffect(() => {
     if (query.data?.status === 'COMPLETED') {
-      console.log('[speechStatus] 응답:', query.data);
-      console.log('[speechStatus] status:', query.data.status);
       router.push(ROUTES.RESULT(query.data.speechId));
     }
     if (query.data?.status === 'FAILED') {

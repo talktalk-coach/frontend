@@ -1,9 +1,6 @@
 import {AgreementCheckbox} from '@/components/auth/signup/AgreementCheckBox';
 
 interface AgreementCheckBoxListProps {
-  isUnder14: boolean;
-  setIsUnder14: (checked: boolean) => void;
-
   isPrivacyChecked: boolean;
   setIsPrivacyChecked: (checked: boolean) => void;
 
@@ -12,8 +9,6 @@ interface AgreementCheckBoxListProps {
 }
 
 export const AgreementCheckBoxList = ({
-  isUnder14,
-  setIsUnder14,
   isPrivacyChecked,
   setIsPrivacyChecked,
   isVoiceChecked,
@@ -21,11 +16,6 @@ export const AgreementCheckBoxList = ({
 }: AgreementCheckBoxListProps) => {
   return (
     <div className='ml-2 flex flex-col gap-2.5'>
-      <AgreementCheckbox
-        label='만 14세 미만인가요?'
-        checked={isUnder14}
-        onChange={setIsUnder14}
-      />
       <AgreementCheckbox
         label='개인정보 활용 동의'
         checked={isPrivacyChecked}

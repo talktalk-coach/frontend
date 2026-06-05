@@ -11,6 +11,9 @@ import MicIcon from '@/assets/record/mic.svg';
 import {RecordFooter} from '@/components/record/RecordFooter';
 import {useRecord} from '@/hooks/useRecord';
 import {useSubmitSpeechMutation} from '@/hooks/queries/useSpeech';
+import {CategoryModal} from '@/components/record/CategoryModal';
+import {CategoryDisplay} from '@/components/record/CategoryDisplay';
+import type {SpeechCategory} from '@/constants/speech';
 type RecordStatus = 'idle' | 'recording' | 'paused';
 
 type ToastState = {
@@ -21,11 +24,9 @@ type ToastState = {
 const INITIAL_TOAST_STATE: ToastState = {isVisible: false, message: ''};
 
 /**
- * TODO: category는 사용자 선택 값이나 선택 UI(모달)가 아직 미구현이라 고정값 사용.
- * title은 "날짜 + 카테고리" 형식으로 확정(별도 입력 UI 없음).
+ * title은 "날짜 + 카테고리" 형식으로 백엔드에 전달한다.
  */
-const DEFAULT_CATEGORY = 'PRESENTATION';
-const createTitleParam = (category: string): string => {
+const createTitleParam = (category: SpeechCategory): string => {
   const today = new Date().toISOString().slice(0, 10);
   return `${today} ${category}`;
 };
@@ -45,6 +46,8 @@ export default function RecordPage(): ReactElement {
   const searchParams = useSearchParams();
 
   const [status, setStatus] = useState<RecordStatus>('idle');
+  const [category, setCategory] = useState<SpeechCategory | null>(null);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState<boolean>(true);
 
   const [toast, setToast] = useState<ToastState>(INITIAL_TOAST_STATE);
   const [isDanger, setIsDanger] = useState<boolean>(false);
@@ -55,6 +58,23 @@ export default function RecordPage(): ReactElement {
 
   const hideToast = useCallback((): void => {
     setToast((prev) => ({...prev, isVisible: false}));
+  }, []);
+
+  const handleCategorySelect = useCallback((selected: SpeechCategory): void => {
+    setCategory(selected);
+    setIsCategoryModalOpen(false);
+  }, []);
+
+  const handleCategoryModalClose = useCallback((): void => {
+    if (category) {
+      setIsCategoryModalOpen(false);
+    } else {
+      router.push(ROUTES.HOMEPAGE);
+    }
+  }, [category, router]);
+
+  const handleCategoryDisplayClick = useCallback((): void => {
+    setIsCategoryModalOpen(true);
   }, []);
 
   useEffect(() => {
@@ -70,14 +90,16 @@ export default function RecordPage(): ReactElement {
    * 업로드 실패 시 라우팅하지 않고 토스트로 안내한다.
    */
   const handleSubmit = useCallback(async (): Promise<void> => {
+    if (!category) return;
+
     const audioBlob = await stopRecording();
 
     try {
       const speechId = await submitSpeech({
         audio: audioBlob,
-        title: createTitleParam(DEFAULT_CATEGORY),
+        title: createTitleParam(category),
         duration: elapsedSeconds,
-        category: DEFAULT_CATEGORY,
+        category: category,
       });
 
       router.push(ROUTES.RESULT_LOADING(speechId));
@@ -85,7 +107,7 @@ export default function RecordPage(): ReactElement {
       showToast('업로드에 실패했습니다. 다시 시도해 주세요');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stopRecording, submitSpeech, router, showToast]);
+  }, [category, stopRecording, submitSpeech, router, showToast]);
 
   /* 12분 경과 - 남은 시간 안내 토스트 */
   const handleWarning = useCallback((): void => {
@@ -111,11 +133,14 @@ export default function RecordPage(): ReactElement {
   });
 
   const handleMicClick = async (): Promise<void> => {
-    if (status === 'idle') {
-      await startRecording();
-      setStatus('recording');
-      showToast('최대 15분까지 녹음할 수 있어요');
+    if (status !== 'idle') return;
+    if (!category) {
+      setIsCategoryModalOpen(true);
+      return;
     }
+    await startRecording();
+    setStatus('recording');
+    showToast('최대 15분까지 녹음할 수 있어요');
   };
 
   const handlePauseClick = (): void => {
@@ -142,16 +167,27 @@ export default function RecordPage(): ReactElement {
         isVisible={toast.isVisible}
         onClose={hideToast}
       />
-      <figure className='bg-primary/20 mt-6 flex items-center gap-2 rounded-full px-4 py-1.5'>
-        <i className='h-2 w-2 rounded-full bg-red-600' />
-        <figcaption className='font-pretendard text-primary text-xs font-bold tracking-widest'>
-          LIVE SESSION
-        </figcaption>
-      </figure>
+      {status === 'idle' ? (
+        category ? (
+          <CategoryDisplay
+            category={category}
+            onClick={handleCategoryDisplayClick}
+          />
+        ) : (
+          <div className='mt-6 h-[34px]' aria-hidden='true' />
+        )
+      ) : (
+        <figure className='bg-primary/20 mt-6 flex items-center gap-2 rounded-full px-4 py-1.5'>
+          <i className='h-2 w-2 rounded-full bg-red-600' />
+          <figcaption className='font-pretendard text-primary text-xs font-bold tracking-widest'>
+            LIVE SESSION
+          </figcaption>
+        </figure>
+      )}
 
       <section className='relative mt-8 flex items-center justify-center'>
-        <i className='border-primary/10 absolute h-64 w-64 rounded-full border' />
-        <i className='border-primary/20 absolute h-48 w-48 rounded-full border' />
+        <i className='border-primary/10 pointer-events-none absolute h-64 w-64 rounded-full border' />
+        <i className='border-primary/20 pointer-events-none absolute h-48 w-48 rounded-full border' />
         <button
           className='from-primary to-primary-gradient relative flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br shadow-2xl'
           onClick={handleMicClick}>
@@ -173,6 +209,12 @@ export default function RecordPage(): ReactElement {
         onPause={handlePauseClick}
         onResume={handleResumeClick}
         onSubmit={handleSubmitClick}
+      />
+
+      <CategoryModal
+        isOpen={isCategoryModalOpen}
+        onSelect={handleCategorySelect}
+        onClose={handleCategoryModalClose}
       />
     </main>
   );

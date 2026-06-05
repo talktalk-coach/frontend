@@ -1,7 +1,6 @@
 import {api} from '@/services/lib/axios';
 import {API_ENDPOINTS} from '@/services/constant/endpoint';
-
-export type SpeechStatus = 'PROCESSING' | 'COMPLETED' | 'FAILED';
+import {SpeechStatus} from '@/types/common';
 
 export interface SpeechStatusResponse {
   speechId: number;

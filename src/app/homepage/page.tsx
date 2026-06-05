@@ -1,14 +1,5 @@
 'use client';
 
-import {
-  mockUserName,
-  mockRadarChart,
-  mockMonthlyScore,
-  mockTodayPractice,
-  mockFeedbacks,
-  mockDailyQuiz,
-} from '@/mocks/homepage';
-import {useState} from 'react';
 import {ROUTES} from '@/constants/routes';
 import {useRouter} from 'next/navigation';
 import {Greeting} from '@/components/homepage/Greeting';
@@ -18,25 +9,57 @@ import {TodayPractice} from '@/components/homepage/TodayPractice';
 import {FeedbackList} from '@/components/homepage/FeedbackSection/FeedbackList';
 import {DailyQuiz} from '@/components/homepage/DailyQuiz';
 import {HomePageButton} from '@/components/common/buttons/HomePageButton';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
+import {Spinner} from '@/components/common/Spinner';
+import {mapScoreLabel} from '@/utils/labelMapping';
+import {useUserInfo} from '@/hooks/queries/useUser';
+import {useHome} from '@/hooks/queries/useHome';
+import {useTodayQuiz} from '@/hooks/queries/useQuiz';
+import {useQuizProgress} from '@/hooks/useQuizProgress';
 
 export default function Homepage() {
   const router = useRouter();
+  const {
+    data: userInfo,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useUserInfo();
+  const {
+    data: homeData,
+    isLoading: isHomeLoading,
+    isError: isHomeError,
+  } = useHome();
+  const {
+    data: quizData,
+    isLoading: isQuizLoading,
+    isError: isQuizError,
+  } = useTodayQuiz();
 
-  const [index, setIndex] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
-  const current = mockDailyQuiz[index];
-  const {score, changeRate} = mockMonthlyScore;
-  const {minutes} = mockTodayPractice;
+  const {index, quizFinished, handleQuizNext} = useQuizProgress(quizData);
 
-  const handleQuizNext = () => {
-    setIndex((prev) => {
-      if (prev + 1 >= mockDailyQuiz.length) {
-        setIsFinished(true);
-        return prev;
-      }
-      return prev + 1;
-    });
-  };
+  if (isHomeLoading || isQuizLoading || isUserLoading) return <Spinner />;
+  if (
+    isHomeError ||
+    !homeData ||
+    isQuizError ||
+    !quizData ||
+    isUserError ||
+    !userInfo
+  )
+    return <ErrorScreen />;
+
+  const current = quizData[index];
+
+  const monthlyScores = homeData?.monthlyScores ?? [];
+  const currentMonth = monthlyScores[0];
+  const prevMonth = monthlyScores[1];
+
+  const score = currentMonth?.averageScore ?? 0;
+  const changeRate = prevMonth?.averageScore
+    ? score - prevMonth.averageScore
+    : 0;
+
+  const monthlyMessage = currentMonth?.message ?? prevMonth?.message ?? '';
 
   const handleButtonClick = () => {
     router.push(ROUTES.RECORD);
@@ -44,24 +67,30 @@ export default function Homepage() {
 
   return (
     <div className='flex flex-col gap-8 p-6 px-6 pt-8 pb-29'>
-      <Greeting userName={mockUserName} />
+      <Greeting userName={userInfo.nickname} />
 
-      <GrowthChart data={mockRadarChart} />
+      <GrowthChart data={mapScoreLabel(homeData.radarAverage)} />
 
-      <MonthlyScore score={score} changeRate={changeRate} />
-
-      <TodayPractice minutes={minutes} />
+      <MonthlyScore
+        score={score}
+        changeRate={changeRate}
+        message={monthlyMessage}
+      />
+      <TodayPractice minutes={homeData.todayPracticeMinutes} />
 
       <section>
-        <FeedbackList feedbacks={mockFeedbacks} />
+        <FeedbackList feedbacks={homeData.summaryFeedback} />
       </section>
 
       <section className='flex flex-col gap-4'>
         <DailyQuiz
-          {...current}
+          key={index}
+          wordId={current.wordId}
+          question={current.description}
+          options={current.options}
           currentIndex={index}
-          isFinished={isFinished}
-          totalIndex={mockDailyQuiz.length}
+          isFinished={quizFinished}
+          totalIndex={quizData.length}
           onNext={handleQuizNext}
         />
       </section>
