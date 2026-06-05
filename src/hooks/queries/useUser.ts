@@ -9,6 +9,7 @@ import {deleteUser} from '@/services/api/user/userWithdrawApi';
 import {getUserSpeeches} from '@/services/api/user/userSpeechesApi';
 import type {SpeechListParams} from '@/services/api/user/userSpeechesApi';
 import {useUserStore} from '@/stores/userStore';
+import {removeTokens} from '@/utils/auth/token';
 
 const USER_INFO_QUERY_KEY = ['userInfo'] as const;
 
@@ -68,8 +69,7 @@ export const useDeleteUserMutation = () => {
   return useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      removeTokens();
       resetUser();
       queryClient.clear();
     },
