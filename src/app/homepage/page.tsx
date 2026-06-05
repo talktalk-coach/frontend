@@ -9,7 +9,7 @@ import {TodayPractice} from '@/components/homepage/TodayPractice';
 import {FeedbackList} from '@/components/homepage/FeedbackSection/FeedbackList';
 import {DailyQuiz} from '@/components/homepage/DailyQuiz';
 import {HomePageButton} from '@/components/common/buttons/HomePageButton';
-import {ErrorScreen} from '@/components/common/ErrorScreen.';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
 import {Spinner} from '@/components/common/Spinner';
 import {mapScoreLabel} from '@/utils/labelMapping';
 import {useUserInfo} from '@/hooks/queries/useUser';

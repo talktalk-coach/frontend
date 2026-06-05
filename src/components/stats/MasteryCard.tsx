@@ -1,4 +1,4 @@
-import type {PerformanceMetric} from '@/mocks/stats';
+import type {PerformanceMetric} from '@/types/stats';
 
 interface MasteryCardProps {
   metrics: PerformanceMetric[];

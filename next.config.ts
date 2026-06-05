@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'talktalkcoach2.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
+  },
   async rewrites() {
     return [
       {

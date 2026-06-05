@@ -7,7 +7,7 @@ import {Score} from '@/components/result/Score';
 import {ImprovementPlanList} from '@/components/result/ImprovementPlanList';
 import {NavigationButton} from '@/components/common/buttons/NavigationButton';
 import {OverallFeedback} from '@/components/result/OverallFeedback';
-import {ErrorScreen} from '@/components/common/ErrorScreen.';
+import {ErrorScreen} from '@/components/common/ErrorScreen';
 import {Spinner} from '@/components/common/Spinner';
 import {mapScoreLabel, mapGradeLabel} from '@/utils/labelMapping';
 import {mapImprovementPlanLabel} from '@/utils/labelMapping';

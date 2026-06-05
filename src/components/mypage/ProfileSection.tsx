@@ -3,8 +3,12 @@
 import {useState, useRef, ChangeEvent} from 'react';
 import Image from 'next/image';
 import EditIcon from '@/assets/mypage/edit-profile.svg';
-import type {UserProfile} from '@/mocks/mypage';
-import {useUserStore} from '@/stores/userStore';
+import ProfileImage from '@/assets/user/user.svg';
+import type {UserProfile} from '@/types/mypage';
+import {
+  useUpdateNicknameMutation,
+  useUploadProfileImageMutation,
+} from '@/hooks/queries/useUser';
 
 interface ProfileSectionProps {
   profile: UserProfile;
@@ -25,7 +29,8 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   const [name, setName] = useState<string>(profile.name);
   const [imageUrl, setImageUrl] = useState<string>(profile.imageUrl);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const setUser = useUserStore((state) => state.setUser);
+  const {mutate: updateNickname} = useUpdateNicknameMutation();
+  const {mutate: uploadImage} = useUploadProfileImageMutation();
 
   const handleEditMenuOpenClick = (): void => {
     setIsMenuOpen(true);
@@ -44,11 +49,9 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    /* TODO: 프로필 이미지 업로드 API 연동 필요 (POST /api/users/me/image) */
-    console.log('이미지 업로드:', file);
-
-    const previewUrl = URL.createObjectURL(file);
-    setImageUrl(previewUrl);
+    /* 미리보기를 먼저 보여주고, 서버 반영은 mutation에 맡긴다. */
+    setImageUrl(URL.createObjectURL(file));
+    uploadImage(file);
   };
 
   const handleNameMenuClick = (): void => {
@@ -62,10 +65,10 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
   };
 
   const handleNameEditSaveClick = (): void => {
-    /* TODO: 닉네임 수정 API 연동 필요 (PATCH /api/users/me/nickname) */
-    console.log('닉네임 저장:', {name});
-    setUser({nickname: name});
-    setIsEditingName(false);
+    updateNickname(
+      {nickname: name},
+      {onSuccess: () => setIsEditingName(false)}
+    );
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -85,13 +88,18 @@ export const ProfileSection = ({profile}: ProfileSectionProps) => {
       <section className='flex flex-col items-center'>
         <div className='relative h-40 w-40'>
           <div className='h-full w-full overflow-hidden rounded-full bg-[#EEEEE5] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]'>
-            <Image
-              src={imageUrl}
-              alt={`${name} 프로필 이미지`}
-              width={160}
-              height={160}
-              className='h-full w-full object-cover'
-            />
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={`${name} 프로필 이미지`}
+                width={160}
+                height={160}
+                priority
+                className='h-full w-full object-cover'
+              />
+            ) : (
+              <ProfileImage className='h-full w-full object-contain' />
+            )}
           </div>
 
           <button

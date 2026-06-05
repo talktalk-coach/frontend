@@ -1,7 +1,7 @@
 'use client';
 
 import {AreaChart, Area, XAxis, ResponsiveContainer, Dot} from 'recharts';
-import type {DailyScoreItem} from '@/mocks/stats';
+import type {DailyScoreItem} from '@/types/stats';
 
 interface DailyScoreChartProps {
   scores: DailyScoreItem[];

@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
     emailVerify: '/api/auth/email/verify',
     login: '/api/auth/login',
     logout: '/api/auth/logout',
+    quickSignup: '/api/auth/quick-signup',
     refresh: '/api/auth/refresh',
     signup: '/api/auth/signup',
   },
@@ -27,5 +28,9 @@ export const API_ENDPOINTS = {
     me: '/api/users/me',
     grade: '/api/users/me/grade',
     speeches: `/api/users/me/speeches`,
+    nickname: '/api/users/me/nickname',
+    image: '/api/users/me/image',
+    statistics: '/api/users/me/statistics',
+    growthHistory: '/api/users/me/growth-history',
   },
 };
