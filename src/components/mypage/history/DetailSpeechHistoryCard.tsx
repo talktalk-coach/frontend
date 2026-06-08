@@ -17,7 +17,7 @@ export const DetailSpeechHistoryCard = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`${ROUTES.RESULT}/${speech.speechId}`);
+    router.push(ROUTES.RESULT(speech.speechId));
   };
 
   return (

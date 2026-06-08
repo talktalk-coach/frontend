@@ -12,6 +12,7 @@ import {
   useSignup,
 } from '@/hooks/queries/useAuth';
 import {AxiosError} from 'axios';
+import {removeTokens} from '@/utils/auth/token';
 
 interface ModalState {
   isOpen: boolean;
@@ -235,8 +236,10 @@ export const useSignupForm = () => {
         ...(isUnder14 && {parentEmail}),
       },
       {
-        onSuccess: () =>
-          openModal('success', '회원가입이 완료되었습니다.', ROUTES.LOGIN),
+        onSuccess: () => {
+          removeTokens();
+          openModal('success', '회원가입이 완료되었습니다.', ROUTES.LOGIN);
+        },
         onError: (error) => {
           const axiosError = error as AxiosError<{message?: string}>;
           const message = axiosError?.response?.data?.message;
