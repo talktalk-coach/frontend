@@ -4,34 +4,32 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+const MAX_PAGE_BUTTONS = 5;
+
 function getPageNumbers(currentPage: number, totalPages: number): number[] {
-  // 5개 이하면 전체 표시
-  if (totalPages <= 5) {
+  // MAX_PAGE_BUTTONS개 이하면 전체 표시
+  if (totalPages <= MAX_PAGE_BUTTONS) {
     return Array.from({length: totalPages}, (_, i) => i + 1);
   }
 
-  // 5개 이상이면 항상 5개만 표시
-  if (currentPage <= 3) {
-    return [1, 2, 3, 4, 5];
+  // MAX_PAGE_BUTTONS개 이상이면 항상 MAX_PAGE_BUTTONS개만 표시
+  const half = Math.floor(MAX_PAGE_BUTTONS / 2);
+
+  if (currentPage <= half + 1) {
+    return Array.from({length: MAX_PAGE_BUTTONS}, (_, i) => i + 1);
   }
 
-  if (currentPage >= totalPages - 2) {
-    return [
-      totalPages - 4,
-      totalPages - 3,
-      totalPages - 2,
-      totalPages - 1,
-      totalPages,
-    ];
+  if (currentPage >= totalPages - half) {
+    return Array.from(
+      {length: MAX_PAGE_BUTTONS},
+      (_, i) => totalPages - (MAX_PAGE_BUTTONS - 1) + i
+    );
   }
 
-  return [
-    currentPage - 2,
-    currentPage - 1,
-    currentPage,
-    currentPage + 1,
-    currentPage + 2,
-  ];
+  return Array.from(
+    {length: MAX_PAGE_BUTTONS},
+    (_, i) => currentPage - half + i
+  );
 }
 
 export function Pagination({
