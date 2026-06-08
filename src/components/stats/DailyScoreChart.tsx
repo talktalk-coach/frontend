@@ -16,7 +16,7 @@ export const DailyScoreChart = ({scores, average}: DailyScoreChartProps) => {
           일별 나의 성장치
         </h3>
         <span className='font-pretendard text-primary2 rounded-2xl bg-[#EEEEE5] px-2 py-1 text-[10px] font-bold'>
-          LATEST 7 DAYS
+          최근 7일
         </span>
       </header>
 
@@ -62,11 +62,11 @@ export const DailyScoreChart = ({scores, average}: DailyScoreChartProps) => {
             aria-hidden='true'
           />
           <span className='font-pretendard text-primary2 text-sm font-medium'>
-            Daily Score Distribution
+            일별 점수 변화
           </span>
         </div>
         <span className='font-pretendard text-primary text-sm font-bold'>
-          Avg. {average}
+          평균. {average}
         </span>
       </footer>
     </section>

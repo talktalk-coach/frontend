@@ -14,7 +14,7 @@ export const StatusMessage = ({status}: StatusMessageProps) => {
           </>
         ) : status === 'recording' ? (
           <>
-            당신의 이야기를
+            당신의 목소리를
             <br />
             듣고 있습니다...
           </>
