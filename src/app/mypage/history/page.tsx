@@ -16,7 +16,7 @@ type ArrowType = 'up' | 'down';
 export default function Historypage() {
   const [sortType, setSortType] = useState<SortType>('date');
   const [selectedArrow, setSelectedArrow] = useState<ArrowType>('down');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const sortParam =
     `${sortType}_${selectedArrow === 'down' ? 'desc' : 'asc'}` as SpeechListParams['sort'];
@@ -28,16 +28,16 @@ export default function Historypage() {
 
   const handleSortTypeChange = (type: SortType) => {
     setSortType(type);
-    setCurrentPage(1);
+    setCurrentPage(0);
   };
 
   const handleArrowChange = (arrow: ArrowType) => {
     setSelectedArrow(arrow);
-    setCurrentPage(1);
+    setCurrentPage(0);
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    setCurrentPage(page - 1);
     window.scrollTo({top: 0, behavior: 'smooth'});
   };
 
@@ -58,7 +58,7 @@ export default function Historypage() {
       <DetailSpeechHistoryCardList speeches={data.speeches} />
 
       <Pagination
-        currentPage={data.currentPage}
+        currentPage={data.currentPage + 1}
         totalPages={data.totalPages}
         onPageChange={handlePageChange}
       />
