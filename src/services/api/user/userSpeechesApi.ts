@@ -21,7 +21,7 @@ export interface UserSpeechesResponse {
 
 export interface SpeechListParams {
   page?: number;
-  sort?: 'date_desc';
+  sort?: 'date_desc' | 'date_asc' | 'score_desc' | 'score_asc';
 }
 
 export const getUserSpeeches = async (
