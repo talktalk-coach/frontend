@@ -22,7 +22,7 @@ export const AnimatedCard = ({children, delay = 0}: AnimatedCardProps) => {
       }}
       viewport={{once: true}}
       transition={{
-        duration: 0.6,
+        duration: 0.4,
         delay,
         ease: 'easeOut',
       }}>
