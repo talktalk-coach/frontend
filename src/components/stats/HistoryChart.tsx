@@ -78,7 +78,7 @@ export const HistoryChart = ({history}: HistoryChartProps) => {
     <section className='bg-surface border-divider/30 flex w-full flex-col gap-6 rounded-[32px] border p-6 shadow-sm'>
       <div className='flex flex-col gap-3'>
         <h3 className='text-primary text-xl font-bold tracking-[-0.32px]'>
-          성장치 히스토리
+          성장치 기록
         </h3>
 
         <ul className='flex flex-wrap gap-x-4 gap-y-2'>
