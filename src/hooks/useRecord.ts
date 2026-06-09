@@ -56,10 +56,22 @@ export function useRecord(): {
           const recordedBlob = new Blob(audioChunksRef.current);
           const arrayBuffer = await recordedBlob.arrayBuffer();
           const audioContext = new AudioContext();
-          const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+          const decoded = await audioContext.decodeAudioData(arrayBuffer);
           await audioContext.close();
 
-          const wavArrayBuffer = audioBufferToWav(audioBuffer);
+          const targetRate = 16000;
+          const offline = new OfflineAudioContext(
+            1, // 모노
+            Math.ceil(decoded.duration * targetRate),
+            targetRate
+          );
+          const source = offline.createBufferSource();
+          source.buffer = decoded;
+          source.connect(offline.destination);
+          source.start();
+          const rendered = await offline.startRendering();
+
+          const wavArrayBuffer = audioBufferToWav(rendered);
           const wavBlob = new Blob([wavArrayBuffer], {type: 'audio/wav'});
 
           const audioUrl = URL.createObjectURL(wavBlob);
